@@ -15,7 +15,6 @@ use triplink\vcc\card\client\query\QueryTransInfoRequest;
 class SignUtils {
     
     static function buildSign($request, $primaryKey) {
-        var_dump("start build sign");
         $baseData = SignUtils::buildSignBaseData($request);
         print_r($baseData);
         return RsaUtils::generateSign($baseData, $primaryKey);
@@ -23,7 +22,6 @@ class SignUtils {
     }
     
     static function buildSignBaseData($request) {
-        var_dump(get_class($request));
         if ($request instanceof OperateRequest) {
             $baseData = '';
             $baseData = $baseData.$request->getRequestId().$request->getRequestTime().$request->getRequestType().$request->getSubRequestType()
@@ -64,7 +62,6 @@ class SignUtils {
                     $baseData = $baseData.$cardInfo->getMaxAuthAmt();
                 }
             }
-            var_dump('baseData is '.$baseData);
             return $baseData;
         }elseif ($request instanceof QueryOperateRequest) {
             $baseData = '';
@@ -79,10 +76,8 @@ class SignUtils {
                 $baseData = $baseData.$request->getSubRequestType();
             }
             $baseData = $baseData.$request->getMerchantName();
-            var_dump('baseData is '.$baseData);
             return $baseData;
         }elseif ($request instanceof QueryInfoRequest) {
-            var_dump($request);
             $baseData = '';
             $baseData = $baseData.$request->getRequestId();
             $baseData = $baseData.$request->getRequestTime();
@@ -100,7 +95,6 @@ class SignUtils {
                     $baseData = $baseData.$cardInfo->getCardNo();
                 }
             }
-            var_dump('baseData is '.$baseData);
             return $baseData;
         }elseif($request instanceof QueryTransInfoRequest) {
             $baseData = '';
@@ -119,7 +113,6 @@ class SignUtils {
                     $baseData = $baseData . $cardInfo->getCardNo();
                 }
             }
-            var_dump('baseData is '.$baseData);
             return $baseData;
         }
     }

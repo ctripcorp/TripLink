@@ -49,20 +49,16 @@ class CardOperation
 
         $operateRequest = RequestUtils::convertCreateRequest($createCardRequest);
         $sign = SignUtils::buildSign($operateRequest, $this->primaryKey);
-        var_dump('sign' . $sign);
 
         $operateRequest->setSign($sign);
         $dataArray = $this->object_array($operateRequest);
         $data = json_encode($dataArray);
 
-        var_dump($data);
 
         $respStr = CURLUtils::curl_post($this->requestUrl . self::OPERATE_METHOD, $data);
         $respObject = json_decode($respStr, true);
-        var_dump($respObject);
 
         $respData = ResponseUtils::convertCreateCardResponse($respObject, $this->rsaKey);
-        var_dump($respData);
         return $respData;
     }
 
@@ -70,20 +66,16 @@ class CardOperation
     {
         $operateRequest = RequestUtils::convertUpdateRequest($updateCardRequest);
         $sign = SignUtils::buildSign($operateRequest, $this->primaryKey);
-        var_dump('sign' . $sign);
 
         $operateRequest->setSign($sign);
         $dataArray = $this->object_array($operateRequest);
         $data = json_encode($dataArray);
 
-        var_dump($data);
 
         $respStr = CURLUtils::curl_post($this->requestUrl . self::OPERATE_METHOD, $data);
         $respObject = json_decode($respStr, true);
-        var_dump($respObject);
 
         $respData = ResponseUtils::convertUpdateCardResponse($respObject, $this->rsaKey);
-        var_dump($respData);
         return $respData;
     }
 
@@ -91,20 +83,16 @@ class CardOperation
     {
         $operateRequest = RequestUtils::convertCloseRequest($closeCardRequest);
         $sign = SignUtils::buildSign($operateRequest, $this->primaryKey);
-        var_dump('sign' . $sign);
 
         $operateRequest->setSign($sign);
         $dataArray = $this->object_array($operateRequest);
         $data = json_encode($dataArray);
 
-        var_dump($data);
 
         $respStr = CURLUtils::curl_post($this->requestUrl . self::OPERATE_METHOD, $data);
         $respObject = json_decode($respStr, true);
-        var_dump($respObject);
 
         $respData = ResponseUtils::convertCloseCardResponse($respObject, $this->rsaKey);
-        var_dump($respData);
         return $respData;
     }
 
@@ -118,15 +106,11 @@ class CardOperation
         $dataArray = $this->object_array($operateRequest);
         $data = json_encode($dataArray);
 
-        var_dump($data);
-
         $respStr = CURLUtils::curl_post($this->requestUrl . self::OPERATE_RESULT_METHOD, $data);
 
         $respObject = json_decode($respStr, true);
-        var_dump($respObject);
 
         $respData = ResponseUtils::convertQueryCreateCardResponse($respObject, $this->rsaKey);
-        var_dump($respData);
         return $respData;
 
 
@@ -143,15 +127,12 @@ class CardOperation
         $dataArray = $this->object_array($operateRequest);
         $data = json_encode($dataArray);
 
-        var_dump($data);
 
         $respStr = CURLUtils::curl_post($this->requestUrl . self::OPERATE_RESULT_METHOD, $data);
 
         $respObject = json_decode($respStr, true);
-        var_dump($respObject);
 
         $respData = ResponseUtils::convertQueryUpdateCardResponse($respObject, $this->rsaKey);
-        var_dump($respData);
         return $respData;
 
 
@@ -168,15 +149,11 @@ class CardOperation
         $dataArray = $this->object_array($operateRequest);
         $data = json_encode($dataArray);
 
-        var_dump($data);
-
         $respStr = CURLUtils::curl_post($this->requestUrl . self::OPERATE_RESULT_METHOD, $data);
 
         $respObject = json_decode($respStr, true);
-        var_dump($respObject);
 
         $respData = ResponseUtils::convertQueryCloseCardResponse($respObject, $this->rsaKey);
-        var_dump($respData);
         return $respData;
 
 
@@ -193,15 +170,11 @@ class CardOperation
         $dataArray = $this->object_array($operateRequest);
         $data = json_encode($dataArray);
 
-        var_dump($data);
-
         $respStr = CURLUtils::curl_post($this->requestUrl . self::QUERY_RESULT_METHOD, $data);
 
         $respObject = json_decode($respStr, true);
-        var_dump($respObject);
 
         $respData = ResponseUtils::convertQueryCardInfoResponse($respObject, $this->rsaKey);
-        var_dump($respData);
         return $respData;
 
 
@@ -218,15 +191,11 @@ class CardOperation
         $dataArray = $this->object_array($operateRequest);
         $data = json_encode($dataArray);
 
-        var_dump($data);
-
         $respStr = CURLUtils::curl_post($this->requestUrl . self::QUERY_RESULT_METHOD, $data);
 
         $respObject = json_decode($respStr, true);
-        var_dump($respObject);
 
         $respData = ResponseUtils::convertQueryMerchantInfoResponse($respObject);
-        var_dump($respData);
         return $respData;
 
     }
@@ -242,15 +211,11 @@ class CardOperation
         $dataArray = $this->object_array($operateRequest);
         $data = json_encode($dataArray);
 
-        var_dump($data);
-
         $respStr = CURLUtils::curl_post($this->requestUrl . self::TRANS_METHOD, $data);
 
         $respObject = json_decode($respStr, true);
-        var_dump($respObject);
 
         $respData = ResponseUtils::convertQueryAuthTransInfoResponse($respObject);
-        var_dump($respData);
         return $respData;
 
     }
@@ -266,15 +231,11 @@ class CardOperation
         $dataArray = $this->object_array($operateRequest);
         $data = json_encode($dataArray);
 
-        var_dump($data);
-
         $respStr = CURLUtils::curl_post($this->requestUrl . self::TRANS_METHOD, $data);
 
         $respObject = json_decode($respStr, true);
-        var_dump($respObject);
 
         $respData = ResponseUtils::convertQuerySettlementTransInfoResponse($respObject);
-        var_dump($respData);
         return $respData;
 
     }

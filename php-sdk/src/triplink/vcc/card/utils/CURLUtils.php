@@ -33,7 +33,6 @@ class CURLUtils {
             throw new CusException($curl, $data);
         } else {
             
-            var_dump($data);
             curl_close($curl);
             return $data;
         }
