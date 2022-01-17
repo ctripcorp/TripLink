@@ -83,12 +83,16 @@ public class RsaUtil {
      * @return
      * @throws Exception
      */
-    public static boolean verifySign(String content, String sign, String publicKey) throws Exception{
-        byte[] contentBytes = content.getBytes(ENCODING);
-        Signature signature = Signature.getInstance(SHA_256_WITH_RSA_ALGORITHM);
-        signature.initVerify(getPublicKeyWithBase64KeyContent(publicKey));
-        signature.update(contentBytes);
-        return signature.verify(Base64.decodeBase64(sign));
+    public static boolean verifySign(String content, String sign, String publicKey){
+        try{
+            byte[] contentBytes = content.getBytes(ENCODING);
+            Signature signature = Signature.getInstance(SHA_256_WITH_RSA_ALGORITHM);
+            signature.initVerify(getPublicKeyWithBase64KeyContent(publicKey));
+            signature.update(contentBytes);
+            return signature.verify(Base64.decodeBase64(sign));
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
 

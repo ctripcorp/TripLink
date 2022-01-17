@@ -1,9 +1,17 @@
 package com.ctrip.ccard.creditcard.vcc.util;
 
+import com.ctrip.ccard.creditcard.vcc.bean.CallHttpResponse;
+
+import java.util.Map;
+
 /**
  * Description:
  */
-public interface HttpClient {
+public interface HttpClient<T extends CallHttpResponse> {
 
-    String post(String requestJson,String url);
+    T post(String requestJson,String url,Map<String,String> header);
+
+    T get(String url,Map<String,String> header);
+
+
 }

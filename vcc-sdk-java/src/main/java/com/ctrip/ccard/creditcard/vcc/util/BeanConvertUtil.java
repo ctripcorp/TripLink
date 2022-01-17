@@ -1,6 +1,41 @@
 package com.ctrip.ccard.creditcard.vcc.util;
 
-import com.ctrip.ccard.creditcard.vcc.bean.*;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CardInfo;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateCardInfo;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.OperateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.OperateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QOperateResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QOperateResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QTransInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QTransInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfo;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateCardInfo;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawResponse;
 
 /**
  * Description:
@@ -13,6 +48,10 @@ public class BeanConvertUtil {
     private static final String REQUEST_TYPE_CREATE = "CREATE";
     //operate接口 更新卡请求类型值
     private static final String REQUEST_TYPE_UPDATE = "UPDATE";
+    //operate接口 充值卡请求类型值
+    private static final String REQUEST_TYPE_RECHARGE = "RECHARGE";
+    //operate接口 提现卡请求类型值
+    private static final String REQUEST_TYPE_WITHDRAW = "WITHDRAW";
     //operate接口 关闭卡请求类型值
     private static final String REQUEST_TYPE_CLOSE = "CLOSE";
     //qInfo接口 请求类型值
@@ -84,7 +123,11 @@ public class BeanConvertUtil {
             //是否启用CVV检验
             cardInfo.setEnaleCVVCheck(createCardInfo.getEnaleCVVCheck());
             //是否启用交易币种限制
+            cardInfo.setEnableCurrencyCheck(createCardInfo.getEnableCurrencyCheck());
+            //用户自定义信息
             cardInfo.setUserDefineInfo(createCardInfo.getUserDefineInfo());
+            //卡组
+            cardInfo.setCardLabel(createCardInfo.getCardLabel());
             operateRequest.setCardInfo(cardInfo);
         }
         return operateRequest;
@@ -101,6 +144,8 @@ public class BeanConvertUtil {
         createResponse.setResultRespCode(operateResponse.getResultRespCode());
         //结果码描述
         createResponse.setResultRespMsg(operateResponse.getResultRespMsg());
+        //结果码详细描述
+        createResponse.setResultRespDetailMsg(operateResponse.getResultRespDetailMsg());
         //发卡通道类型
         createResponse.setChannelType(operateResponse.getChannelType());
         //VCC生成的唯一流水号
@@ -123,6 +168,8 @@ public class BeanConvertUtil {
             createResponse.setCardVerifyNo(cardInfo.getCardVerifyNo());
             //卡有效期 <yyyyMM>
             createResponse.setCardExpiryDate(cardInfo.getCardExpiryDate());
+            //卡组
+            createResponse.setCardLabel(cardInfo.getCardLabel());
         }
         return createResponse;
     }
@@ -200,6 +247,8 @@ public class BeanConvertUtil {
         updateResponse.setResultRespCode(operateResponse.getResultRespCode());
         //结果码描述
         updateResponse.setResultRespMsg(operateResponse.getResultRespMsg());
+        //结果码详细描述
+        updateResponse.setResultRespDetailMsg(operateResponse.getResultRespDetailMsg());
         //发卡通道类型
         updateResponse.setChannelType(operateResponse.getChannelType());
         //VCC生成的唯一流水号
@@ -268,6 +317,8 @@ public class BeanConvertUtil {
         closeResponse.setResultRespCode(operateResponse.getResultRespCode());
         //结果码描述
         closeResponse.setResultRespMsg(operateResponse.getResultRespMsg());
+        //结果码详细描述
+        closeResponse.setResultRespDetailMsg(operateResponse.getResultRespDetailMsg());
         //发卡通道类型
         closeResponse.setChannelType(operateResponse.getChannelType());
         //VCC生成的唯一流水号
@@ -492,6 +543,8 @@ public class BeanConvertUtil {
         qInfoRequest.setSubRequestType(SUB_REQUEST_TYPE_CREATE);
         //商户名
         qInfoRequest.setMerchantName(request.getMerchantName());
+        //发卡通道类型
+        qInfoRequest.setChannelType(request.getChannelType());
         //请求扩展字段
         qInfoRequest.setReqExtra(request.getReqExtra());
         //操作人
@@ -515,6 +568,8 @@ public class BeanConvertUtil {
         queryCardInfoResponse.setResultRespCode(qInfoResponse.getResultRespCode());
         //结果码描述
         queryCardInfoResponse.setResultRespMsg(qInfoResponse.getResultRespMsg());
+        //结果码详细描述
+        queryCardInfoResponse.setResultRespDetailMsg(qInfoResponse.getResultRespDetailMsg());
         //请求流水号
         queryCardInfoResponse.setRequestId(qInfoResponse.getRequestId());
         //请求时间
@@ -534,13 +589,15 @@ public class BeanConvertUtil {
             //卡号
             queryCardInfo.setCardNo(cardInfo.getCardNo());
             //卡安全验证码CVV（3位）
-            queryCardInfo.setCardVerifyNo(cardInfo.getCardNo());
+            queryCardInfo.setCardVerifyNo(cardInfo.getCardVerifyNo());
             //卡有效期 <yyyyMM>
             queryCardInfo.setCardExpiryDate(cardInfo.getCardExpiryDate());
             //卡具体失效日期 <yyyy-MM-dd>
             queryCardInfo.setCardFullExpiryDate(cardInfo.getCardFullExpiryDate());
             //卡类型
             queryCardInfo.setCardType(cardInfo.getCardType());
+            //卡组
+            queryCardInfo.setCardLabel(cardInfo.getCardLabel());
             //卡本币种 开卡币种
             queryCardInfo.setLocalCurrency(cardInfo.getLocalCurrency());
             //卡入账币种 结算币种
@@ -609,6 +666,8 @@ public class BeanConvertUtil {
         qInfoRequest.setSubRequestType(SUB_REQUEST_TYPE_MERCHANT);
         //商户名
         qInfoRequest.setMerchantName(request.getMerchantName());
+        //发卡通道类型
+        qInfoRequest.setChannelType(request.getChannelType());
         //请求扩展字段
         qInfoRequest.setReqExtra(request.getReqExtra());
         //操作人
@@ -632,6 +691,8 @@ public class BeanConvertUtil {
         queryMerchantInfoResponse.setResultRespCode(qInfoResponse.getResultRespCode());
         //结果码描述
         queryMerchantInfoResponse.setResultRespMsg(qInfoResponse.getResultRespMsg());
+        //结果码详细描述
+        queryMerchantInfoResponse.setResultRespDetailMsg(qInfoResponse.getResultRespDetailMsg());
         //请求流水号
         queryMerchantInfoResponse.setRequestId(qInfoResponse.getRequestId());
         //请求时间
@@ -665,6 +726,10 @@ public class BeanConvertUtil {
         qTransInfoRequest.setChannelType(request.getChannelType());
         //商户名
         qTransInfoRequest.setMerchantName(request.getMerchantName());
+        //查询开始日期
+        qTransInfoRequest.setStartDate(request.getStartDate());
+        //查询结束日期
+        qTransInfoRequest.setEndDate(request.getEndDate());
         //请求扩展字段
         qTransInfoRequest.setReqExtra(request.getReqExtra());
         //操作人
@@ -688,6 +753,8 @@ public class BeanConvertUtil {
         queryAuthTransInfoResponse.setResultRespCode(qTransInfoResponse.getResultRespCode());
         //结果码描述
         queryAuthTransInfoResponse.setResultRespMsg(qTransInfoResponse.getResultRespMsg());
+        //结果码详细描述
+        queryAuthTransInfoResponse.setResultRespDetailMsg(qTransInfoResponse.getResultRespDetailMsg());
         //请求流水号
         queryAuthTransInfoResponse.setRequestId(qTransInfoResponse.getRequestId());
         //请求时间
@@ -719,6 +786,10 @@ public class BeanConvertUtil {
         qTransInfoRequest.setChannelType(request.getChannelType());
         //商户名
         qTransInfoRequest.setMerchantName(request.getMerchantName());
+        //查询开始日期
+        qTransInfoRequest.setStartDate(request.getStartDate());
+        //查询结束日期
+        qTransInfoRequest.setEndDate(request.getEndDate());
         //请求扩展字段
         qTransInfoRequest.setReqExtra(request.getReqExtra());
         //操作人
@@ -742,6 +813,8 @@ public class BeanConvertUtil {
         querySettlemetTransInfoResponse.setResultRespCode(qTransInfoResponse.getResultRespCode());
         //结果码描述
         querySettlemetTransInfoResponse.setResultRespMsg(qTransInfoResponse.getResultRespMsg());
+        //结果码详细描述
+        querySettlemetTransInfoResponse.setResultRespDetailMsg(qTransInfoResponse.getResultRespDetailMsg());
         //请求流水号
         querySettlemetTransInfoResponse.setRequestId(qTransInfoResponse.getRequestId());
         //请求时间
@@ -755,4 +828,139 @@ public class BeanConvertUtil {
         }
         return querySettlemetTransInfoResponse;
     }
+
+
+    /**
+     * operate接口请求数据 ：充值卡操作
+     */
+    public static OperateRequest convert2RechargeRequest(RechargeRequest request){
+        OperateRequest operateRequest = new OperateRequest();
+        //请求流水号
+        operateRequest.setRequestId(request.getRequestId());
+        //请求时间 yyyyMMddHHmmss
+        operateRequest.setRequestTime(request.getRequestTime());
+        //请求类型
+        operateRequest.setRequestType(REQUEST_TYPE_RECHARGE);
+        //请求子类型
+        operateRequest.setSubRequestType(SUB_REQUEST_TYPE_CREATE);
+        //商户名
+        operateRequest.setMerchantName(request.getMerchantName());
+        //发卡通道类型
+        operateRequest.setChannelType(request.getChannelType());
+        //请求来源标注
+        operateRequest.setRequestSource(request.getRequestSource());
+        //调用端操作人
+        operateRequest.setOperator(request.getOperator());
+        //请求扩展字段
+        operateRequest.setReqExtra(request.getReqExtra());
+        //卡信息
+        CardInfo cardInfo = new CardInfo();
+        //VCC发行卡片处唯一参考号
+        cardInfo.setCardLogId(request.getCardLogId());
+        //充值金额
+        cardInfo.setWillChangeAmt(request.getWillChangeAmt());
+        operateRequest.setCardInfo(cardInfo);
+        return operateRequest;
+    }
+
+    /**
+     * operate接口请求数据 ：提现卡操作
+     */
+    public static OperateRequest convert2WithdrawRequest(WithdrawRequest request){
+        OperateRequest operateRequest = new OperateRequest();
+        //请求流水号
+        operateRequest.setRequestId(request.getRequestId());
+        //请求时间 yyyyMMddHHmmss
+        operateRequest.setRequestTime(request.getRequestTime());
+        //请求类型
+        operateRequest.setRequestType(REQUEST_TYPE_WITHDRAW);
+        //请求子类型
+        operateRequest.setSubRequestType(SUB_REQUEST_TYPE_CREATE);
+        //商户名
+        operateRequest.setMerchantName(request.getMerchantName());
+        //发卡通道类型
+        operateRequest.setChannelType(request.getChannelType());
+        //请求来源标注
+        operateRequest.setRequestSource(request.getRequestSource());
+        //调用端操作人
+        operateRequest.setOperator(request.getOperator());
+        //请求扩展字段
+        operateRequest.setReqExtra(request.getReqExtra());
+        //卡信息
+        CardInfo cardInfo = new CardInfo();
+        //VCC发行卡片处唯一参考号
+        cardInfo.setCardLogId(request.getCardLogId());
+        //充值金额
+        cardInfo.setWillChangeAmt(request.getWillChangeAmt());
+        operateRequest.setCardInfo(cardInfo);
+        return operateRequest;
+    }
+
+    /**
+     * operate接口返回数据 ：充值卡操作
+     */
+    public static RechargeResponse convert2RechargeResponse(OperateResponse operateResponse){
+        RechargeResponse rechargeResponse = new RechargeResponse();
+        //结果状态
+        rechargeResponse.setResultStatus(operateResponse.getResultstatus());
+        //结果码
+        rechargeResponse.setResultRespCode(operateResponse.getResultRespCode());
+        //结果码描述
+        rechargeResponse.setResultRespMsg(operateResponse.getResultRespMsg());
+        //结果码详细描述
+        rechargeResponse.setResultRespDetailMsg(operateResponse.getResultRespDetailMsg());
+        //发卡通道类型
+        rechargeResponse.setChannelType(operateResponse.getChannelType());
+        //VCC生成的唯一流水号
+        rechargeResponse.setCcOpId(operateResponse.getCcOpId());
+        //原请求流水号
+        rechargeResponse.setRequestId(operateResponse.getRequestId());
+        //原请求时间
+        rechargeResponse.setRequestTime(operateResponse.getRequestTime());
+        //原请求商户名
+        rechargeResponse.setMerchantName(operateResponse.getMerchantName());
+        //响应扩展数据
+        rechargeResponse.setRespExtra(operateResponse.getRespExtra());
+        if(null != operateResponse.getCardInfo()){
+            CardInfo cardInfo = operateResponse.getCardInfo();
+            //VCC发行卡片处唯一参考号
+            rechargeResponse.setCardLogId(cardInfo.getCardLogId());
+        }
+        return rechargeResponse;
+    }
+
+    /**
+     * operate接口返回数据 ：提现卡操作
+     */
+    public static WithdrawResponse convert2WithdrawResponse(OperateResponse operateResponse){
+        WithdrawResponse withdrawResponse = new WithdrawResponse();
+        //结果状态
+        withdrawResponse.setResultStatus(operateResponse.getResultstatus());
+        //结果码
+        withdrawResponse.setResultRespCode(operateResponse.getResultRespCode());
+        //结果码描述
+        withdrawResponse.setResultRespMsg(operateResponse.getResultRespMsg());
+        //结果码详细描述
+        withdrawResponse.setResultRespDetailMsg(operateResponse.getResultRespDetailMsg());
+        //发卡通道类型
+        withdrawResponse.setChannelType(operateResponse.getChannelType());
+        //VCC生成的唯一流水号
+        withdrawResponse.setCcOpId(operateResponse.getCcOpId());
+        //原请求流水号
+        withdrawResponse.setRequestId(operateResponse.getRequestId());
+        //原请求时间
+        withdrawResponse.setRequestTime(operateResponse.getRequestTime());
+        //原请求商户名
+        withdrawResponse.setMerchantName(operateResponse.getMerchantName());
+        //响应扩展数据
+        withdrawResponse.setRespExtra(operateResponse.getRespExtra());
+        if(null != operateResponse.getCardInfo()){
+            CardInfo cardInfo = operateResponse.getCardInfo();
+            //VCC发行卡片处唯一参考号
+            withdrawResponse.setCardLogId(cardInfo.getCardLogId());
+        }
+        return withdrawResponse;
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.ctrip.ccard.creditcard.vcc.util;
 
+import com.ctrip.ccard.creditcard.vcc.bean.CallHttpResponse;
 import com.ctrip.ccard.creditcard.vcc.exception.HttpException;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -11,11 +12,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Description: https请求vcc接口
  */
-public class TripLinkHttpClient implements HttpClient {
+public class TripLinkHttpClient implements HttpClient<CallHttpResponse> {
+
+    private static final String HTTP_METHOD_GET = "GET";
 
     private static final String HTTP_METHOD_POST = "POST";
 
@@ -25,9 +32,21 @@ public class TripLinkHttpClient implements HttpClient {
 
     private static final String CONTENT_TYPE_JSON_CONTENT = "application/json";
 
-    public String post(String requestJson, String url) {
+    public CallHttpResponse post(String requestJson, String url, Map<String,String> header) {
         try {
-            return httpsRequest(url,HTTP_METHOD_POST,requestJson);
+            if(null == header){
+                header = new HashMap<String, String>();
+            }
+            header.put(CONTENT_TYPE,CONTENT_TYPE_JSON_CONTENT);
+            return httpsRequest(url,HTTP_METHOD_POST,requestJson,header);
+        } catch (Exception e) {
+            throw new HttpException("request vcc exception",e);
+        }
+    }
+
+    public CallHttpResponse get(String url, Map<String, String> header) {
+        try {
+            return httpsRequest(url,HTTP_METHOD_GET,null,header);
         } catch (Exception e) {
             throw new HttpException("request vcc exception",e);
         }
@@ -40,7 +59,8 @@ public class TripLinkHttpClient implements HttpClient {
      * @return
      * @throws Exception
      */
-    private static String httpsRequest(String requestUrl,String httpMethod,String requestJsonInfo) throws Exception{
+    private static CallHttpResponse httpsRequest(String requestUrl,String httpMethod,String requestJsonInfo,Map<String,String> header) throws Exception{
+        CallHttpResponse response = new CallHttpResponse();
         StringBuffer stringBuffer = null;
         //请求数据流
         OutputStream outputStream = null;
@@ -64,16 +84,29 @@ public class TripLinkHttpClient implements HttpClient {
             conn.setUseCaches(false);
             conn.setRequestMethod(httpMethod);
             conn.setSSLSocketFactory(ssf);
-            conn.setRequestProperty(CONTENT_TYPE, CONTENT_TYPE_JSON_CONTENT);
+            //设置 header
+            if(null != header){
+                for(Map.Entry<String,String> entry : header.entrySet()){
+                    conn.setRequestProperty(entry.getKey(), entry.getValue());
+                }
+            }
             //往服务器端写内容
             if(null != requestJsonInfo){
                 outputStream = conn.getOutputStream();
                 outputStream.write(requestJsonInfo.getBytes(CHARSET_NAME));
             }
             conn.connect();
-            if(200 != conn.getResponseCode()){
-                throw new Exception("response not 200");
+            if(200 != conn.getResponseCode() && 500 != conn.getResponseCode()){
+                throw new Exception("response not success");
             }
+            //response header
+            Map<String, List<String>> responseHeaderFileds = conn.getHeaderFields();
+            Set<String> keys = responseHeaderFileds.keySet();
+            Map<String,String> responseHeader = new HashMap<String, String>();
+            for(String key:keys){
+                responseHeader.put(key,conn.getHeaderField(key));
+            }
+            response.setHeader(responseHeader);
             //读取服务器端返回的内容
             inputStream = conn.getInputStream();
             inputStreamReader = new InputStreamReader(inputStream,CHARSET_NAME);
@@ -83,6 +116,7 @@ public class TripLinkHttpClient implements HttpClient {
             while((line = bufferedReader.readLine())!= null){
                 stringBuffer.append(line);
             }
+            response.setResult(stringBuffer.toString());
         }finally {
             //关闭流
             if(null != outputStream)  outputStream.close();
@@ -90,6 +124,6 @@ public class TripLinkHttpClient implements HttpClient {
             if(null != inputStreamReader) inputStreamReader.close();
             if(null != bufferedReader)  bufferedReader.close();
         }
-        return stringBuffer.toString();
+        return response;
     }
 }
