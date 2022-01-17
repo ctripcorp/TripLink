@@ -6,7 +6,10 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.Charset;
-import java.security.*;
+import java.security.KeyFactory;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
@@ -95,9 +98,4 @@ public final class CipherUtils {
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         return keyFactory.generatePublic(new X509EncodedKeySpec(bytes));
     }
-
-    private static String toRsaPrivateKeyStr(PrivateKey privateKey) {
-        return new String(BASE64.encode(privateKey.getEncoded()), UTF_8);
-    }
-
 }

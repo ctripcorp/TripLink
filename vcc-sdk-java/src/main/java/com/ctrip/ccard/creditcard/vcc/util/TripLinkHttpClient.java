@@ -61,7 +61,6 @@ public class TripLinkHttpClient implements HttpClient<CallHttpResponse> {
      */
     private static CallHttpResponse httpsRequest(String requestUrl,String httpMethod,String requestJsonInfo,Map<String,String> header) throws Exception{
         CallHttpResponse response = new CallHttpResponse();
-        StringBuffer stringBuffer = null;
         //请求数据流
         OutputStream outputStream = null;
         //服务端返回的报文流
@@ -111,12 +110,12 @@ public class TripLinkHttpClient implements HttpClient<CallHttpResponse> {
             inputStream = conn.getInputStream();
             inputStreamReader = new InputStreamReader(inputStream,CHARSET_NAME);
             bufferedReader = new BufferedReader(inputStreamReader);
-            stringBuffer = new StringBuffer();
+            StringBuilder builder = new StringBuilder();
             String line = null;
             while((line = bufferedReader.readLine())!= null){
-                stringBuffer.append(line);
+                builder.append(line);
             }
-            response.setResult(stringBuffer.toString());
+            response.setResult(builder.toString());
         }finally {
             //关闭流
             if(null != outputStream)  outputStream.close();

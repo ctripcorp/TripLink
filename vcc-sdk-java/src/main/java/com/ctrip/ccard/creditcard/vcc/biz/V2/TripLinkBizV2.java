@@ -1,19 +1,33 @@
 package com.ctrip.ccard.creditcard.vcc.biz.V2;
 
-import com.ctrip.ccard.creditcard.vcc.bean.V2.*;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCancelRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCancelResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCreateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCreateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardDetailQueryRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardDetailQueryResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRechargeRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRechargeResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUpdateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUpdateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardWithdrawRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardWithdrawResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryCustomerCreditAmountRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryCustomerCreditAmountResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionResponse;
 
-/**
- * Created with IntelliJ IDEA
- * Description:
- * User: j.mao
- * Date: 2021-10-20
- * Time: 14:05
- */
 public interface TripLinkBizV2 {
 
     CardCreateResponse create(CardCreateRequest request);
 
     CardUpdateResponse update(CardUpdateRequest request);
+
+    CardRechargeResponse recharge(CardRechargeRequest request);
+
+    CardWithdrawResponse withdraw(CardWithdrawRequest request);
 
     CardCancelResponse close(CardCancelRequest request);
 
@@ -21,7 +35,7 @@ public interface TripLinkBizV2 {
 
     QueryCustomerCreditAmountResponse queryCustomerCreditAmount(QueryCustomerCreditAmountRequest request);
 
-    QueryAuthTranscationResponse queryAuthTranscation(QueryAuthTranscationReuqest request);
+    QueryAuthTransactionResponse queryAuthTransaction(QueryAuthTransactionRequest request);
 
-    QuerySettlementTranscationResponse querySettlementTranscation(QuerySettlementTranscationRequest request);
+    QuerySettlementTransactionResponse querySettlementTransaction(QuerySettlementTransactionRequest request);
 }
