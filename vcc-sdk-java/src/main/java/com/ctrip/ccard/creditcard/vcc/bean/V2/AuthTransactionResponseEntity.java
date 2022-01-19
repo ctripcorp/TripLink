@@ -23,6 +23,15 @@ public class AuthTransactionResponseEntity {
     private String posMerchantID;   // 商户ID
     private String posAcquirerID;   // 收单行ID
     private String txnId; // 交易唯一ID
+    private String trasactionID; //交易关联ID 消费授权和冲正为个ID
+
+    public String getTrasactionID() {
+        return trasactionID;
+    }
+
+    public void setTrasactionID(String trasactionID) {
+        this.trasactionID = trasactionID;
+    }
 
     public String getOccurDateTime() {
         return occurDateTime;
@@ -198,6 +207,7 @@ public class AuthTransactionResponseEntity {
                 ", posMerchantID='" + posMerchantID + '\'' +
                 ", posAcquirerID='" + posAcquirerID + '\'' +
                 ", txnId='" + txnId + '\'' +
+                ", trasactionID='" + trasactionID + '\'' +
                 '}';
     }
 }
