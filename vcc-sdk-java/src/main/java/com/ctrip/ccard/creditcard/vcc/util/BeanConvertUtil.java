@@ -14,6 +14,8 @@ import com.ctrip.ccard.creditcard.vcc.bean.V1.QOperateResultRequest;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.QOperateResultResponse;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.QTransInfoRequest;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.QTransInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAccountInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAccountInfoResponse;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoRequest;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoResponse;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfo;
@@ -37,9 +39,6 @@ import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateResponse;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawRequest;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawResponse;
 
-/**
- * Description:
- */
 public class BeanConvertUtil {
 
     //operate接口 请求子类型值
@@ -56,8 +55,10 @@ public class BeanConvertUtil {
     private static final String REQUEST_TYPE_CLOSE = "CLOSE";
     //qInfo接口 请求类型值
     private static final String REQUEST_TYPE_QINFO = "GET";
-    //qInfo接口 请求子类型值
+    //qInfo接口 请求子类型值 商户信息
     private static final String SUB_REQUEST_TYPE_MERCHANT = "MERCHANT_INFO";
+    //qInfo接口 请求子类型值 账户信息
+    private static final String SUB_REQUEST_TYPE_ACCOUNT = "ACCOUNT_INFO";
     //qTransInfo接口 请求类型值
     private static final String REQUEST_TYPE_QTRANS = "TRANS";
     //qTransInfo接口 请求子类型值 预授权交易
@@ -707,6 +708,54 @@ public class BeanConvertUtil {
             queryMerchantInfoResponse.setMerchantInfo(qInfoResponse.getMerchantInfo());
         }
         return queryMerchantInfoResponse;
+    }
+
+    /**
+     * qInfo接口请求数据 账户信息查询
+     */
+    public static QInfoRequest convert2QueryAccountInfoRequest(QueryAccountInfoRequest request) {
+        QInfoRequest qInfoRequest = new QInfoRequest();
+        //请求流水号
+        qInfoRequest.setRequestId(request.getRequestId());
+        //请求时间 yyyyMMddHHmmss
+        qInfoRequest.setRequestTime(request.getRequestTime());
+        //请求类型
+        qInfoRequest.setRequestType(REQUEST_TYPE_QINFO);
+        //请求子类型
+        qInfoRequest.setSubRequestType(SUB_REQUEST_TYPE_ACCOUNT);
+        //商户名
+        qInfoRequest.setMerchantName(request.getMerchantName());
+        //发卡通道类型
+        qInfoRequest.setChannelType(request.getChannelType());
+        //操作人
+        qInfoRequest.setOperator(request.getOperator());
+        return qInfoRequest;
+    }
+
+    /**
+     * qInfo接口返回数据 账户信息查询
+     */
+    public static QueryAccountInfoResponse convert2QueryAccountInfoResponse(QInfoResponse qInfoResponse) {
+        QueryAccountInfoResponse queryAccountInfoResponse = new QueryAccountInfoResponse();
+        //结果状态
+        queryAccountInfoResponse.setResultStatus(qInfoResponse.getResultstatus());
+        //结果码
+        queryAccountInfoResponse.setResultRespCode(qInfoResponse.getResultRespCode());
+        //结果码描述
+        queryAccountInfoResponse.setResultRespMsg(qInfoResponse.getResultRespMsg());
+        //结果码详细描述
+        queryAccountInfoResponse.setResultRespDetailMsg(qInfoResponse.getResultRespDetailMsg());
+        //请求流水号
+        queryAccountInfoResponse.setRequestId(qInfoResponse.getRequestId());
+        //请求时间
+        queryAccountInfoResponse.setRequestTime(qInfoResponse.getRequestTime());
+        //请求商户名
+        queryAccountInfoResponse.setMerchantName(qInfoResponse.getMerchantName());
+        //发卡通道类型
+        queryAccountInfoResponse.setChannelType(qInfoResponse.getChannelType());
+        //商户信息
+        queryAccountInfoResponse.setMerchantInfo(qInfoResponse.getMerchantInfo());
+        return queryAccountInfoResponse;
     }
 
     /**

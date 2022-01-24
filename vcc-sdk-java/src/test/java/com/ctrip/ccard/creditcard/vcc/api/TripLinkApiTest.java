@@ -1,7 +1,34 @@
 package com.ctrip.ccard.creditcard.vcc.api;
 
 import com.ctrip.ccard.creditcard.vcc.api.V1.TripLinkApiImpl;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.*;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateCardInfo;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAccountInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAccountInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateCardInfo;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawResponse;
 import com.ctrip.ccard.creditcard.vcc.biz.V1.TripLinkBizImpl;
 import com.ctrip.ccard.creditcard.vcc.util.TripLinkHttpClient;
 import org.junit.Assert;
@@ -10,9 +37,6 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
-/**
- * Description:
- */
 public class TripLinkApiTest {
 
     private TripLinkHttpClient tripLinkHttpClient;
@@ -196,6 +220,17 @@ public class TripLinkApiTest {
         Assert.assertNotNull(response);
     }
 
+    @Test
+    public void queryAccountInfoTest() {
+        QueryAccountInfoRequest request = new QueryAccountInfoRequest();
+        request.setRequestId("account20220111");
+        request.setRequestTime("20220111170850");
+        request.setMerchantName("WANWEI");
+        request.setChannelType("WANWEI_CFNC_VCC");
+        request.setOperator("max");
+        QueryAccountInfoResponse response = tripLinkApi.queryAccountInfo(request);
+        Assert.assertNotNull(response);
+    }
 
     @Test
     public void queryAuthTransInfoTest() {
