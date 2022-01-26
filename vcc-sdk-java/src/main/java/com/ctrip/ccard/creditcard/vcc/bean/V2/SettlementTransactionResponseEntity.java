@@ -11,7 +11,7 @@ public class SettlementTransactionResponseEntity {
     private String accountCurrency;	//			结算币种
     private BigDecimal billAccountAmount;	//			结算金额
     private String cardTransactionCurrency;//开卡时入账币种
-    private BigDecimal cardTrasnactionAmount;//开卡时入账金额
+    private BigDecimal cardTransactionAmount;//开卡时入账金额
     private String transactionType;	//			交易类型
     private String transactionCode;	//			交易类型码
     private String approvalCode;	//			授权码
@@ -178,12 +178,12 @@ public class SettlementTransactionResponseEntity {
         this.cardTransactionCurrency = cardTransactionCurrency;
     }
 
-    public BigDecimal getCardTrasnactionAmount() {
-        return cardTrasnactionAmount;
+    public BigDecimal getCardTransactionAmount() {
+        return cardTransactionAmount;
     }
 
-    public void setCardTrasnactionAmount(BigDecimal cardTrasnactionAmount) {
-        this.cardTrasnactionAmount = cardTrasnactionAmount;
+    public void setCardTransactionAmount(BigDecimal cardTransactionAmount) {
+        this.cardTransactionAmount = cardTransactionAmount;
     }
 
     public String getAccountCurrency() {
@@ -213,7 +213,7 @@ public class SettlementTransactionResponseEntity {
                 ", accountCurrency='" + accountCurrency + '\'' +
                 ", billAccountAmount=" + billAccountAmount +
                 ", cardTransactionCurrency='" + cardTransactionCurrency + '\'' +
-                ", cardTrasnactionAmount=" + cardTrasnactionAmount +
+                ", cardTransactionAmount=" + cardTransactionAmount +
                 ", transactionType='" + transactionType + '\'' +
                 ", transactionCode='" + transactionCode + '\'' +
                 ", approvalCode='" + approvalCode + '\'' +
