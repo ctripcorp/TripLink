@@ -9,27 +9,22 @@ public class CardCreateRequest {
 
     private String serviceVersion;
     private String requestId;
-    private String requestType;
     private String customerId;
     private String cardCurrencyCode;
-    private Date activeDate;
-    private Date inactiveDate;
+    private String settlementCurrencyCode;
+    private String activeDate;
+    private String inactiveDate;
     private BigDecimal cardLimit;
     private BigDecimal minAuthAmount;
     private BigDecimal maxAuthAmount;
     private Integer maxAuthTimes;
     private Integer cardCloseUsage;
-    private String settlementCurrencyCode;
     private String supportedMccGroup;
-    private String supportedMcc;
     private String supportedMid;
-    private String supportedAccquirerId;
+    private String supportedAcquirerId;
     private Boolean isMultipleCurrencyCard;
     private Boolean isCvv2ForceCheck;
-    private String requestUser;
-    private String requestSource;
     private String cardBin;
-    private String productCode;
     private String cardType;
     private String cardLabel;
     private Map<String, String> userReferenceMap = new LinkedHashMap<String, String>();
@@ -50,14 +45,6 @@ public class CardCreateRequest {
         this.requestId = requestId;
     }
 
-    public String getRequestType() {
-        return requestType;
-    }
-
-    public void setRequestType(String requestType) {
-        this.requestType = requestType;
-    }
-
     public String getCustomerId() {
         return customerId;
     }
@@ -74,19 +61,27 @@ public class CardCreateRequest {
         this.cardCurrencyCode = cardCurrencyCode;
     }
 
-    public Date getActiveDate() {
+    public String getSettlementCurrencyCode() {
+        return settlementCurrencyCode;
+    }
+
+    public void setSettlementCurrencyCode(String settlementCurrencyCode) {
+        this.settlementCurrencyCode = settlementCurrencyCode;
+    }
+
+    public String getActiveDate() {
         return activeDate;
     }
 
-    public void setActiveDate(Date activeDate) {
+    public void setActiveDate(String activeDate) {
         this.activeDate = activeDate;
     }
 
-    public Date getInactiveDate() {
+    public String getInactiveDate() {
         return inactiveDate;
     }
 
-    public void setInactiveDate(Date inactiveDate) {
+    public void setInactiveDate(String inactiveDate) {
         this.inactiveDate = inactiveDate;
     }
 
@@ -130,28 +125,12 @@ public class CardCreateRequest {
         this.cardCloseUsage = cardCloseUsage;
     }
 
-    public String getSettlementCurrencyCode() {
-        return settlementCurrencyCode;
-    }
-
-    public void setSettlementCurrencyCode(String settlementCurrencyCode) {
-        this.settlementCurrencyCode = settlementCurrencyCode;
-    }
-
     public String getSupportedMccGroup() {
         return supportedMccGroup;
     }
 
     public void setSupportedMccGroup(String supportedMccGroup) {
         this.supportedMccGroup = supportedMccGroup;
-    }
-
-    public String getSupportedMcc() {
-        return supportedMcc;
-    }
-
-    public void setSupportedMcc(String supportedMcc) {
-        this.supportedMcc = supportedMcc;
     }
 
     public String getSupportedMid() {
@@ -162,12 +141,12 @@ public class CardCreateRequest {
         this.supportedMid = supportedMid;
     }
 
-    public String getSupportedAccquirerId() {
-        return supportedAccquirerId;
+    public String getSupportedAcquirerId() {
+        return supportedAcquirerId;
     }
 
-    public void setSupportedAccquirerId(String supportedAccquirerId) {
-        this.supportedAccquirerId = supportedAccquirerId;
+    public void setSupportedAcquirerId(String supportedAcquirerId) {
+        this.supportedAcquirerId = supportedAcquirerId;
     }
 
     public Boolean getMultipleCurrencyCard() {
@@ -186,36 +165,12 @@ public class CardCreateRequest {
         isCvv2ForceCheck = cvv2ForceCheck;
     }
 
-    public String getRequestUser() {
-        return requestUser;
-    }
-
-    public void setRequestUser(String requestUser) {
-        this.requestUser = requestUser;
-    }
-
-    public String getRequestSource() {
-        return requestSource;
-    }
-
-    public void setRequestSource(String requestSource) {
-        this.requestSource = requestSource;
-    }
-
     public String getCardBin() {
         return cardBin;
     }
 
     public void setCardBin(String cardBin) {
         this.cardBin = cardBin;
-    }
-
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
     }
 
     public String getCardType() {
@@ -247,9 +202,9 @@ public class CardCreateRequest {
         return "CardCreateRequest{" +
                 "serviceVersion='" + serviceVersion + '\'' +
                 ", requestId='" + requestId + '\'' +
-                ", requestType='" + requestType + '\'' +
                 ", customerId='" + customerId + '\'' +
                 ", cardCurrencyCode='" + cardCurrencyCode + '\'' +
+                ", settlementCurrencyCode='" + settlementCurrencyCode + '\'' +
                 ", activeDate=" + activeDate +
                 ", inactiveDate=" + inactiveDate +
                 ", cardLimit=" + cardLimit +
@@ -257,17 +212,12 @@ public class CardCreateRequest {
                 ", maxAuthAmount=" + maxAuthAmount +
                 ", maxAuthTimes=" + maxAuthTimes +
                 ", cardCloseUsage=" + cardCloseUsage +
-                ", settlementCurrencyCode='" + settlementCurrencyCode + '\'' +
                 ", supportedMccGroup='" + supportedMccGroup + '\'' +
-                ", supportedMcc='" + supportedMcc + '\'' +
                 ", supportedMid='" + supportedMid + '\'' +
-                ", supportedAccquirerId='" + supportedAccquirerId + '\'' +
+                ", supportedAcquirerId='" + supportedAcquirerId + '\'' +
                 ", isMultipleCurrencyCard=" + isMultipleCurrencyCard +
                 ", isCvv2ForceCheck=" + isCvv2ForceCheck +
-                ", requestUser='" + requestUser + '\'' +
-                ", requestSource='" + requestSource + '\'' +
                 ", cardBin='" + cardBin + '\'' +
-                ", productCode='" + productCode + '\'' +
                 ", cardType='" + cardType + '\'' +
                 ", cardLabel='" + cardLabel + '\'' +
                 ", userReferenceMap=" + userReferenceMap +

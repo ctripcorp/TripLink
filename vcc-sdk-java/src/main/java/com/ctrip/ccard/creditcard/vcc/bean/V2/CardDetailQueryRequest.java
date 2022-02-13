@@ -2,21 +2,13 @@ package com.ctrip.ccard.creditcard.vcc.bean.V2;
 
 public class CardDetailQueryRequest{
 
-    private String requestId;
-
     private String serviceVersion;
+
+    private String requestId;
 
     private String customerId;
 
     private String cardLogId;
-
-    public String getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
-    }
 
     public String getServiceVersion() {
         return serviceVersion;
@@ -24,6 +16,14 @@ public class CardDetailQueryRequest{
 
     public void setServiceVersion(String serviceVersion) {
         this.serviceVersion = serviceVersion;
+    }
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 
     public String getCustomerId() {
@@ -46,9 +46,9 @@ public class CardDetailQueryRequest{
     public String toString() {
         return "CardDetailQueryRequest{" +
                 "serviceVersion='" + serviceVersion + '\'' +
+                ", requestId='" + requestId + '\'' +
                 ", customerId='" + customerId + '\'' +
                 ", cardLogId='" + cardLogId + '\'' +
-                ", requestId='" + requestId + '\'' +
                 '}';
     }
 }

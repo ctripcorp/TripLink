@@ -8,34 +8,21 @@ import java.util.Map;
 public class CardUpdateRequest{
 
     private String serviceVersion;
-    private String customerId;
     private String requestId;
-    private String requestType;
+    private String customerId;
     private String cardLogId;
-    private Date activeDate;
-    private Date inactiveDate;
+    private String activeDate;
+    private String inactiveDate;
     private BigDecimal cardLimit;
     private BigDecimal minAuthAmount;
     private BigDecimal maxAuthAmount;
     private Integer cardCloseUsage;
-    private Boolean isCvv2ForceCheck;
-    private Boolean isMultipleCurrencyCard;
     private String supportedMccGroup;
-    private String supportedMcc;
     private String supportedMid;
-    private String supportedAccquirerId;
-    private String requestUser;
-    private String requestSource;
-    private String cardStatus;
+    private String supportedAcquirerId;
+    private Boolean isMultipleCurrencyCard;
+    private Boolean isCvv2ForceCheck;
     private Map<String, String> userReferenceMap = new LinkedHashMap<String, String>();
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
 
     public String getServiceVersion() {
         return serviceVersion;
@@ -53,12 +40,12 @@ public class CardUpdateRequest{
         this.requestId = requestId;
     }
 
-    public String getRequestType() {
-        return requestType;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setRequestType(String requestType) {
-        this.requestType = requestType;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public String getCardLogId() {
@@ -69,19 +56,19 @@ public class CardUpdateRequest{
         this.cardLogId = cardLogId;
     }
 
-    public Date getActiveDate() {
+    public String getActiveDate() {
         return activeDate;
     }
 
-    public void setActiveDate(Date activeDate) {
+    public void setActiveDate(String activeDate) {
         this.activeDate = activeDate;
     }
 
-    public Date getInactiveDate() {
+    public String getInactiveDate() {
         return inactiveDate;
     }
 
-    public void setInactiveDate(Date inactiveDate) {
+    public void setInactiveDate(String inactiveDate) {
         this.inactiveDate = inactiveDate;
     }
 
@@ -117,36 +104,12 @@ public class CardUpdateRequest{
         this.cardCloseUsage = cardCloseUsage;
     }
 
-    public Boolean getCvv2ForceCheck() {
-        return isCvv2ForceCheck;
-    }
-
-    public void setCvv2ForceCheck(Boolean cvv2ForceCheck) {
-        isCvv2ForceCheck = cvv2ForceCheck;
-    }
-
-    public Boolean getMultipleCurrencyCard() {
-        return isMultipleCurrencyCard;
-    }
-
-    public void setMultipleCurrencyCard(Boolean multipleCurrencyCard) {
-        isMultipleCurrencyCard = multipleCurrencyCard;
-    }
-
     public String getSupportedMccGroup() {
         return supportedMccGroup;
     }
 
     public void setSupportedMccGroup(String supportedMccGroup) {
         this.supportedMccGroup = supportedMccGroup;
-    }
-
-    public String getSupportedMcc() {
-        return supportedMcc;
-    }
-
-    public void setSupportedMcc(String supportedMcc) {
-        this.supportedMcc = supportedMcc;
     }
 
     public String getSupportedMid() {
@@ -157,36 +120,28 @@ public class CardUpdateRequest{
         this.supportedMid = supportedMid;
     }
 
-    public String getSupportedAccquirerId() {
-        return supportedAccquirerId;
+    public String getSupportedAcquirerId() {
+        return supportedAcquirerId;
     }
 
-    public void setSupportedAccquirerId(String supportedAccquirerId) {
-        this.supportedAccquirerId = supportedAccquirerId;
+    public void setSupportedAcquirerId(String supportedAcquirerId) {
+        this.supportedAcquirerId = supportedAcquirerId;
     }
 
-    public String getRequestUser() {
-        return requestUser;
+    public Boolean getMultipleCurrencyCard() {
+        return isMultipleCurrencyCard;
     }
 
-    public void setRequestUser(String requestUser) {
-        this.requestUser = requestUser;
+    public void setMultipleCurrencyCard(Boolean multipleCurrencyCard) {
+        isMultipleCurrencyCard = multipleCurrencyCard;
     }
 
-    public String getRequestSource() {
-        return requestSource;
+    public Boolean getCvv2ForceCheck() {
+        return isCvv2ForceCheck;
     }
 
-    public void setRequestSource(String requestSource) {
-        this.requestSource = requestSource;
-    }
-
-    public String getCardStatus() {
-        return cardStatus;
-    }
-
-    public void setCardStatus(String cardStatus) {
-        this.cardStatus = cardStatus;
+    public void setCvv2ForceCheck(Boolean cvv2ForceCheck) {
+        isCvv2ForceCheck = cvv2ForceCheck;
     }
 
     public Map<String, String> getUserReferenceMap() {
@@ -201,9 +156,8 @@ public class CardUpdateRequest{
     public String toString() {
         return "CardUpdateRequest{" +
                 "serviceVersion='" + serviceVersion + '\'' +
-                ", customerId='" + customerId + '\'' +
                 ", requestId='" + requestId + '\'' +
-                ", requestType='" + requestType + '\'' +
+                ", customerId='" + customerId + '\'' +
                 ", cardLogId='" + cardLogId + '\'' +
                 ", activeDate=" + activeDate +
                 ", inactiveDate=" + inactiveDate +
@@ -211,15 +165,11 @@ public class CardUpdateRequest{
                 ", minAuthAmount=" + minAuthAmount +
                 ", maxAuthAmount=" + maxAuthAmount +
                 ", cardCloseUsage=" + cardCloseUsage +
-                ", isCvv2ForceCheck=" + isCvv2ForceCheck +
-                ", isMultipleCurrencyCard=" + isMultipleCurrencyCard +
                 ", supportedMccGroup='" + supportedMccGroup + '\'' +
-                ", supportedMcc='" + supportedMcc + '\'' +
                 ", supportedMid='" + supportedMid + '\'' +
-                ", supportedAccquirerId='" + supportedAccquirerId + '\'' +
-                ", requestUser='" + requestUser + '\'' +
-                ", requestSource='" + requestSource + '\'' +
-                ", cardStatus='" + cardStatus + '\'' +
+                ", supportedAcquirerId='" + supportedAcquirerId + '\'' +
+                ", isMultipleCurrencyCard=" + isMultipleCurrencyCard +
+                ", isCvv2ForceCheck=" + isCvv2ForceCheck +
                 ", userReferenceMap=" + userReferenceMap +
                 '}';
     }

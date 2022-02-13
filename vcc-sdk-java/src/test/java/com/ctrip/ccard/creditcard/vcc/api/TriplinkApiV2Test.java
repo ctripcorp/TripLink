@@ -51,12 +51,13 @@ public class TriplinkApiV2Test {
     private static final String URL = "接口请求地址";
     /**
      * RSA publick key
+     * 测试环境：MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzGuvnpECqBJlD2Rk8eQ3BiNJn6TglMxC+BIzj7g2xOBF1wrn7vDgO40uNwF42SSDbQ2eb9lOyslhFlNZFeasCwKFLQ/uo0HY2vFlFBb49362OL1aYIf3hCgL7J2+4U6vUlrZkm0HWSZm5KMT/Y39hjTPSvaTQQPYBFgbderPIw1CS7hQpOh6MMp6XqdzPEdKWZ431A60wYV89BAd5n5hrlAWXeWsnzsO9FK1AHnDhH8FGkIsxYaZsVAAHwWIk1WLnKTWLLJSJjH+0qG7LwWcnlZDe22xza+LzszgyBcQ3f2jio1KD+xpXGN+qqa9jjuwFUx3qcdURRS53j1qRVhuFwIDAQAB
      */
-    private static final String PUBLIC_KEY = "您自己创建的RSA公钥";
+    private static final String PUBLIC_KEY = "携程提供的RSA公钥，用来验签";
     /**
      * RSA private key
      */
-    private static final String PRIVATE_KEY = "您自己创建的RSA私钥";
+    private static final String PRIVATE_KEY = "您自己创建的RSA私钥，用来加签";
 
     @Before
     public void setup() {
@@ -89,17 +90,15 @@ public class TriplinkApiV2Test {
         /**
          * 生效日期 ， 根据您自己的要求填写
          * 测试示例：
-         *  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-         *  request.setActiveDate(simpleDateFormat.parse("2022-01-01"));
+         *  request.setActiveDate("2022-01-01");
          */
-        request.setActiveDate(new Date());
+        request.setActiveDate("生效日期 yyyy-MM-dd");
         /**
          * 失效日期，根据您自己的要求填写
          * 测试示例：
-         *  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-         *  request.setInactiveDate(simpleDateFormat.parse("2023-01-01"));
+         *  request.setInactiveDate("2023-01-01");
          */
-        request.setInactiveDate(new Date());
+        request.setInactiveDate("失效日期 yyyy-MM-dd");
         /**
          * 卡额度，测试环境配置的币种默认是840 （USD）美元币种，小数位保留两位
          * 测试示例：request.setCardLimit(new BigDecimal(100.00))
@@ -341,6 +340,16 @@ public class TriplinkApiV2Test {
          * 测试示例：request.setCardLogId("db5831315c687528ab03784da1e5e32e19169e6952f164c489a502787abfba92");
          */
         request.setCardLogId("卡识别号，开卡接口返回的 cardLogId字段");
+        /**
+         * 查询授权记录 时间区间设置 开始时间
+         * 测试示例： request.setStartTime("2022-01-01");
+         */
+        request.setStartTime("时间区间 yyyy-MM-dd");
+        /**
+         * 查询授权记录 时间区间设置 结束时间
+         * 测试示例： request.setStartTime("2022-02-01");
+         */
+        request.setEndTime("时间区间 yyyy-MM-dd");
         QueryAuthTransactionResponse response = tripLinkApi.queryAuthTransaction(request);
         Assert.assertNotNull(response);
     }
@@ -363,6 +372,16 @@ public class TriplinkApiV2Test {
          * 测试示例：request.setCardLogId("db5831315c687528ab03784da1e5e32e19169e6952f164c489a502787abfba92");
          */
         request.setCardLogId("卡识别号，开卡接口返回的 cardLogId字段");
+        /**
+         * 查询清算记录 时间区间设置 开始时间
+         * 测试示例： request.setStartTime("2022-01-01");
+         */
+        request.setStartTime("时间区间 yyyy-MM-dd");
+        /**
+         * 查询清算记录 时间区间设置 结束时间
+         * 测试示例： request.setStartTime("2022-02-01");
+         */
+        request.setEndTime("时间区间 yyyy-MM-dd");
         QuerySettlementTransactionResponse response = tripLinkApi.querySettlementTransaction(request);
         Assert.assertNotNull(response);
     }

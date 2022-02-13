@@ -1,29 +1,28 @@
 package com.ctrip.ccard.creditcard.vcc.bean.V2;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CardDetailQueryResponse {
 
-    private String cardLogId;
+    private String returnCode;
 
-    private String cardSid;
-
-    private String productCode;
-
-    private String maskedCardNo;
+    private String errorMessage;
 
     private String customerId;
 
+    private String cardLogId;
+
     private String cardCurrencyCode;
 
-    private BigDecimal cardLimit;
+    private String settlementCurrencyCode;
 
     private String activeDate;
 
     private String inactiveDate;
+
+    private BigDecimal cardLimit;
 
     private BigDecimal minAuthAmount;
 
@@ -33,15 +32,13 @@ public class CardDetailQueryResponse {
 
     private Integer cardCloseUsage;
 
-    private Boolean isMultipleCurrencyCard;
-
     private String supportedMccGroup;
-
-    private String supportedMcc;
 
     private String supportedMid;
 
-    private String supportedAccquirerId;
+    private String supportedAcquirerId;
+
+    private Boolean isMultipleCurrencyCard;
 
     private Boolean isCvv2ForceCheck;
 
@@ -51,78 +48,36 @@ public class CardDetailQueryResponse {
 
     private String cardNum;
 
-    private String cardExpiredate;
+    private String cardExpirationDate;
 
     private String cvv2;
 
-    private boolean multipleTimesUseStatus;
+    private BigDecimal availableBalance;
 
     private BigDecimal authorizeAmount;
 
-    private BigDecimal refundAmount;
-
-    private BigDecimal availableBalance;
-
     private BigDecimal settlementAmount;
-
-    private String settlementCurrencyCode;
-
-    private Map<String, String> userReferenceMap = new HashMap<String, String>();
-
-    private String returnCode;
-
-    private String errorMessage;
 
     private String cardType;
 
     private String cardLabel;
 
-    public String getCardType() {
-        return cardType;
+    private Map<String, String> userReferenceMap = new HashMap<String, String>();
+
+    public String getReturnCode() {
+        return returnCode;
     }
 
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
+    public void setReturnCode(String returnCode) {
+        this.returnCode = returnCode;
     }
 
-    public String getCardLabel() {
-        return cardLabel;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setCardLabel(String cardLabel) {
-        this.cardLabel = cardLabel;
-    }
-
-    public String getCardLogId() {
-        return cardLogId;
-    }
-
-    public void setCardLogId(String cardLogId) {
-        this.cardLogId = cardLogId;
-    }
-
-    public String getCardSid() {
-        return cardSid;
-    }
-
-    public void setCardSid(String cardSid) {
-        this.cardSid = cardSid;
-    }
-
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
-
-    public String getMaskedCardNo() {
-        return maskedCardNo;
-    }
-
-    public void setMaskedCardNo(String maskedCardNo) {
-        this.maskedCardNo = maskedCardNo;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public String getCustomerId() {
@@ -133,12 +88,28 @@ public class CardDetailQueryResponse {
         this.customerId = customerId;
     }
 
+    public String getCardLogId() {
+        return cardLogId;
+    }
+
+    public void setCardLogId(String cardLogId) {
+        this.cardLogId = cardLogId;
+    }
+
     public String getCardCurrencyCode() {
         return cardCurrencyCode;
     }
 
     public void setCardCurrencyCode(String cardCurrencyCode) {
         this.cardCurrencyCode = cardCurrencyCode;
+    }
+
+    public String getSettlementCurrencyCode() {
+        return settlementCurrencyCode;
+    }
+
+    public void setSettlementCurrencyCode(String settlementCurrencyCode) {
+        this.settlementCurrencyCode = settlementCurrencyCode;
     }
 
     public String getActiveDate() {
@@ -157,6 +128,30 @@ public class CardDetailQueryResponse {
         this.inactiveDate = inactiveDate;
     }
 
+    public BigDecimal getCardLimit() {
+        return cardLimit;
+    }
+
+    public void setCardLimit(BigDecimal cardLimit) {
+        this.cardLimit = cardLimit;
+    }
+
+    public BigDecimal getMinAuthAmount() {
+        return minAuthAmount;
+    }
+
+    public void setMinAuthAmount(BigDecimal minAuthAmount) {
+        this.minAuthAmount = minAuthAmount;
+    }
+
+    public BigDecimal getMaxAuthAmount() {
+        return maxAuthAmount;
+    }
+
+    public void setMaxAuthAmount(BigDecimal maxAuthAmount) {
+        this.maxAuthAmount = maxAuthAmount;
+    }
+
     public Integer getMaxAuthTimes() {
         return maxAuthTimes;
     }
@@ -173,28 +168,12 @@ public class CardDetailQueryResponse {
         this.cardCloseUsage = cardCloseUsage;
     }
 
-    public Boolean getMultipleCurrencyCard() {
-        return isMultipleCurrencyCard;
-    }
-
-    public void setMultipleCurrencyCard(Boolean multipleCurrencyCard) {
-        isMultipleCurrencyCard = multipleCurrencyCard;
-    }
-
     public String getSupportedMccGroup() {
         return supportedMccGroup;
     }
 
     public void setSupportedMccGroup(String supportedMccGroup) {
         this.supportedMccGroup = supportedMccGroup;
-    }
-
-    public String getSupportedMcc() {
-        return supportedMcc;
-    }
-
-    public void setSupportedMcc(String supportedMcc) {
-        this.supportedMcc = supportedMcc;
     }
 
     public String getSupportedMid() {
@@ -205,12 +184,20 @@ public class CardDetailQueryResponse {
         this.supportedMid = supportedMid;
     }
 
-    public String getSupportedAccquirerId() {
-        return supportedAccquirerId;
+    public String getSupportedAcquirerId() {
+        return supportedAcquirerId;
     }
 
-    public void setSupportedAccquirerId(String supportedAccquirerId) {
-        this.supportedAccquirerId = supportedAccquirerId;
+    public void setSupportedAcquirerId(String supportedAcquirerId) {
+        this.supportedAcquirerId = supportedAcquirerId;
+    }
+
+    public Boolean getMultipleCurrencyCard() {
+        return isMultipleCurrencyCard;
+    }
+
+    public void setMultipleCurrencyCard(Boolean multipleCurrencyCard) {
+        isMultipleCurrencyCard = multipleCurrencyCard;
     }
 
     public Boolean getCvv2ForceCheck() {
@@ -245,12 +232,12 @@ public class CardDetailQueryResponse {
         this.cardNum = cardNum;
     }
 
-    public String getCardExpiredate() {
-        return cardExpiredate;
+    public String getCardExpirationDate() {
+        return cardExpirationDate;
     }
 
-    public void setCardExpiredate(String cardExpiredate) {
-        this.cardExpiredate = cardExpiredate;
+    public void setCardExpirationDate(String cardExpirationDate) {
+        this.cardExpirationDate = cardExpirationDate;
     }
 
     public String getCvv2() {
@@ -261,68 +248,12 @@ public class CardDetailQueryResponse {
         this.cvv2 = cvv2;
     }
 
-    public boolean isMultipleTimesUseStatus() {
-        return multipleTimesUseStatus;
+    public BigDecimal getAvailableBalance() {
+        return availableBalance;
     }
 
-    public void setMultipleTimesUseStatus(boolean multipleTimesUseStatus) {
-        this.multipleTimesUseStatus = multipleTimesUseStatus;
-    }
-
-    public String getSettlementCurrencyCode() {
-        return settlementCurrencyCode;
-    }
-
-    public void setSettlementCurrencyCode(String settlementCurrencyCode) {
-        this.settlementCurrencyCode = settlementCurrencyCode;
-    }
-
-    public Map<String, String> getUserReferenceMap() {
-        return userReferenceMap;
-    }
-
-    public void setUserReferenceMap(Map<String, String> userReferenceMap) {
-        this.userReferenceMap = userReferenceMap;
-    }
-
-    public String getReturnCode() {
-        return returnCode;
-    }
-
-    public void setReturnCode(String returnCode) {
-        this.returnCode = returnCode;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    public BigDecimal getCardLimit() {
-        return cardLimit;
-    }
-
-    public void setCardLimit(BigDecimal cardLimit) {
-        this.cardLimit = cardLimit;
-    }
-
-    public BigDecimal getMinAuthAmount() {
-        return minAuthAmount;
-    }
-
-    public void setMinAuthAmount(BigDecimal minAuthAmount) {
-        this.minAuthAmount = minAuthAmount;
-    }
-
-    public BigDecimal getMaxAuthAmount() {
-        return maxAuthAmount;
-    }
-
-    public void setMaxAuthAmount(BigDecimal maxAuthAmount) {
-        this.maxAuthAmount = maxAuthAmount;
+    public void setAvailableBalance(BigDecimal availableBalance) {
+        this.availableBalance = availableBalance;
     }
 
     public BigDecimal getAuthorizeAmount() {
@@ -333,22 +264,6 @@ public class CardDetailQueryResponse {
         this.authorizeAmount = authorizeAmount;
     }
 
-    public BigDecimal getRefundAmount() {
-        return refundAmount;
-    }
-
-    public void setRefundAmount(BigDecimal refundAmount) {
-        this.refundAmount = refundAmount;
-    }
-
-    public BigDecimal getAvailableBalance() {
-        return availableBalance;
-    }
-
-    public void setAvailableBalance(BigDecimal availableBalance) {
-        this.availableBalance = availableBalance;
-    }
-
     public BigDecimal getSettlementAmount() {
         return settlementAmount;
     }
@@ -357,44 +272,62 @@ public class CardDetailQueryResponse {
         this.settlementAmount = settlementAmount;
     }
 
+    public String getCardType() {
+        return cardType;
+    }
+
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
+
+    public String getCardLabel() {
+        return cardLabel;
+    }
+
+    public void setCardLabel(String cardLabel) {
+        this.cardLabel = cardLabel;
+    }
+
+    public Map<String, String> getUserReferenceMap() {
+        return userReferenceMap;
+    }
+
+    public void setUserReferenceMap(Map<String, String> userReferenceMap) {
+        this.userReferenceMap = userReferenceMap;
+    }
+
     @Override
     public String toString() {
         return "CardDetailQueryResponse{" +
-                "cardLogId='" + cardLogId + '\'' +
-                ", cardSid='" + cardSid + '\'' +
-                ", productCode='" + productCode + '\'' +
-                ", maskedCardNo='" + maskedCardNo + '\'' +
+                "returnCode='" + returnCode + '\'' +
+                ", errorMessage='" + errorMessage + '\'' +
                 ", customerId='" + customerId + '\'' +
+                ", cardLogId='" + cardLogId + '\'' +
                 ", cardCurrencyCode='" + cardCurrencyCode + '\'' +
+                ", settlementCurrencyCode='" + settlementCurrencyCode + '\'' +
+                ", activeDate='" + activeDate + '\'' +
+                ", inactiveDate='" + inactiveDate + '\'' +
                 ", cardLimit=" + cardLimit +
-                ", activeDate=" + activeDate +
-                ", inactiveDate=" + inactiveDate +
                 ", minAuthAmount=" + minAuthAmount +
                 ", maxAuthAmount=" + maxAuthAmount +
                 ", maxAuthTimes=" + maxAuthTimes +
                 ", cardCloseUsage=" + cardCloseUsage +
-                ", isMultipleCurrencyCard=" + isMultipleCurrencyCard +
                 ", supportedMccGroup='" + supportedMccGroup + '\'' +
-                ", supportedMcc='" + supportedMcc + '\'' +
                 ", supportedMid='" + supportedMid + '\'' +
-                ", supportedAccquirerId='" + supportedAccquirerId + '\'' +
+                ", supportedAcquirerId='" + supportedAcquirerId + '\'' +
+                ", isMultipleCurrencyCard=" + isMultipleCurrencyCard +
                 ", isCvv2ForceCheck=" + isCvv2ForceCheck +
                 ", applyTime='" + applyTime + '\'' +
                 ", status='" + status + '\'' +
                 ", cardNum='" + cardNum + '\'' +
-                ", cardExpiredate='" + cardExpiredate + '\'' +
+                ", cardExpirationDate='" + cardExpirationDate + '\'' +
                 ", cvv2='" + cvv2 + '\'' +
-                ", multipleTimesUseStatus=" + multipleTimesUseStatus +
-                ", authorizeAmount=" + authorizeAmount +
-                ", refundAmount=" + refundAmount +
                 ", availableBalance=" + availableBalance +
+                ", authorizeAmount=" + authorizeAmount +
                 ", settlementAmount=" + settlementAmount +
-                ", settlementCurrencyCode='" + settlementCurrencyCode + '\'' +
-                ", userReferenceMap=" + userReferenceMap +
-                ", returnCode='" + returnCode + '\'' +
-                ", errorMessage='" + errorMessage + '\'' +
                 ", cardType='" + cardType + '\'' +
                 ", cardLabel='" + cardLabel + '\'' +
+                ", userReferenceMap=" + userReferenceMap +
                 '}';
     }
 }
