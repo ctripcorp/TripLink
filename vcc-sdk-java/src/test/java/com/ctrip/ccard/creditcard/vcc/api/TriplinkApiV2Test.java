@@ -26,11 +26,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class TriplinkApiV2Test {
 
@@ -112,7 +109,7 @@ public class TriplinkApiV2Test {
         /**
          * 单次授权金额上限，不能高于卡额度
          * 测试环境配置的币种默认是840 （USD）美元币种，小数位保留两位
-         * 测试示例：request.setMinAuthAmount(new BigDecimal(0.00))
+         * 测试示例：request.setMaxAuthAmount(new BigDecimal(100.00))
          */
         request.setMaxAuthAmount(new BigDecimal("单次授权金额上限,保留的小数位对应卡币种"));
         /**
@@ -199,7 +196,7 @@ public class TriplinkApiV2Test {
         /**
          * 单次授权金额上限，不能高于卡额度
          * 测试环境配置的币种默认是840 （USD）美元币种，小数位保留两位
-         * 测试示例：request.setMinAuthAmount(new BigDecimal(0.00))
+         * 测试示例：request.setMaxAuthAmount(new BigDecimal(100.00))
          */
         request.setMaxAuthAmount(new BigDecimal("单次授权金额上限,保留的小数位对应卡币种"));
         CardUpdateResponse response = tripLinkApi.update(request);

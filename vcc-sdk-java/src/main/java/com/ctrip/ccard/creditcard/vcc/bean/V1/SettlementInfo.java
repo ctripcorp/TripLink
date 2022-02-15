@@ -89,14 +89,17 @@ public class SettlementInfo {
      */
     private String transExtra;
 
-    private String txnId;// 入账的流水号
+    /**
+     * 交易唯一号
+     */
+    private String transId;
 
-    public String getTxnId() {
-        return txnId;
+    public String getTransId() {
+        return transId;
     }
 
-    public void setTxnId(String txnId) {
-        this.txnId = txnId;
+    public void setTransId(String transId) {
+        this.transId = transId;
     }
 
     public String getOccurTime() {
