@@ -1,0 +1,15 @@
+<?php declare(strict_types=1);
+
+namespace v2\model\core;
+
+use JsonSerializable;
+use v2\model\BaseRequest;
+
+class QueryAccountRequest extends BaseRequest implements JsonSerializable {
+
+    public function jsonSerialize(): object {
+        return (object)array_filter(get_object_vars($this), function ($value) {
+            return $value !== null;
+        });
+    }
+}
