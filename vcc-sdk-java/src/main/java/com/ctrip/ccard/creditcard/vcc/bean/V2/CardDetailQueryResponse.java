@@ -38,9 +38,9 @@ public class CardDetailQueryResponse {
 
     private String supportedAcquirerId;
 
-    private Boolean isMultipleCurrencyCard;
+    private Boolean multipleCurrencyCard;
 
-    private Boolean isCvv2ForceCheck;
+    private Boolean cvv2ForceCheck;
 
     private String applyTime;
 
@@ -193,19 +193,19 @@ public class CardDetailQueryResponse {
     }
 
     public Boolean getMultipleCurrencyCard() {
-        return isMultipleCurrencyCard;
+        return multipleCurrencyCard;
     }
 
     public void setMultipleCurrencyCard(Boolean multipleCurrencyCard) {
-        isMultipleCurrencyCard = multipleCurrencyCard;
+        this.multipleCurrencyCard = multipleCurrencyCard;
     }
 
     public Boolean getCvv2ForceCheck() {
-        return isCvv2ForceCheck;
+        return cvv2ForceCheck;
     }
 
     public void setCvv2ForceCheck(Boolean cvv2ForceCheck) {
-        isCvv2ForceCheck = cvv2ForceCheck;
+        this.cvv2ForceCheck = cvv2ForceCheck;
     }
 
     public String getApplyTime() {
@@ -315,8 +315,8 @@ public class CardDetailQueryResponse {
                 ", supportedMccGroup='" + supportedMccGroup + '\'' +
                 ", supportedMid='" + supportedMid + '\'' +
                 ", supportedAcquirerId='" + supportedAcquirerId + '\'' +
-                ", isMultipleCurrencyCard=" + isMultipleCurrencyCard +
-                ", isCvv2ForceCheck=" + isCvv2ForceCheck +
+                ", multipleCurrencyCard=" + multipleCurrencyCard +
+                ", cvv2ForceCheck=" + cvv2ForceCheck +
                 ", applyTime='" + applyTime + '\'' +
                 ", status='" + status + '\'' +
                 ", cardNum='" + cardNum + '\'' +

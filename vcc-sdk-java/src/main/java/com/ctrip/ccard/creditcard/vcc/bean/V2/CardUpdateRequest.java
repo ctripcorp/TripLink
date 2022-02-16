@@ -1,7 +1,6 @@
 package com.ctrip.ccard.creditcard.vcc.bean.V2;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -20,8 +19,8 @@ public class CardUpdateRequest{
     private String supportedMccGroup;
     private String supportedMid;
     private String supportedAcquirerId;
-    private Boolean isMultipleCurrencyCard;
-    private Boolean isCvv2ForceCheck;
+    private Boolean multipleCurrencyCard;
+    private Boolean cvv2ForceCheck;
     private Map<String, String> userReferenceMap = new LinkedHashMap<String, String>();
 
     public String getServiceVersion() {
@@ -129,19 +128,19 @@ public class CardUpdateRequest{
     }
 
     public Boolean getMultipleCurrencyCard() {
-        return isMultipleCurrencyCard;
+        return multipleCurrencyCard;
     }
 
     public void setMultipleCurrencyCard(Boolean multipleCurrencyCard) {
-        isMultipleCurrencyCard = multipleCurrencyCard;
+        this.multipleCurrencyCard = multipleCurrencyCard;
     }
 
     public Boolean getCvv2ForceCheck() {
-        return isCvv2ForceCheck;
+        return cvv2ForceCheck;
     }
 
     public void setCvv2ForceCheck(Boolean cvv2ForceCheck) {
-        isCvv2ForceCheck = cvv2ForceCheck;
+        this.cvv2ForceCheck = cvv2ForceCheck;
     }
 
     public Map<String, String> getUserReferenceMap() {
@@ -168,8 +167,8 @@ public class CardUpdateRequest{
                 ", supportedMccGroup='" + supportedMccGroup + '\'' +
                 ", supportedMid='" + supportedMid + '\'' +
                 ", supportedAcquirerId='" + supportedAcquirerId + '\'' +
-                ", isMultipleCurrencyCard=" + isMultipleCurrencyCard +
-                ", isCvv2ForceCheck=" + isCvv2ForceCheck +
+                ", multipleCurrencyCard=" + multipleCurrencyCard +
+                ", cvv2ForceCheck=" + cvv2ForceCheck +
                 ", userReferenceMap=" + userReferenceMap +
                 '}';
     }
