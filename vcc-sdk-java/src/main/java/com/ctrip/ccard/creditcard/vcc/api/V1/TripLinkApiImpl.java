@@ -1,39 +1,6 @@
 package com.ctrip.ccard.creditcard.vcc.api.V1;
 
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.OperateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.OperateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QOperateResultRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QOperateResultResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QTransInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QTransInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAccountInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAccountInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.*;
 import com.ctrip.ccard.creditcard.vcc.biz.V1.TripLinkBiz;
 import com.ctrip.ccard.creditcard.vcc.util.BeanConvertUtil;
 
@@ -233,5 +200,35 @@ public class TripLinkApiImpl implements TripLinkApi {
         QTransInfoRequest bizRequest = BeanConvertUtil.convert2QuerySettlemetTransInfoRequest(request);
         QTransInfoResponse bizResponse = vccBiz.qTransInfo(bizRequest);
         return BeanConvertUtil.convert2QuerySettlemetTransInfoResponse(bizResponse);
+    }
+
+    /**
+     * VCC <suspend> card
+     * request.requestId/requestTime/merchantName/cardLogId/  can not null
+     * @return SuspendResponse
+     * response.resultstatus enums is : PROCESS：处理中 SUCCEED：成功 FAILURE：失败 EXCEPTION：异常
+     * if response.resultstatus is PROCESS or EXCEPTION please retry
+     * response.resultRespMsg is result message
+     */
+    @Override
+    public SuspendResponse suspend(SuspendRequest request){
+        OperateRequest bizRequest = BeanConvertUtil.convert2SuspendRequest(request);
+        OperateResponse bizResponse = vccBiz.operate(bizRequest);
+        return BeanConvertUtil.convert2SuspendResponse(bizResponse);
+    }
+
+    /**
+     * VCC <unSuspend> card
+     * request.requestId/requestTime/merchantName/cardLogId/  can not null
+     * @return UnsuspendResponse
+     * response.resultstatus enums is : PROCESS：处理中 SUCCEED：成功 FAILURE：失败 EXCEPTION：异常
+     * if response.resultstatus is PROCESS or EXCEPTION please retry
+     * response.resultRespMsg is result message
+     */
+    @Override
+    public UnSuspendResponse unSuspend(UnSuspendRequest request) {
+        OperateRequest bizRequest = BeanConvertUtil.convert2UnSuspendRequest(request);
+        OperateResponse bizResponse = vccBiz.operate(bizRequest);
+        return BeanConvertUtil.convert2UnSuspendResponse(bizResponse);
     }
 }

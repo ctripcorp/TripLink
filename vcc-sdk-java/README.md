@@ -1,4 +1,4 @@
-欢迎使用 TripLink SDK For Java 。
+欢迎使用 TripLink SDK For Java ！
 
 TripLink SDK For Java 让您不用更轻松方便对接TripLink开发接口，可以自动帮您满足能力调用过程中所需的参数校验、加签、数据解密、发送HTTP请求等非功能性要求。
 

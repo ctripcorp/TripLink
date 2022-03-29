@@ -1,24 +1,7 @@
 package com.ctrip.ccard.creditcard.vcc.api;
 
 import com.ctrip.ccard.creditcard.vcc.api.V2.TripLinkApiImplV2;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCancelRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCancelResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCreateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCreateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardDetailQueryRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardDetailQueryResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRechargeRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRechargeResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUpdateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUpdateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardWithdrawRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardWithdrawResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryCustomerCreditAmountRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryCustomerCreditAmountResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.*;
 import com.ctrip.ccard.creditcard.vcc.biz.V2.TripLinkBizImplV2;
 import com.ctrip.ccard.creditcard.vcc.util.TripLinkHttpClient;
 import org.junit.Assert;
@@ -380,6 +363,52 @@ public class TriplinkApiV2Test {
          */
         request.setEndTime("时间区间 yyyy-MM-dd");
         QuerySettlementTransactionResponse response = tripLinkApi.querySettlementTransaction(request);
+        Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void suspend() throws Exception {
+        CardSuspendRequest request = new CardSuspendRequest();
+        /**
+         * 请求流水号
+         * 测试示例： request.setRequestId(UUID.randomUUID());
+         */
+        request.setRequestId("请求流水号");
+        /**
+         * 商户ID 携程提供
+         * 测试示例： request.setCustomerId("CSR1234567890");
+         */
+        request.setCustomerId("携程提供 格式为 CSRxxxxxx");
+        /**
+         * 卡识别号，开卡接口返回的 cardLogId字段
+         * 测试示例：request.setCardLogId("db5831315c687528ab03784da1e5e32e19169e6952f164c489a502787abfba92");
+         */
+        request.setCardLogId("卡识别号，开卡接口返回的 cardLogId字段");
+
+        CardSuspendResponse response = tripLinkApi.suspend(request);
+        Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void unsuspend() throws Exception {
+        CardUnsuspendRequest request = new CardUnsuspendRequest();
+        /**
+         * 请求流水号
+         * 测试示例： request.setRequestId(UUID.randomUUID());
+         */
+        request.setRequestId("请求流水号");
+        /**
+         * 商户ID 携程提供
+         * 测试示例： request.setCustomerId("CSR1234567890");
+         */
+        request.setCustomerId("携程提供 格式为 CSRxxxxxx");
+        /**
+         * 卡识别号，开卡接口返回的 cardLogId字段
+         * 测试示例：request.setCardLogId("db5831315c687528ab03784da1e5e32e19169e6952f164c489a502787abfba92");
+         */
+        request.setCardLogId("卡识别号，开卡接口返回的 cardLogId字段");
+
+        CardUnsuspendResponse response = tripLinkApi.unsuspend(request);
         Assert.assertNotNull(response);
     }
 }

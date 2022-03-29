@@ -33,6 +33,10 @@ import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultRequest;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultResponse;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeRequest;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.SuspendRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.SuspendResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UnSuspendRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UnSuspendResponse;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateCardInfo;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateRequest;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateResponse;
@@ -51,6 +55,10 @@ public class BeanConvertUtil {
     private static final String REQUEST_TYPE_RECHARGE = "RECHARGE";
     //operate接口 提现卡请求类型值
     private static final String REQUEST_TYPE_WITHDRAW = "WITHDRAW";
+    //operate接口 锁定卡请求类型值
+    private static final String REQUEST_TYPE_SUSPEND = "SUSPEND";
+    //operate接口 解锁卡请求类型值
+    private static final String REQUEST_TYPE_UNSUSPEND = "UNSUSPEND";
     //operate接口 关闭卡请求类型值
     private static final String REQUEST_TYPE_CLOSE = "CLOSE";
     //qInfo接口 请求类型值
@@ -95,6 +103,12 @@ public class BeanConvertUtil {
             CreateCardInfo createCardInfo = request.getCardInfo();
             //卡信息
             CardInfo cardInfo = new CardInfo();
+            //卡产品
+            cardInfo.setCardProductCode(createCardInfo.getCardProductCode());
+            //汇率ID
+            cardInfo.setQuoteId(createCardInfo.getQuoteId());
+            //卖出币种
+            cardInfo.setSellCurrency(createCardInfo.getSellCurrency());
             //开卡币种
             cardInfo.setLocalCurrency(createCardInfo.getLocalCurrency());
             //结算币种
@@ -1012,4 +1026,119 @@ public class BeanConvertUtil {
     }
 
 
+    public static OperateRequest convert2SuspendRequest(SuspendRequest request) {
+        OperateRequest operateRequest = new OperateRequest();
+        //请求流水号
+        operateRequest.setRequestId(request.getRequestId());
+        //请求时间 yyyyMMddHHmmss
+        operateRequest.setRequestTime(request.getRequestTime());
+        //请求类型
+        operateRequest.setRequestType(REQUEST_TYPE_SUSPEND);
+        //请求子类型
+        operateRequest.setSubRequestType(SUB_REQUEST_TYPE_CREATE);
+        //商户名
+        operateRequest.setMerchantName(request.getMerchantName());
+        //发卡通道类型
+        operateRequest.setChannelType(request.getChannelType());
+        //请求来源标注
+        operateRequest.setRequestSource(request.getRequestSource());
+        //调用端操作人
+        operateRequest.setOperator(request.getOperator());
+        //请求扩展字段
+        operateRequest.setReqExtra(request.getReqExtra());
+        //卡信息
+        CardInfo cardInfo = new CardInfo();
+        //VCC发行卡片处唯一参考号
+        cardInfo.setCardLogId(request.getCardLogId());
+        operateRequest.setCardInfo(cardInfo);
+        return operateRequest;
+    }
+
+    public static SuspendResponse convert2SuspendResponse(OperateResponse operateResponse) {
+        SuspendResponse suspendResponse = new SuspendResponse();
+        //结果状态
+        suspendResponse.setResultStatus(operateResponse.getResultstatus());
+        //结果码
+        suspendResponse.setResultRespCode(operateResponse.getResultRespCode());
+        //结果码描述
+        suspendResponse.setResultRespMsg(operateResponse.getResultRespMsg());
+        //结果码详细描述
+        suspendResponse.setResultRespDetailMsg(operateResponse.getResultRespDetailMsg());
+        //发卡通道类型
+        suspendResponse.setChannelType(operateResponse.getChannelType());
+        //VCC生成的唯一流水号
+        suspendResponse.setCcOpId(operateResponse.getCcOpId());
+        //原请求流水号
+        suspendResponse.setRequestId(operateResponse.getRequestId());
+        //原请求时间
+        suspendResponse.setRequestTime(operateResponse.getRequestTime());
+        //原请求商户名
+        suspendResponse.setMerchantName(operateResponse.getMerchantName());
+        //响应扩展数据
+        suspendResponse.setRespExtra(operateResponse.getRespExtra());
+        if(null != operateResponse.getCardInfo()){
+            CardInfo cardInfo = operateResponse.getCardInfo();
+            //VCC发行卡片处唯一参考号
+            suspendResponse.setCardLogId(cardInfo.getCardLogId());
+        }
+        return suspendResponse;
+    }
+
+    public static OperateRequest convert2UnSuspendRequest(UnSuspendRequest request) {
+        OperateRequest operateRequest = new OperateRequest();
+        //请求流水号
+        operateRequest.setRequestId(request.getRequestId());
+        //请求时间 yyyyMMddHHmmss
+        operateRequest.setRequestTime(request.getRequestTime());
+        //请求类型
+        operateRequest.setRequestType(REQUEST_TYPE_UNSUSPEND);
+        //请求子类型
+        operateRequest.setSubRequestType(SUB_REQUEST_TYPE_CREATE);
+        //商户名
+        operateRequest.setMerchantName(request.getMerchantName());
+        //发卡通道类型
+        operateRequest.setChannelType(request.getChannelType());
+        //请求来源标注
+        operateRequest.setRequestSource(request.getRequestSource());
+        //调用端操作人
+        operateRequest.setOperator(request.getOperator());
+        //请求扩展字段
+        operateRequest.setReqExtra(request.getReqExtra());
+        //卡信息
+        CardInfo cardInfo = new CardInfo();
+        //VCC发行卡片处唯一参考号
+        cardInfo.setCardLogId(request.getCardLogId());
+        operateRequest.setCardInfo(cardInfo);
+        return operateRequest;
+    }
+
+    public static UnSuspendResponse convert2UnSuspendResponse(OperateResponse operateResponse) {
+        UnSuspendResponse unSuspendResponse = new UnSuspendResponse();
+        //结果状态
+        unSuspendResponse.setResultStatus(operateResponse.getResultstatus());
+        //结果码
+        unSuspendResponse.setResultRespCode(operateResponse.getResultRespCode());
+        //结果码描述
+        unSuspendResponse.setResultRespMsg(operateResponse.getResultRespMsg());
+        //结果码详细描述
+        unSuspendResponse.setResultRespDetailMsg(operateResponse.getResultRespDetailMsg());
+        //发卡通道类型
+        unSuspendResponse.setChannelType(operateResponse.getChannelType());
+        //VCC生成的唯一流水号
+        unSuspendResponse.setCcOpId(operateResponse.getCcOpId());
+        //原请求流水号
+        unSuspendResponse.setRequestId(operateResponse.getRequestId());
+        //原请求时间
+        unSuspendResponse.setRequestTime(operateResponse.getRequestTime());
+        //原请求商户名
+        unSuspendResponse.setMerchantName(operateResponse.getMerchantName());
+        //响应扩展数据
+        unSuspendResponse.setRespExtra(operateResponse.getRespExtra());
+        if(null != operateResponse.getCardInfo()){
+            CardInfo cardInfo = operateResponse.getCardInfo();
+            //VCC发行卡片处唯一参考号
+            unSuspendResponse.setCardLogId(cardInfo.getCardLogId());
+        }
+        return unSuspendResponse;
+    }
 }

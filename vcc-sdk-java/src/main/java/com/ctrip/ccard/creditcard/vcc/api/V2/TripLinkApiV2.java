@@ -1,23 +1,6 @@
 package com.ctrip.ccard.creditcard.vcc.api.V2;
 
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCancelRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCancelResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCreateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCreateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardDetailQueryRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardDetailQueryResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRechargeRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRechargeResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUpdateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUpdateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardWithdrawRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardWithdrawResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryCustomerCreditAmountRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryCustomerCreditAmountResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.*;
 
 public interface TripLinkApiV2 {
     /**
@@ -100,4 +83,29 @@ public interface TripLinkApiV2 {
      * if response.resultCode is not equals "000000" check the response.message
      */
     QuerySettlementTransactionResponse querySettlementTransaction(QuerySettlementTransactionRequest request);
+
+    /**
+     * suspend card
+     * request.requestId can not null
+     * @return CardSuspendResponse
+     * response.resultCode equals "000000" it succeeds otherwise it is failed
+     * if response.resultCode is not equals "000000" check the response.message
+     */
+    CardSuspendResponse suspend(CardSuspendRequest request);
+
+    /**
+     * unsuspend card
+     * request.requestId can not null
+     * @return CardUnsuspendResponse
+     * response.resultCode equals "000000" it succeeds otherwise it is failed
+     * if response.resultCode is not equals "000000" check the response.message
+     */
+    CardUnsuspendResponse unsuspend(CardUnsuspendRequest request);
+
+    /**
+     * fx quote
+     * @param quoteRequest
+     * @return
+     */
+    QuoteResponse quote(QuoteRequest quoteRequest);
 }

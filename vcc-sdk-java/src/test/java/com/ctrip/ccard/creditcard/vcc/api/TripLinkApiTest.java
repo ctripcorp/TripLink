@@ -24,6 +24,10 @@ import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultRequest;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultResponse;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeRequest;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.SuspendRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.SuspendResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UnSuspendRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UnSuspendResponse;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateCardInfo;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateRequest;
 import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateResponse;
@@ -71,6 +75,9 @@ public class TripLinkApiTest {
         createRequest.setOperator("max");
         createRequest.setRequestSource("goldenwater");
         CreateCardInfo createCardInfo = new CreateCardInfo();
+        createCardInfo.setCardProductCode(null);
+        createCardInfo.setQuoteId(null);
+        createCardInfo.setSellCurrency(null);
         createCardInfo.setLocalCurrency("USD");
         createCardInfo.setBillCurrency("USD");
         createCardInfo.setStartActiveDate("2021-07-28");
@@ -259,6 +266,34 @@ public class TripLinkApiTest {
         request.setCardLogId("a7558f115f25893d3588d9fc3ecab8e8b887bc92e82f4c3e2ba3d4e239a6e9b9");
         request.setOperator("max");
         QuerySettlemetTransInfoResponse response = tripLinkApi.querySettlemetTransInfo(request);
+        Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void suspendCardTest(){
+        SuspendRequest request = new SuspendRequest();
+        request.setRequestId("suspend20200201111233");
+        request.setRequestTime("20220306230850");
+        request.setMerchantName("WANWEI");
+        request.setChannelType("WANWEI_CFNC_VCC");
+        request.setOperator("max");
+        request.setRequestSource("goldenwater");
+        request.setCardLogId("a7558f115f25893d3588d9fc3ecab8e8b887bc92e82f4c3e2ba3d4e239a6e9b9");
+        SuspendResponse response = tripLinkApi.suspend(request);
+        Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void unSuspendCardTest(){
+        UnSuspendRequest request = new UnSuspendRequest();
+        request.setRequestId("suspend20200201111233");
+        request.setRequestTime("20220306230850");
+        request.setMerchantName("WANWEI");
+        request.setChannelType("WANWEI_CFNC_VCC");
+        request.setOperator("max");
+        request.setRequestSource("goldenwater");
+        request.setCardLogId("a7558f115f25893d3588d9fc3ecab8e8b887bc92e82f4c3e2ba3d4e239a6e9b9");
+        UnSuspendResponse response = tripLinkApi.unSuspend(request);
         Assert.assertNotNull(response);
     }
 }

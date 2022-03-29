@@ -32,4 +32,8 @@ public interface TripLinkApi {
 
     QuerySettlemetTransInfoResponse querySettlemetTransInfo(QuerySettlemetTransInfoRequest request);
 
+    SuspendResponse suspend(SuspendRequest request);
+
+    UnSuspendResponse unSuspend(UnSuspendRequest request);
+
 }
