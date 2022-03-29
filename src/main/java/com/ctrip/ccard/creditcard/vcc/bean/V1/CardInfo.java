@@ -2,10 +2,19 @@ package com.ctrip.ccard.creditcard.vcc.bean.V1;
 
 import java.math.BigDecimal;
 
-/**
- * Description:
- */
 public class CardInfo {
+    /**
+     * 卡产品
+     */
+    private String cardProductCode;
+    /**
+     * 汇率ID
+     */
+    private String quoteId;
+    /**
+     * 卖出币种
+     */
+    private String sellCurrency;
 
     /**
      * VCC发行卡片处唯一参考号
@@ -184,20 +193,28 @@ public class CardInfo {
      */
     private String cardLabel;
 
-    public BigDecimal getWillChangeAmt() {
-        return willChangeAmt;
+    public String getCardProductCode() {
+        return cardProductCode;
     }
 
-    public void setWillChangeAmt(BigDecimal willChangeAmt) {
-        this.willChangeAmt = willChangeAmt;
+    public void setCardProductCode(String cardProductCode) {
+        this.cardProductCode = cardProductCode;
     }
 
-    public String getCardLabel() {
-        return cardLabel;
+    public String getQuoteId() {
+        return quoteId;
     }
 
-    public void setCardLabel(String cardLabel) {
-        this.cardLabel = cardLabel;
+    public void setQuoteId(String quoteId) {
+        this.quoteId = quoteId;
+    }
+
+    public String getSellCurrency() {
+        return sellCurrency;
+    }
+
+    public void setSellCurrency(String sellCurrency) {
+        this.sellCurrency = sellCurrency;
     }
 
     public String getCardLogId() {
@@ -294,6 +311,14 @@ public class CardInfo {
 
     public void setCreditLimitAmt(BigDecimal creditLimitAmt) {
         this.creditLimitAmt = creditLimitAmt;
+    }
+
+    public BigDecimal getWillChangeAmt() {
+        return willChangeAmt;
+    }
+
+    public void setWillChangeAmt(BigDecimal willChangeAmt) {
+        this.willChangeAmt = willChangeAmt;
     }
 
     public BigDecimal getMinAuthAmt() {
@@ -438,5 +463,13 @@ public class CardInfo {
 
     public void setUserDefineInfo(String userDefineInfo) {
         this.userDefineInfo = userDefineInfo;
+    }
+
+    public String getCardLabel() {
+        return cardLabel;
+    }
+
+    public void setCardLabel(String cardLabel) {
+        this.cardLabel = cardLabel;
     }
 }

@@ -101,4 +101,11 @@ public interface TripLinkApiV2 {
      * if response.resultCode is not equals "000000" check the response.message
      */
     CardUnsuspendResponse unsuspend(CardUnsuspendRequest request);
+
+    /**
+     * fx quote
+     * @param quoteRequest
+     * @return
+     */
+    QuoteResponse quote(QuoteRequest quoteRequest);
 }

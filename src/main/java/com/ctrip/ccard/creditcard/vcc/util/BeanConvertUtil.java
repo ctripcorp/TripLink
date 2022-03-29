@@ -1,6 +1,47 @@
 package com.ctrip.ccard.creditcard.vcc.util;
 
-import com.ctrip.ccard.creditcard.vcc.bean.V1.*;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CardInfo;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateCardInfo;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.OperateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.OperateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QOperateResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QOperateResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QTransInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QTransInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAccountInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAccountInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfo;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.SuspendRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.SuspendResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UnSuspendRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UnSuspendResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateCardInfo;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawResponse;
 
 public class BeanConvertUtil {
 
@@ -62,6 +103,12 @@ public class BeanConvertUtil {
             CreateCardInfo createCardInfo = request.getCardInfo();
             //卡信息
             CardInfo cardInfo = new CardInfo();
+            //卡产品
+            cardInfo.setCardProductCode(createCardInfo.getCardProductCode());
+            //汇率ID
+            cardInfo.setQuoteId(createCardInfo.getQuoteId());
+            //卖出币种
+            cardInfo.setSellCurrency(createCardInfo.getSellCurrency());
             //开卡币种
             cardInfo.setLocalCurrency(createCardInfo.getLocalCurrency());
             //结算币种

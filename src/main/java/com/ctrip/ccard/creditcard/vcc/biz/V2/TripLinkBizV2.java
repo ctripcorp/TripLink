@@ -25,4 +25,6 @@ public interface TripLinkBizV2 {
     CardSuspendResponse suspend(CardSuspendRequest request);
 
     CardUnsuspendResponse unsuspend(CardUnsuspendRequest request);
+
+    QuoteResponse quote(QuoteRequest request);
 }

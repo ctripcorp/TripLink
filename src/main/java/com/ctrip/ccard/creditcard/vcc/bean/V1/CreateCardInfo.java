@@ -2,11 +2,19 @@ package com.ctrip.ccard.creditcard.vcc.bean.V1;
 
 import java.math.BigDecimal;
 
-/**
- * Description:
- */
 public class CreateCardInfo {
-
+    /**
+     * 卡产品
+     */
+    private String cardProductCode;
+    /**
+     * 汇率ID
+     */
+    private String quoteId;
+    /**
+     * 卖出币种
+     */
+    private String sellCurrency;
     /**
      * 卡本币种 开卡币种
      */
@@ -84,12 +92,28 @@ public class CreateCardInfo {
      */
     private String cardLabel;
 
-    public String getCardLabel() {
-        return cardLabel;
+    public String getCardProductCode() {
+        return cardProductCode;
     }
 
-    public void setCardLabel(String cardLabel) {
-        this.cardLabel = cardLabel;
+    public void setCardProductCode(String cardProductCode) {
+        this.cardProductCode = cardProductCode;
+    }
+
+    public String getQuoteId() {
+        return quoteId;
+    }
+
+    public void setQuoteId(String quoteId) {
+        this.quoteId = quoteId;
+    }
+
+    public String getSellCurrency() {
+        return sellCurrency;
+    }
+
+    public void setSellCurrency(String sellCurrency) {
+        this.sellCurrency = sellCurrency;
     }
 
     public String getLocalCurrency() {
@@ -218,5 +242,13 @@ public class CreateCardInfo {
 
     public void setUserDefineInfo(String userDefineInfo) {
         this.userDefineInfo = userDefineInfo;
+    }
+
+    public String getCardLabel() {
+        return cardLabel;
+    }
+
+    public void setCardLabel(String cardLabel) {
+        this.cardLabel = cardLabel;
     }
 }

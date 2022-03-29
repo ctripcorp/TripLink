@@ -40,6 +40,8 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
 
     private static final String QUERY_SETTLEMENT_INFO = "querySettlementTransaction";
 
+    private static final String FX_QUOTE = "fxQuote";
+
     private static final String API_SUCCESS_CODE = "200";
 
     private static final String DEFAULT_VERSION = "2.0";
@@ -615,5 +617,48 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         header.put("timestamp", String.valueOf(timestamp));
         header.put("sign", sign);
         return header;
+    }
+
+    @Override
+    public QuoteResponse quote(QuoteRequest request) {
+        //添加默认版本2.0
+        request.setServiceVersion(StringUtils.isEmpty(request.getServiceVersion()) ? DEFAULT_VERSION : request.getServiceVersion());
+        //加密数据
+        String encryptData = CipherUtils.aesEncrypt(this.aesKey, JacksonUtil.object2JsonString(request));
+        //当前时间戳
+        long timestamp = new Date().getTime();
+        //签名数据
+        String signContent = buildRequestSignContent(request.getCustomerId(), FX_QUOTE, request.getServiceVersion(), request.getRequestId(), timestamp, encryptData);
+        //生成签名
+        String sign = CipherUtils.rsaSign(this.customerRsaPrivateKey, signContent);
+        //接口请求头
+        Map<String, String> header = buildHeader(request.getCustomerId(), FX_QUOTE, request.getServiceVersion(), timestamp, request.getRequestId(), sign);
+        //API请求入参
+        TripLinkApiRequest apiRequest = new TripLinkApiRequest();
+        apiRequest.setPayload(encryptData);
+        //接口请求
+        String requestJson = JacksonUtil.object2JsonString(apiRequest);
+        LOGGER.info("call tripLinkV2 quote requestJson is：" + encryptData);
+        CallHttpResponse response = httpClient.post(requestJson, url, header);
+        LOGGER.info("call tripLinkV2 quote responseStr is：" + response);
+        //http请求返回报文 header
+        Map<String, String> responseHeaders = response.getHeader();
+        //code判断
+        if (!API_SUCCESS_CODE.equals(responseHeaders.get("code"))) {
+            throw new BusinessException(responseHeaders.get("message"));
+        }
+        //http请求返回报文 业务数据
+        String result = response.getResult();
+        TripLinkApiRequest apiResponse = JacksonUtil.str2Object(result, TripLinkApiRequest.class);
+        //生成需要验签的签名数据
+        String responseSignContent = buildResponseSignContent(responseHeaders, apiResponse.getPayload());
+        //验签
+        boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
+        if (!signResult) {
+            throw new BusinessException("query settlement transaction verify response sign failed");
+        }
+        //解密数据
+        String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
+        return JacksonUtil.str2Object(payload, QuoteResponse.class);
     }
 }

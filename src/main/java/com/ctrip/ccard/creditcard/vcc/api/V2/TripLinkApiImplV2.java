@@ -60,6 +60,12 @@ public class TripLinkApiImplV2 implements TripLinkApiV2 {
     }
 
     @Override
+    public QuoteResponse quote(QuoteRequest request) {
+        return vccBiz.quote(request);
+    }
+
+
+    @Override
     public CardSuspendResponse suspend(CardSuspendRequest request) {
         return vccBiz.suspend(request);
     }
