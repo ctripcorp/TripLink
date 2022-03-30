@@ -26,7 +26,16 @@ public class CardCreateRequest {
     private String cardBin;
     private String cardType;
     private String cardLabel;
+    private String cardProductCode;
     private Map<String, String> userReferenceMap = new LinkedHashMap<String, String>();
+
+    public String getCardProductCode() {
+        return cardProductCode;
+    }
+
+    public void setCardProductCode(String cardProductCode) {
+        this.cardProductCode = cardProductCode;
+    }
 
     public String getServiceVersion() {
         return serviceVersion;
@@ -219,6 +228,7 @@ public class CardCreateRequest {
                 ", cardBin='" + cardBin + '\'' +
                 ", cardType='" + cardType + '\'' +
                 ", cardLabel='" + cardLabel + '\'' +
+                ", cardProductCode=" + cardProductCode +
                 ", userReferenceMap=" + userReferenceMap +
                 '}';
     }
