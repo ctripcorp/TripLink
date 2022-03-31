@@ -3,6 +3,7 @@ package com.ctrip.ccard.creditcard.vcc.api;
 import com.ctrip.ccard.creditcard.vcc.api.V2.TripLinkApiImplV2;
 import com.ctrip.ccard.creditcard.vcc.bean.V2.*;
 import com.ctrip.ccard.creditcard.vcc.biz.V2.TripLinkBizImplV2;
+import com.ctrip.ccard.creditcard.vcc.util.JacksonUtil;
 import com.ctrip.ccard.creditcard.vcc.util.TripLinkHttpClient;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,6 +12,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class TriplinkApiV2Test {
 
@@ -410,5 +412,43 @@ public class TriplinkApiV2Test {
 
         CardUnsuspendResponse response = tripLinkApi.unsuspend(request);
         Assert.assertNotNull(response);
+    }
+    @Test
+    public void quote() throws Exception {
+        QuoteRequest request = new QuoteRequest();
+        /**
+         * 请求流水号
+         * 测试示例： request.setRequestId(UUID.randomUUID());
+         */
+        request.setRequestId(String.valueOf(UUID.randomUUID()));
+        /**
+         * 商户ID 携程提供
+         * 测试示例： request.setCustomerId("CSR1234567890");
+         */
+        request.setCustomerId("CSR2E54DC4B8A5D4");
+        /**
+         * 卖出币种
+         * 测试示例：request.setSellCurrency("EUR");
+         */
+        request.setSellCurrency("156");
+        /**
+         * 买入币种
+         * 测试示例： request.setBuyCurrency("USD");
+         */
+        request.setBuyCurrency("840");
+        /**
+         * 换汇方向 0-指定卖出 1-指定买入
+         * 测试示例： request.setFxDirection(0);
+         */
+        request.setFxDirection(0);
+        /**
+         * 交易金额，与FxDirection相互联动
+         *  request.setFxAmount(100L);
+         */
+        request.setFxAmount(BigDecimal.valueOf(100L));
+
+        QuoteResponse response = tripLinkApi.quote(request);
+        System.out.println(JacksonUtil.object2JsonString(response));
+        //Assert.assertNotNull(response);
     }
 }

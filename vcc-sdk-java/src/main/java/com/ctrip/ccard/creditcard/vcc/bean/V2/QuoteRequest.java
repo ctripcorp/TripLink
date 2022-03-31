@@ -1,5 +1,7 @@
 package com.ctrip.ccard.creditcard.vcc.bean.V2;
 
+import java.math.BigDecimal;
+
 public class QuoteRequest {
     /**
      * API版本
@@ -24,7 +26,7 @@ public class QuoteRequest {
     /**
      * 交易金额
      */
-    private Long fxAmount;
+    private BigDecimal fxAmount;
     /**
      * 交易方向
      * FxDirectionEnums
@@ -71,11 +73,11 @@ public class QuoteRequest {
         this.buyCurrency = buyCurrency;
     }
 
-    public Long getFxAmount() {
+    public BigDecimal getFxAmount() {
         return fxAmount;
     }
 
-    public void setFxAmount(Long fxAmount) {
+    public void setFxAmount(BigDecimal fxAmount) {
         this.fxAmount = fxAmount;
     }
 

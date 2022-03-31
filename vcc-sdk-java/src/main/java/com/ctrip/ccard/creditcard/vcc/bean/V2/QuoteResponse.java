@@ -25,11 +25,11 @@ public class QuoteResponse {
     /**
      * 卖出金额
      */
-    private Long sellAmount;
+    private BigDecimal sellAmount;
     /**
      * 买入金额
      */
-    private Long buyAmount;
+    private BigDecimal buyAmount;
     /**
      * 汇率
      */
@@ -37,7 +37,7 @@ public class QuoteResponse {
     /**
      * 过期时间
      */
-    private Date expireTime;
+    private String expireTime;
 
 
 
@@ -81,19 +81,19 @@ public class QuoteResponse {
         this.buyCurrency = buyCurrency;
     }
 
-    public Long getSellAmount() {
+    public BigDecimal getSellAmount() {
         return sellAmount;
     }
 
-    public void setSellAmount(Long sellAmount) {
+    public void setSellAmount(BigDecimal sellAmount) {
         this.sellAmount = sellAmount;
     }
 
-    public Long getBuyAmount() {
+    public BigDecimal getBuyAmount() {
         return buyAmount;
     }
 
-    public void setBuyAmount(Long buyAmount) {
+    public void setBuyAmount(BigDecimal buyAmount) {
         this.buyAmount = buyAmount;
     }
 
@@ -105,15 +105,13 @@ public class QuoteResponse {
         this.rate = rate;
     }
 
-    public Date getExpireTime() {
+    public String getExpireTime() {
         return expireTime;
     }
 
-    public void setExpireTime(Date expireTime) {
+    public void setExpireTime(String expireTime) {
         this.expireTime = expireTime;
     }
-
-
 
     @Override
     public String toString() {
