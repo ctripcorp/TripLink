@@ -129,15 +129,10 @@ public class TriplinkApiV2Test {
          */
         request.setCvv2ForceCheck(false);
         /**
-         * 卡产品，默认GWTTP，具体枚举值查看API
-         * 测试示例：request.setCardType("GWTTP");
+         * 卡产品，C01 CO2 CO3
+         * 具体值看api文档描述
          */
-        request.setCardType("GWTTP");
-        /**
-         * 卡组织，默认 MasterCard ，具体枚举值查看API
-         * 测试示例：request.setCardLabel("MasterCard");
-         */
-        request.setCardLabel("MasterCard");
+        request.setCardProductCode("C01");
         /**
          * 用户自定义参数，String键值对，共20个键可选，范围useRef1Txt-useRef20Txt
          * 测试示例：Map<String, String> userReferenceMap = new HashMap<String, String>();

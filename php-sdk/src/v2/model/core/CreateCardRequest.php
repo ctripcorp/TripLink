@@ -82,8 +82,13 @@ class CreateCardRequest extends BaseRequest implements JsonSerializable {
      */
     private $cardBin = null;
     /**
-     * 卡品牌
-     * @var string|null card brand
+     * 卡产品
+     * @var string|null card product
+     */
+    private $cardProductCode = null;
+    /**
+     * 卡类型
+     * @var string|null card type
      */
     private $cardType = null;
     /**
@@ -220,6 +225,14 @@ class CreateCardRequest extends BaseRequest implements JsonSerializable {
 
     public function setCardBin(?string $cardBin): void {
         $this->cardBin = $cardBin;
+    }
+
+    public function getCardProductCode(): ?string {
+        return $this->cardProductCode;
+    }
+
+    public function setCardProductCode(?string $cardProductCode): void {
+        $this->cardProductCode = $cardProductCode;
     }
 
     public function getCardType(): ?string {
