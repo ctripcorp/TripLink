@@ -27,7 +27,25 @@ public class CardCreateRequest {
     private String cardType;
     private String cardLabel;
     private String cardProductCode;
+    private String quoteId;
+    private String exchangeCurrencyCode;
     private Map<String, String> userReferenceMap = new LinkedHashMap<String, String>();
+
+    public String getQuoteId() {
+        return quoteId;
+    }
+
+    public void setQuoteId(String quoteId) {
+        this.quoteId = quoteId;
+    }
+
+    public String getExchangeCurrencyCode() {
+        return exchangeCurrencyCode;
+    }
+
+    public void setExchangeCurrencyCode(String exchangeCurrencyCode) {
+        this.exchangeCurrencyCode = exchangeCurrencyCode;
+    }
 
     public String getCardProductCode() {
         return cardProductCode;
@@ -229,6 +247,8 @@ public class CardCreateRequest {
                 ", cardType='" + cardType + '\'' +
                 ", cardLabel='" + cardLabel + '\'' +
                 ", cardProductCode=" + cardProductCode +
+                ", quoteId=" + quoteId +
+                ", exchangeCurrencyCode=" + exchangeCurrencyCode +
                 ", userReferenceMap=" + userReferenceMap +
                 '}';
     }
