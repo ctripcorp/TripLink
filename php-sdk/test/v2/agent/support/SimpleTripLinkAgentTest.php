@@ -12,6 +12,8 @@ use v2\model\core\QueryAuthorizationRequest;
 use v2\model\core\QueryCardRequest;
 use v2\model\core\QuerySettlementRequest;
 use v2\model\core\RechargeCardRequest;
+use v2\model\core\SuspendCardRequest;
+use v2\model\core\UnsuspendCardRequest;
 use v2\model\core\UpdateCardRequest;
 use v2\model\core\UserReference;
 use v2\model\core\WithdrawCardRequest;
@@ -102,6 +104,34 @@ class SimpleTripLinkAgentTest extends TestCase {
         $this->assertEquals('000000', $response->getReturnCode());
     }
 
+    public function testSuspendCard(): void {
+        $httpClient = new GuzzleHttpClient();
+        $customer = new Customer(CUSTOMER_ID, AES_KEY, CUSTOMER_PRIVATE_KEY, TRIPLINK_PUBLIC_KEY);
+        $tripLinkAgent = new SimpleTripLinkAgent(BASE_URL, $customer, $httpClient);
+
+        $request = new SuspendCardRequest(uniqid(), CUSTOMER_ID);
+        $request->setCardLogId('12bdcdb20b6f304975ef15a12e1686fcfd23eb6c72c3536b3c4aa40e8d1299a3');
+
+        $response = $tripLinkAgent->suspendCard($request);
+        var_dump($response);
+
+        $this->assertEquals('000000', $response->getReturnCode());
+    }
+
+    public function testUnsuspendCard(): void {
+        $httpClient = new GuzzleHttpClient();
+        $customer = new Customer(CUSTOMER_ID, AES_KEY, CUSTOMER_PRIVATE_KEY, TRIPLINK_PUBLIC_KEY);
+        $tripLinkAgent = new SimpleTripLinkAgent(BASE_URL, $customer, $httpClient);
+
+        $request = new UnsuspendCardRequest(uniqid(), CUSTOMER_ID);
+        $request->setCardLogId('12bdcdb20b6f304975ef15a12e1686fcfd23eb6c72c3536b3c4aa40e8d1299a3');
+
+        $response = $tripLinkAgent->unsuspendCard($request);
+        var_dump($response);
+
+        $this->assertEquals('000000', $response->getReturnCode());
+    }
+
     public function testCloseCard(): void {
         $httpClient = new GuzzleHttpClient();
         $customer = new Customer(CUSTOMER_ID, AES_KEY, CUSTOMER_PRIVATE_KEY, TRIPLINK_PUBLIC_KEY);
@@ -122,7 +152,7 @@ class SimpleTripLinkAgentTest extends TestCase {
         $tripLinkAgent = new SimpleTripLinkAgent(BASE_URL, $customer, $httpClient);
 
         $request = new QueryCardRequest(uniqid(), CUSTOMER_ID);
-        $request->setCardLogId('7b4d537f43c88d64b28ce1881b2311efe0596b0ea7ae496907530b3db8b96ebc');
+        $request->setCardLogId('12bdcdb20b6f304975ef15a12e1686fcfd23eb6c72c3536b3c4aa40e8d1299a3');
 
         $response = $tripLinkAgent->queryCard($request);
         var_dump($response);

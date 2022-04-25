@@ -20,6 +20,10 @@ use v2\model\core\QuerySettlementRequest;
 use v2\model\core\QuerySettlementResponse;
 use v2\model\core\RechargeCardRequest;
 use v2\model\core\RechargeCardResponse;
+use v2\model\core\SuspendCardRequest;
+use v2\model\core\SuspendCardResponse;
+use v2\model\core\UnsuspendCardRequest;
+use v2\model\core\UnsuspendCardResponse;
 use v2\model\core\UpdateCardRequest;
 use v2\model\core\UpdateCardResponse;
 use v2\model\core\WithdrawCardRequest;
@@ -63,6 +67,14 @@ class SimpleTripLinkAgent implements TripLinkAgent {
 
     public function withDrawCard(WithdrawCardRequest $request): WithdrawCardResponse {
         return WithdrawCardResponse::fromArray($this->general(get_object_vars($request->jsonSerialize()), 'withdrawCard'));
+    }
+
+    public function suspendCard(SuspendCardRequest $request): SuspendCardResponse {
+        return SuspendCardResponse::fromArray($this->general(get_object_vars($request->jsonSerialize()), 'suspendCard'));
+    }
+
+    public function unsuspendCard(UnsuspendCardRequest $request): UnsuspendCardResponse {
+        return UnsuspendCardResponse::fromArray($this->general(get_object_vars($request->jsonSerialize()), 'unSuspendCard'));
     }
 
     public function closeCard(CloseCardRequest $request): CloseCardResponse {
