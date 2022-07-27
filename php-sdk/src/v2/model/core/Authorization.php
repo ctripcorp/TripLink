@@ -31,6 +31,11 @@ class Authorization implements JsonSerializable {
      */
     private $messageTypeDescription = null;
     /**
+     * 冲正类型
+     * @var string|null reversal type
+     */
+    private $reversalType = null;
+    /**
      * 交易响应码
      * @var string|null response code
      */
@@ -103,6 +108,7 @@ class Authorization implements JsonSerializable {
         $instance->occurDateTime = $array['occurDateTime'] ?? null;
         $instance->messageType = $array['messageType'] ?? null;
         $instance->messageTypeDescription = $array['messageTypeDescription'] ?? null;
+        $instance->reversalType = $array['reversalType'] ?? null;
         $instance->responseCode = $array['responseCode'] ?? null;
         $instance->responseCodeDescription = $array['responseCodeDescription'] ?? null;
         $instance->approvalCode = $array['approvalCode'] ?? null;
@@ -157,6 +163,14 @@ class Authorization implements JsonSerializable {
 
     public function setMessageTypeDescription(?string $messageTypeDescription): void {
         $this->messageTypeDescription = $messageTypeDescription;
+    }
+
+    public function getReversalType(): ?string {
+        return $this->reversalType;
+    }
+
+    public function setReversalType(?string $reversalType): void {
+        $this->reversalType = $reversalType;
     }
 
     public function getResponseCode(): ?string {

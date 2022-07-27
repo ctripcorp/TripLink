@@ -58,11 +58,41 @@ public class CardDetailQueryResponse {
 
     private BigDecimal settlementAmount;
 
+    private BigDecimal refundAmount;
+
     private String cardType;
 
     private String cardLabel;
 
+    private String productCode;
+
+    private String cardSid;
+
     private Map<String, String> userReferenceMap = new HashMap<String, String>();
+
+    public BigDecimal getRefundAmount() {
+        return refundAmount;
+    }
+
+    public void setRefundAmount(BigDecimal refundAmount) {
+        this.refundAmount = refundAmount;
+    }
+
+    public String getCardSid() {
+        return cardSid;
+    }
+
+    public void setCardSid(String cardSid) {
+        this.cardSid = cardSid;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
 
     public String getReturnCode() {
         return returnCode;
@@ -327,6 +357,9 @@ public class CardDetailQueryResponse {
                 ", settlementAmount=" + settlementAmount +
                 ", cardType='" + cardType + '\'' +
                 ", cardLabel='" + cardLabel + '\'' +
+                ", productCode='" + productCode + '\'' +
+                ", cardSid='" + cardSid + '\'' +
+                ", refundAmount='" + refundAmount + '\'' +
                 ", userReferenceMap=" + userReferenceMap +
                 '}';
     }

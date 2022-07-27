@@ -575,6 +575,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
     private String buildResponseSignContent(Map<String, String> header, String result) {
         StringBuilder builder = new StringBuilder();
         String customerId = header.get("customerId");
+        if(StringUtils.isBlank(customerId)){
+            customerId = header.get("customerid");
+        }
         if (StringUtils.isNotBlank(customerId)) {
             builder.append(customerId).append("|");
         }
@@ -587,6 +590,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
             builder.append(version).append("|");
         }
         String requestId = header.get("requestId");
+        if (StringUtils.isBlank(requestId)) {
+            requestId = header.get("requestid");
+        }
         if (StringUtils.isNotBlank(requestId)) {
             builder.append(requestId).append("|");
         }

@@ -30,6 +30,7 @@ public class CardCreateRequest {
     private String quoteId;
     private String exchangeCurrencyCode;
     private Map<String, String> userReferenceMap = new LinkedHashMap<String, String>();
+    private Map<String,String> riskInfo = new LinkedHashMap<String, String>();
 
     public String getQuoteId() {
         return quoteId;
@@ -223,6 +224,14 @@ public class CardCreateRequest {
         this.userReferenceMap = userReferenceMap;
     }
 
+    public Map<String, String> getRiskInfo() {
+        return riskInfo;
+    }
+
+    public void setRiskInfo(Map<String, String> riskInfo) {
+        this.riskInfo = riskInfo;
+    }
+
     @Override
     public String toString() {
         return "CardCreateRequest{" +
@@ -250,6 +259,7 @@ public class CardCreateRequest {
                 ", quoteId=" + quoteId +
                 ", exchangeCurrencyCode=" + exchangeCurrencyCode +
                 ", userReferenceMap=" + userReferenceMap +
+                ", riskInfo=" + riskInfo +
                 '}';
     }
 }

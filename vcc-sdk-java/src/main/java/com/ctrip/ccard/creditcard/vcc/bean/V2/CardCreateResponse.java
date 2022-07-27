@@ -18,6 +18,17 @@ public class CardCreateResponse {
 
     private String cardLabel;
 
+    // 卡号别名短号
+    private String cardSId;
+
+    public String getCardSId() {
+        return cardSId;
+    }
+
+    public void setCardSId(String cardSId) {
+        this.cardSId = cardSId;
+    }
+
     public String getReturnCode() {
         return returnCode;
     }
@@ -93,6 +104,7 @@ public class CardCreateResponse {
                 ", cvv2='" + cvv2 + '\'' +
                 ", cardType='" + cardType + '\'' +
                 ", cardLabel='" + cardLabel + '\'' +
+                ", cardSId='" + cardSId + '\'' +
                 '}';
     }
 }

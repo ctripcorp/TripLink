@@ -1,4 +1,4 @@
-欢迎使用 TripLink SDK For Java ！
+欢迎使用 TripLink SDK For Java 。
 
 TripLink SDK For Java 让您不用更轻松方便对接TripLink开发接口，可以自动帮您满足能力调用过程中所需的参数校验、加签、数据解密、发送HTTP请求等非功能性要求。
 
@@ -65,11 +65,11 @@ TripLink SDK For Java 引用了`slf4j`日志标准，您可以根据自己应用
 5. 接口请求响应处理
 
 ```java
-import com.ctrip.ccard.creditcard.vcc.api.TripLinkApiImpl;
-import com.ctrip.ccard.creditcard.vcc.bean.CreateCardInfo;
-import com.ctrip.ccard.creditcard.vcc.bean.CreateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.CreateResponse;
-import com.ctrip.ccard.creditcard.vcc.biz.TripLinkBizImpl;
+import com.ctrip.ccard.creditcard.vcc.api.V1.TripLinkApiImpl;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateCardInfo;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateResponse;
+import com.ctrip.ccard.creditcard.vcc.biz.V1.TripLinkBizImpl;
 import org.junit.Assert;
 
 import java.math.BigDecimal;

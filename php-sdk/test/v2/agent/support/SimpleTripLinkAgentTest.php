@@ -7,6 +7,7 @@ use v2\client\support\GuzzleHttpClient;
 use v2\config\Customer;
 use v2\model\core\CloseCardRequest;
 use v2\model\core\CreateCardRequest;
+use v2\model\core\FxQuoteRequest;
 use v2\model\core\QueryAccountRequest;
 use v2\model\core\QueryAuthorizationRequest;
 use v2\model\core\QueryCardRequest;
@@ -155,6 +156,23 @@ class SimpleTripLinkAgentTest extends TestCase {
         $request->setCardLogId('12bdcdb20b6f304975ef15a12e1686fcfd23eb6c72c3536b3c4aa40e8d1299a3');
 
         $response = $tripLinkAgent->queryCard($request);
+        var_dump($response);
+
+        $this->assertEquals('000000', $response->getReturnCode());
+    }
+
+    public function testFxQuote(): void {
+        $httpClient = new GuzzleHttpClient();
+        $customer = new Customer(CUSTOMER_ID, AES_KEY, CUSTOMER_PRIVATE_KEY, TRIPLINK_PUBLIC_KEY);
+        $tripLinkAgent = new SimpleTripLinkAgent(BASE_URL, $customer, $httpClient);
+
+        $request = new FxQuoteRequest(uniqid(), CUSTOMER_ID);
+        $request->setSellCurrency('156');
+        $request->setBuyCurrency('840');
+        $request->setFxDirection(0);
+        $request->setFxAmount(100.12);
+
+        $response = $tripLinkAgent->fxQuote($request);
         var_dump($response);
 
         $this->assertEquals('000000', $response->getReturnCode());

@@ -22,6 +22,7 @@ public class CardUpdateRequest{
     private Boolean multipleCurrencyCard;
     private Boolean cvv2ForceCheck;
     private Map<String, String> userReferenceMap = new LinkedHashMap<String, String>();
+    private Map<String,String> riskInfo = new LinkedHashMap<String, String>();
 
     public String getServiceVersion() {
         return serviceVersion;
@@ -151,6 +152,14 @@ public class CardUpdateRequest{
         this.userReferenceMap = userReferenceMap;
     }
 
+    public Map<String, String> getRiskInfo() {
+        return riskInfo;
+    }
+
+    public void setRiskInfo(Map<String, String> riskInfo) {
+        this.riskInfo = riskInfo;
+    }
+
     @Override
     public String toString() {
         return "CardUpdateRequest{" +
@@ -170,6 +179,7 @@ public class CardUpdateRequest{
                 ", multipleCurrencyCard=" + multipleCurrencyCard +
                 ", cvv2ForceCheck=" + cvv2ForceCheck +
                 ", userReferenceMap=" + userReferenceMap +
+                ", riskInfo=" + riskInfo +
                 '}';
     }
 }

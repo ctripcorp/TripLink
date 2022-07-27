@@ -16,6 +16,7 @@ public class AuthTransactionResponseEntity {
     private String countryCode;			//交易地国家代码
     private String messageType;			//信息类型
     private String messageTypeDescription;			//信息类型描述
+    private String reversalType;  //冲正类型
     private String posMerchantName;	//			商户名称
     private String posMerchantClassCode;//			商户MCC
     private String posMerchantCountry;//			商户所在国家
@@ -95,6 +96,14 @@ public class AuthTransactionResponseEntity {
 
     public void setMessageTypeDescription(String messageTypeDescription) {
         this.messageTypeDescription = messageTypeDescription;
+    }
+
+    public String getReversalType() {
+        return reversalType;
+    }
+
+    public void setReversalType(String reversalType) {
+        this.reversalType = reversalType;
     }
 
     public String getPosMerchantName() {
@@ -200,6 +209,7 @@ public class AuthTransactionResponseEntity {
                 ", countryCode='" + countryCode + '\'' +
                 ", messageType='" + messageType + '\'' +
                 ", messageTypeDescription='" + messageTypeDescription + '\'' +
+                ", reversalType='" + reversalType + '\'' +
                 ", posMerchantName='" + posMerchantName + '\'' +
                 ", posMerchantClassCode='" + posMerchantClassCode + '\'' +
                 ", posMerchantCountry='" + posMerchantCountry + '\'' +

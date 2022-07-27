@@ -10,6 +10,8 @@ use v2\model\core\CloseCardRequest;
 use v2\model\core\CloseCardResponse;
 use v2\model\core\CreateCardRequest;
 use v2\model\core\CreateCardResponse;
+use v2\model\core\FxQuoteRequest;
+use v2\model\core\FxQuoteResponse;
 use v2\model\core\QueryAccountRequest;
 use v2\model\core\QueryAccountResponse;
 use v2\model\core\QueryAuthorizationRequest;
@@ -83,6 +85,10 @@ class SimpleTripLinkAgent implements TripLinkAgent {
 
     public function queryCard(QueryCardRequest $request): QueryCardResponse {
         return QueryCardResponse::fromArray($this->general(get_object_vars($request->jsonSerialize()), 'queryCardDetail'));
+    }
+
+    public function fxQuote(FxQuoteRequest $request): FxQuoteResponse {
+        return FxQuoteResponse::fromArray($this->general(get_object_vars($request->jsonSerialize()), 'fxQuote'));
     }
 
     public function queryAccount(QueryAccountRequest $request): QueryAccountResponse {
