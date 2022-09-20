@@ -27,4 +27,6 @@ public interface TripLinkBizV2 {
     CardUnsuspendResponse unsuspend(CardUnsuspendRequest request);
 
     QuoteResponse quote(QuoteRequest request);
+
+    QueryAuthTransactionByPageResponse authTransactionQueryByPage(QueryAuthTransactionByPageRequest request);
 }

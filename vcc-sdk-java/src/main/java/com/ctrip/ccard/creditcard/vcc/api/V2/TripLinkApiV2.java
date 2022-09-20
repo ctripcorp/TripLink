@@ -108,4 +108,13 @@ public interface TripLinkApiV2 {
      * @return
      */
     QuoteResponse quote(QuoteRequest quoteRequest);
+
+    /**
+     * authTransactionQueryByPage
+     * request.requestId can not null
+     * @return QueryAuthTransactionByPageResponse
+     * response.resultCode equals "000000" it succeeds otherwise it is failed
+     * if response.resultCode is not equals "000000" check the response.message
+     */
+    QueryAuthTransactionByPageResponse authTransactionQueryByPage(QueryAuthTransactionByPageRequest request);
 }

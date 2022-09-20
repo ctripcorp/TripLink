@@ -64,6 +64,11 @@ public class TripLinkApiImplV2 implements TripLinkApiV2 {
         return vccBiz.quote(request);
     }
 
+    @Override
+    public QueryAuthTransactionByPageResponse authTransactionQueryByPage(QueryAuthTransactionByPageRequest request) {
+        return vccBiz.authTransactionQueryByPage(request);
+    }
+
 
     @Override
     public CardSuspendResponse suspend(CardSuspendRequest request) {
