@@ -23,7 +23,7 @@ public class QueryAuthTransactionByPageRequest {
     /**
      * 卡索引ID
      */
-    private String cardLid;
+    private String cardLogId;
 
     /**
      * 订单号
@@ -86,12 +86,12 @@ public class QueryAuthTransactionByPageRequest {
         this.customerId = customerId;
     }
 
-    public String getCardLid() {
-        return cardLid;
+    public String getCardLogId() {
+        return cardLogId;
     }
 
-    public void setCardLid(String cardLid) {
-        this.cardLid = cardLid;
+    public void setCardLogId(String cardLogId) {
+        this.cardLogId = cardLogId;
     }
 
     public String getOrderNo() {
@@ -156,7 +156,7 @@ public class QueryAuthTransactionByPageRequest {
                 "serviceVersion='" + serviceVersion + '\'' +
                 ", requestId='" + requestId + '\'' +
                 ", customerId='" + customerId + '\'' +
-                ", cardLid='" + cardLid + '\'' +
+                ", cardLogId='" + cardLogId + '\'' +
                 ", orderNo='" + orderNo + '\'' +
                 ", transactionStatus='" + transactionStatus + '\'' +
                 ", transactionCode='" + transactionCode + '\'' +

@@ -8,7 +8,7 @@ import java.util.List;
 public class QueryAuthTransactionByPageResponse {
 
     // 卡ID
-    private String cardLid;
+    private String cardLogId;
 
     // 返回授权数据数量
     private Integer count;
@@ -28,12 +28,12 @@ public class QueryAuthTransactionByPageResponse {
      */
     private String errorMessage;
 
-    public String getCardLid() {
-        return cardLid;
+    public String getCardLogId() {
+        return cardLogId;
     }
 
-    public void setCardLid(String cardLid) {
-        this.cardLid = cardLid;
+    public void setCardLogId(String cardLogId) {
+        this.cardLogId = cardLogId;
     }
 
     public Integer getCount() {
@@ -79,7 +79,7 @@ public class QueryAuthTransactionByPageResponse {
     @Override
     public String toString() {
         return "QueryAuthTransactionByPageResponse{" +
-                "cardLid='" + cardLid + '\'' +
+                "cardLogId='" + cardLogId + '\'' +
                 ", count=" + count +
                 ", isMore=" + isMore +
                 ", transactionData=" + transactionData +

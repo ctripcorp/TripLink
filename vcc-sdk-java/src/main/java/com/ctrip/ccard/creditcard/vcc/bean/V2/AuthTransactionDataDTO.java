@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class AuthTransactionDataDTO implements Serializable {
     private static final long serialVersionUID = -8410962393294745215L;
 
-    private String cardLid;
+    private String cardLogId;
 
     private String requestId;
     private String transactionId;
@@ -55,12 +55,12 @@ public class AuthTransactionDataDTO implements Serializable {
     // 是否是授权释放 1-授权释放交易 0-非授权释放交易
     private String authorizationReleaseCode;
 
-    public String getCardLid() {
-        return cardLid;
+    public String getCardLogId() {
+        return cardLogId;
     }
 
-    public void setCardLid(String cardLid) {
-        this.cardLid = cardLid;
+    public void setCardLogId(String cardLogId) {
+        this.cardLogId = cardLogId;
     }
 
     public String getRequestId() {
@@ -242,7 +242,7 @@ public class AuthTransactionDataDTO implements Serializable {
     @Override
     public String toString() {
         return "AuthTransactionDataDTO{" +
-                "cardLid='" + cardLid + '\'' +
+                "cardLogId='" + cardLogId + '\'' +
                 ", requestId='" + requestId + '\'' +
                 ", transactionId='" + transactionId + '\'' +
                 ", orderNo='" + orderNo + '\'' +
