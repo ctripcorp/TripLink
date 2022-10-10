@@ -52,8 +52,8 @@ public class AuthTransactionDataDTO implements Serializable {
     // 是否为借记交易
     private String creditTransactionSign;
 
-    // 是否是授权释放 1-授权释放交易 0-非授权释放交易
-    private String authorizationReleaseCode;
+    // 是否是授权释放 0-授权释放交易 1-非授权释放交易
+    private String reversalType;
 
     public String getCardLogId() {
         return cardLogId;
@@ -231,12 +231,12 @@ public class AuthTransactionDataDTO implements Serializable {
         this.creditTransactionSign = creditTransactionSign;
     }
 
-    public String getAuthorizationReleaseCode() {
-        return authorizationReleaseCode;
+    public String getReversalType() {
+        return reversalType;
     }
 
-    public void setAuthorizationReleaseCode(String authorizationReleaseCode) {
-        this.authorizationReleaseCode = authorizationReleaseCode;
+    public void setReversalType(String reversalType) {
+        this.reversalType = reversalType;
     }
 
     @Override
@@ -264,7 +264,7 @@ public class AuthTransactionDataDTO implements Serializable {
                 ", cardInitialBalance=" + cardInitialBalance +
                 ", cardEndingBalance=" + cardEndingBalance +
                 ", creditTransactionSign='" + creditTransactionSign + '\'' +
-                ", authorizationReleaseCode='" + authorizationReleaseCode + '\'' +
+                ", reversalType='" + reversalType + '\'' +
                 '}';
     }
 }
