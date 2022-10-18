@@ -94,6 +94,11 @@ public class SettlementInfo {
      */
     private String transId;
 
+    /**
+     * 交易ID
+     */
+    private String transactionId;
+
     public String getTransId() {
         return transId;
     }
@@ -236,5 +241,38 @@ public class SettlementInfo {
 
     public void setTransExtra(String transExtra) {
         this.transExtra = transExtra;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    @Override
+    public String toString() {
+        return "SettlementInfo{" +
+                "occurTime='" + occurTime + '\'' +
+                ", postDate='" + postDate + '\'' +
+                ", settleDate='" + settleDate + '\'' +
+                ", transCurrency='" + transCurrency + '\'' +
+                ", transAmt='" + transAmt + '\'' +
+                ", localCurrency='" + localCurrency + '\'' +
+                ", localCurrencyAmt='" + localCurrencyAmt + '\'' +
+                ", billCurrency='" + billCurrency + '\'' +
+                ", billCurrencyAmt='" + billCurrencyAmt + '\'' +
+                ", originalBillCurrencyAmt='" + originalBillCurrencyAmt + '\'' +
+                ", transType='" + transType + '\'' +
+                ", transCode='" + transCode + '\'' +
+                ", authNo='" + authNo + '\'' +
+                ", transNo='" + transNo + '\'' +
+                ", isCredit='" + isCredit + '\'' +
+                ", transMerchantInfo=" + transMerchantInfo +
+                ", transExtra='" + transExtra + '\'' +
+                ", transId='" + transId + '\'' +
+                ", transactionId='" + transactionId + '\'' +
+                '}';
     }
 }

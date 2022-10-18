@@ -84,6 +84,11 @@ public class AuthInfo {
      */
     private String transExtra;
 
+    /**
+     * 交易ID
+     */
+    private String transactionId;
+
     public String getOccurTime() {
         return occurTime;
     }
@@ -210,5 +215,13 @@ public class AuthInfo {
 
     public void setTransExtra(String transExtra) {
         this.transExtra = transExtra;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 }

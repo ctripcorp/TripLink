@@ -25,6 +25,7 @@ public class SettlementTransactionResponseEntity {
     private String posMerchantID;   // 商户ID
     private String posAcquirerID;   // 收单行ID
     private String txnId;// 入账的流水号
+    private String transactionId;   // 交易ID
 
     public String getTxnId() {
         return txnId;
@@ -202,6 +203,14 @@ public class SettlementTransactionResponseEntity {
         this.billAccountAmount = billAccountAmount;
     }
 
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
     @Override
     public String toString() {
         return "SettlementTransactionResponseEntity{" +
@@ -227,6 +236,7 @@ public class SettlementTransactionResponseEntity {
                 ", posMerchantID='" + posMerchantID + '\'' +
                 ", posAcquirerID='" + posAcquirerID + '\'' +
                 ", txnId='" + txnId + '\'' +
+                ", transactionId='" + transactionId + '\'' +
                 '}';
     }
 }
