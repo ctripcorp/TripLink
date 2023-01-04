@@ -29,6 +29,7 @@ public class CardCreateRequest {
     private String cardProductCode;
     private String quoteId;
     private String exchangeCurrencyCode;
+    private String timeZone;
     private Map<String, String> userReferenceMap = new LinkedHashMap<String, String>();
     private Map<String,String> riskInfo = new LinkedHashMap<String, String>();
 
@@ -216,6 +217,14 @@ public class CardCreateRequest {
         this.cardLabel = cardLabel;
     }
 
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
+    }
+
     public Map<String, String> getUserReferenceMap() {
         return userReferenceMap;
     }
@@ -240,8 +249,8 @@ public class CardCreateRequest {
                 ", customerId='" + customerId + '\'' +
                 ", cardCurrencyCode='" + cardCurrencyCode + '\'' +
                 ", settlementCurrencyCode='" + settlementCurrencyCode + '\'' +
-                ", activeDate=" + activeDate +
-                ", inactiveDate=" + inactiveDate +
+                ", activeDate='" + activeDate + '\'' +
+                ", inactiveDate='" + inactiveDate + '\'' +
                 ", cardLimit=" + cardLimit +
                 ", minAuthAmount=" + minAuthAmount +
                 ", maxAuthAmount=" + maxAuthAmount +
@@ -255,9 +264,10 @@ public class CardCreateRequest {
                 ", cardBin='" + cardBin + '\'' +
                 ", cardType='" + cardType + '\'' +
                 ", cardLabel='" + cardLabel + '\'' +
-                ", cardProductCode=" + cardProductCode +
-                ", quoteId=" + quoteId +
-                ", exchangeCurrencyCode=" + exchangeCurrencyCode +
+                ", cardProductCode='" + cardProductCode + '\'' +
+                ", quoteId='" + quoteId + '\'' +
+                ", exchangeCurrencyCode='" + exchangeCurrencyCode + '\'' +
+                ", timeZone='" + timeZone + '\'' +
                 ", userReferenceMap=" + userReferenceMap +
                 ", riskInfo=" + riskInfo +
                 '}';

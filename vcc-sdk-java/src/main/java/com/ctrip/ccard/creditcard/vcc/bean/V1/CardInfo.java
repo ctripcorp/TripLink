@@ -193,6 +193,11 @@ public class CardInfo {
      */
     private String cardLabel;
 
+    /**
+     * 卡时区
+     */
+    private String timeZone;
+
     public String getCardProductCode() {
         return cardProductCode;
     }
@@ -471,5 +476,13 @@ public class CardInfo {
 
     public void setCardLabel(String cardLabel) {
         this.cardLabel = cardLabel;
+    }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
     }
 }

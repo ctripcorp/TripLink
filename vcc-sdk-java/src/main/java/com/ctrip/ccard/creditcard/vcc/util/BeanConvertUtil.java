@@ -143,6 +143,8 @@ public class BeanConvertUtil {
             cardInfo.setUserDefineInfo(createCardInfo.getUserDefineInfo());
             //卡组
             cardInfo.setCardLabel(createCardInfo.getCardLabel());
+            //卡时区
+            cardInfo.setTimeZone(createCardInfo.getTimeZone());
             operateRequest.setCardInfo(cardInfo);
         }
         return operateRequest;
@@ -246,6 +248,8 @@ public class BeanConvertUtil {
             cardInfo.setEnableCurrencyCheck(updateCardInfo.getEnableCurrencyCheck());
             //用户自定义信息
             cardInfo.setUserDefineInfo(updateCardInfo.getUserDefineInfo());
+            //卡时区
+            cardInfo.setTimeZone(updateCardInfo.getTimeZone());
             operateRequest.setCardInfo(cardInfo);
         }
         return operateRequest;
@@ -661,6 +665,8 @@ public class BeanConvertUtil {
             queryCardInfo.setCardStatus(cardInfo.getCardStatus());
             //用户自定义信息
             queryCardInfo.setUserDefineInfo(cardInfo.getUserDefineInfo());
+            //卡时区
+            queryCardInfo.setTimeZone(cardInfo.getTimeZone());
             queryCardInfoResponse.setCardInfo(queryCardInfo);
         }
         return queryCardInfoResponse;

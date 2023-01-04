@@ -21,6 +21,7 @@ public class CardUpdateRequest{
     private String supportedAcquirerId;
     private Boolean multipleCurrencyCard;
     private Boolean cvv2ForceCheck;
+    private String timeZone;
     private Map<String, String> userReferenceMap = new LinkedHashMap<String, String>();
     private Map<String,String> riskInfo = new LinkedHashMap<String, String>();
 
@@ -144,6 +145,14 @@ public class CardUpdateRequest{
         this.cvv2ForceCheck = cvv2ForceCheck;
     }
 
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
+    }
+
     public Map<String, String> getUserReferenceMap() {
         return userReferenceMap;
     }
@@ -167,8 +176,8 @@ public class CardUpdateRequest{
                 ", requestId='" + requestId + '\'' +
                 ", customerId='" + customerId + '\'' +
                 ", cardLogId='" + cardLogId + '\'' +
-                ", activeDate=" + activeDate +
-                ", inactiveDate=" + inactiveDate +
+                ", activeDate='" + activeDate + '\'' +
+                ", inactiveDate='" + inactiveDate + '\'' +
                 ", cardLimit=" + cardLimit +
                 ", minAuthAmount=" + minAuthAmount +
                 ", maxAuthAmount=" + maxAuthAmount +
@@ -178,6 +187,7 @@ public class CardUpdateRequest{
                 ", supportedAcquirerId='" + supportedAcquirerId + '\'' +
                 ", multipleCurrencyCard=" + multipleCurrencyCard +
                 ", cvv2ForceCheck=" + cvv2ForceCheck +
+                ", timeZone='" + timeZone + '\'' +
                 ", userReferenceMap=" + userReferenceMap +
                 ", riskInfo=" + riskInfo +
                 '}';

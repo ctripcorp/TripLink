@@ -69,6 +69,10 @@ public class UpdateCardInfo {
      */
     private String userDefineInfo;
 
+    /**
+     * 卡时区
+     */
+    private String timeZone;
 
     public String getCardLogId() {
         return cardLogId;
@@ -180,5 +184,13 @@ public class UpdateCardInfo {
 
     public void setUserDefineInfo(String userDefineInfo) {
         this.userDefineInfo = userDefineInfo;
+    }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
     }
 }
