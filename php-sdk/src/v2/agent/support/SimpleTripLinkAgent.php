@@ -14,6 +14,8 @@ use v2\model\core\FxQuoteRequest;
 use v2\model\core\FxQuoteResponse;
 use v2\model\core\QueryAccountRequest;
 use v2\model\core\QueryAccountResponse;
+use v2\model\core\QueryAuthorizationByPageRequest;
+use v2\model\core\QueryAuthorizationByPageResponse;
 use v2\model\core\QueryAuthorizationRequest;
 use v2\model\core\QueryAuthorizationResponse;
 use v2\model\core\QueryCardRequest;
@@ -97,6 +99,10 @@ class SimpleTripLinkAgent implements TripLinkAgent {
 
     public function queryAuthorization(QueryAuthorizationRequest $request): QueryAuthorizationResponse {
         return QueryAuthorizationResponse::fromArray($this->general(get_object_vars($request->jsonSerialize()), 'queryAuthTransaction'));
+    }
+
+    public function queryAuthorizationByPage(QueryAuthorizationByPageRequest $request): QueryAuthorizationByPageResponse {
+        return QueryAuthorizationByPageResponse::fromArray($this->general(get_object_vars($request->jsonSerialize()), 'queryAuthTransactionByPage'));
     }
 
     public function querySettlement(QuerySettlementRequest $request): QuerySettlementResponse {
