@@ -4,15 +4,25 @@ namespace v2\util;
 
 use PHPUnit\Framework\TestCase;
 
-const TRIPLINK_PUBLIC_KEY = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzGuvnpECqBJlD2Rk8eQ3BiNJn6TglMxC+BIzj7g2xOBF1wrn7vDgO40uNwF42SSDbQ2eb9lOyslhFlNZFeasCwKFLQ/uo0HY2vFlFBb49362OL1aYIf3hCgL7J2+4U6vUlrZkm0HWSZm5KMT/Y39hjTPSvaTQQPYBFgbderPIw1CS7hQpOh6MMp6XqdzPEdKWZ431A60wYV89BAd5n5hrlAWXeWsnzsO9FK1AHnDhH8FGkIsxYaZsVAAHwWIk1WLnKTWLLJSJjH+0qG7LwWcnlZDe22xza+LzszgyBcQ3f2jio1KD+xpXGN+qqa9jjuwFUx3qcdURRS53j1qRVhuFwIDAQAB';
-
 class CipherUtilsTest extends TestCase {
 
-    public function testRsaVerify(): void {
-        $bizContent = '{"customerId":"CSR47184A93E35E4","authId":"07c93b59-23b2-4aa0-8cff-55a026b02329","cardLogId":"42f4d634e184351e6b035eb58ea4892620ce2eaa5347fcd206646fe24ffae905","cardAvailableBalance":"966.68","occurTime":"2022-06-23 14:06:36","transCurrency":"840","transCurrencyAmt":"33.44","localCurrency":"840","localCurrencyAmt":"33.44","respCode":"0000","respCodeDesc":"Authorization Approval","approveCode":"057685","messageType":"6810","messageTypeDesc":"Authorization Approval","useRef1Txt":"anything","merchantName":"","merchantCategoryCode":"0011","merchantId":"080000100003","merchantCountry":"","merchantCity":"","merchantPostcode":"","acquirerId":"213457","state":""}';
-        $sign = 'tNNvnZBcvb7IR4qkPM9j+5/Hun1qj7MlnmcqeLKAO0Q8R4EB2OYLPTf/q50Rlq/gJf5x93OWSbSg9QqhktgZM0abZIKoAnidzNdGoLdINPSfdhkB/bkrpC8LctqEsLXwU2Kn3LHK3qAgDDJAf5AGmZmzn9SXnO2tvdVMvLbSj8vACpMm12g/zQyUPJ5NlCI7Hf5DXQeQy/Hd0hSyAFuhHO/V++a4TdEDZ3wqh9a1JVs0cy7t63vI0IT6r6l6hjiInoahW7H/zVZ1jcdhxNc1hGJRaM6GvlwsSFH9+gqIYv/DIPxIqTP2Bk6IDc0JaPBx/ClH7mefkunRerzCXFKC+g==';
+    public function testAesEncryptDecrypt(): void {
+        $plaintext = 'plaintext';
+        $keyStr = '9ehthOcVJJ1Dyp1appaKEg==';
 
-        $verified = CipherUtils::rsaVerify(TRIPLINK_PUBLIC_KEY, $bizContent, $sign);
+        $encrypted = CipherUtils::aesEncrypt($keyStr, $plaintext);
+        $decrypted = CipherUtils::aesDecrypt($keyStr, $encrypted);
+
+        $this->assertEquals($plaintext, $decrypted);
+    }
+
+    public function testRsaSignVerify(): void {
+        $content = 'content';
+        $privateKeyStr = 'MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCCFYckNSKbUnR02d1EyMsb40CehfCBAHGENDhJCQSWl17sEd5EiFRqN/w0SbumDeL4k+vPYZc2pNwVSnN08wgyWtaJCi9c7vd3/+cTAsv/N4cJsxiCZrl1NBUywbPzms3rb3JPiV+STaeTd4mT03iVOL7YMS4f3mpqajyItCeokOOd778Ne7nKPv6K4A0XcTr1w3Kn+lvsYULwsy2yt4pIuu8CtL9PLyRJezi1b2prtHaKS3q4dt5FcnqIqg/zND/hmb03LgcSc+rUxTtOfRt09X2NRrXwIQuyy2R4njGfJ8MwOtL6zXxojsWsndfc/6prZVL7LHiZjqb0tNYK7+dvAgMBAAECggEAUaogMBvngOkP0Tfg0EjaMcTGEX72kJXtrdh2qWsu5TdcUQmapx2LGS/SdiT/1+yJ3BJJDOUwYA65V+hoeTgFok8itd+eAlLHKx+NOoMb/Doo3W8A6QSCU1ECKd4vEbTSp4ZMliAgzqFPnaWCyjoNTmjUbrbZRQqFdg8Bt7SZ3RlHsSMfH7HCYG/KbTqd+IAO77O9B/uhCLvHW12FUWgPFZ0WlQS49Jfh11Mg/095bZJ/GH/BaHpCshz31yXimntImuhYFyVVZFtVSx8/Wyl82N3xkU0C/o49hq6iWznJgTDlfuT3cqqrxxCrbajdB+xhEGIlNCyLjWx+Sw8B1gEvsQKBgQDbe8WIDVxb8rdAqOqb8NwBd2S8Ye6hUfex5l6o1vMV+vnir58kkQG0csC9R1IwxFfHIbLdWWX+bRvepnI2Mfg3ZnuloF+DkOYwLDzYZIQZT2NyiFfIzK0K8FRNPaLvB6BuM+2uqkGf1ajt7wVH6nlsmMcQ5/49UXN8bkkkjdMWeQKBgQCXug/6/Q5C5HC1PwFZnISwgdTfja2LGcNoigXduXGCYviBYdRAuwYah/fP9+unkZKHKD2owBQL8IHnPXGM9UiurLo7aEF6WupceFUM3VYcch+ey4YPzhh0iV6JpryV6EWKVgQwzgwhKBQaCtYmzLpqK3nkVEqQHYb+DTRBEOCTJwKBgQCZ5K8cNkIMNqNHMylNLhUU8iIv9HrdohuLIXw95nmLb+7Gg12Sxhnr7Io4LUnz57ekaHyBt61MODTSaOKsHV1teu43s7tFBNRh8qK3F8OH+6I/LFpg8SJkCR8TCaS09SQIIWEGl1psN+O68V1Cj6WT/4uUzxX06KeRF8MxXkAkAQKBgCLV9mtTBJ45IuOKRr4TYKfB92Uoe0rvrFzpK7WfqT8diB70ni4Kgrk+tJgMPQ/pLXJYu+dtymx/WOQFyHdrrbdlMxEGu9ni2+JFQonEm8vGLBpicjJYyGahT5JdNPlaLfU4EJhABqrqL8tW55pa8QYFW2QgMkpqbR8RWwkBXf6LAoGAN1WQ/naVBi5cFFuCiWoEQ4rZLur2mMsPCN2hgubF8M3lyAzTmDx7dPpFRpUZiuc8Zo8JwtrVyDzK5iTXNZHeYaeUYIKJqCMtOU9fLv1SnhlW/zFTwwl5c0p/J5f2XfphTWeGwsyLkaBi1CZDBQYehx3QS6nTaRHhOHiA9ji9nyI=';
+        $publicKeyStr = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAghWHJDUim1J0dNndRMjLG+NAnoXwgQBxhDQ4SQkElpde7BHeRIhUajf8NEm7pg3i+JPrz2GXNqTcFUpzdPMIMlrWiQovXO73d//nEwLL/zeHCbMYgma5dTQVMsGz85rN629yT4lfkk2nk3eJk9N4lTi+2DEuH95qamo8iLQnqJDjne+/DXu5yj7+iuANF3E69cNyp/pb7GFC8LMtsreKSLrvArS/Ty8kSXs4tW9qa7R2ikt6uHbeRXJ6iKoP8zQ/4Zm9Ny4HEnPq1MU7Tn0bdPV9jUa18CELsstkeJ4xnyfDMDrS+s18aI7FrJ3X3P+qa2VS+yx4mY6m9LTWCu/nbwIDAQAB';
+
+        $signature = CipherUtils::rsaSign($privateKeyStr, $content);
+        $verified = CipherUtils::rsaVerify($publicKeyStr, $content, $signature);
 
         $this->assertTrue($verified);
     }

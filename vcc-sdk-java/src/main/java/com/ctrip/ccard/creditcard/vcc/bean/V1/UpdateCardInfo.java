@@ -68,11 +68,14 @@ public class UpdateCardInfo {
      * 如："userDefineInfo": "{"BookingNumber":"可填客户的订单号，该数据会在交易账单中提现"}"
      */
     private String userDefineInfo;
-
     /**
      * 卡时区
      */
     private String timeZone;
+    /**
+     * 是否接受3ds验证
+     */
+    private Boolean allow3ds;
 
     public String getCardLogId() {
         return cardLogId;
@@ -192,5 +195,13 @@ public class UpdateCardInfo {
 
     public void setTimeZone(String timeZone) {
         this.timeZone = timeZone;
+    }
+
+    public Boolean getAllow3ds() {
+        return allow3ds;
+    }
+
+    public void setAllow3ds(Boolean allow3ds) {
+        this.allow3ds = allow3ds;
     }
 }

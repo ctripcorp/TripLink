@@ -145,6 +145,8 @@ public class BeanConvertUtil {
             cardInfo.setCardLabel(createCardInfo.getCardLabel());
             //卡时区
             cardInfo.setTimeZone(createCardInfo.getTimeZone());
+            //是否接受3ds验证
+            cardInfo.setAllow3ds(createCardInfo.getAllow3ds());
             operateRequest.setCardInfo(cardInfo);
         }
         return operateRequest;
@@ -250,6 +252,8 @@ public class BeanConvertUtil {
             cardInfo.setUserDefineInfo(updateCardInfo.getUserDefineInfo());
             //卡时区
             cardInfo.setTimeZone(updateCardInfo.getTimeZone());
+            //是否接受3ds验证
+            cardInfo.setAllow3ds(updateCardInfo.getAllow3ds());
             operateRequest.setCardInfo(cardInfo);
         }
         return operateRequest;
@@ -667,6 +671,8 @@ public class BeanConvertUtil {
             queryCardInfo.setUserDefineInfo(cardInfo.getUserDefineInfo());
             //卡时区
             queryCardInfo.setTimeZone(cardInfo.getTimeZone());
+            //是否接受3ds验证
+            queryCardInfo.setAllow3ds(cardInfo.getAllow3ds());
             queryCardInfoResponse.setCardInfo(queryCardInfo);
         }
         return queryCardInfoResponse;

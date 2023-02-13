@@ -30,6 +30,7 @@ public class CardCreateRequest {
     private String quoteId;
     private String exchangeCurrencyCode;
     private String timeZone;
+    private Boolean allow3ds;
     private Map<String, String> userReferenceMap = new LinkedHashMap<String, String>();
     private Map<String,String> riskInfo = new LinkedHashMap<String, String>();
 
@@ -225,6 +226,14 @@ public class CardCreateRequest {
         this.timeZone = timeZone;
     }
 
+    public Boolean getAllow3ds() {
+        return allow3ds;
+    }
+
+    public void setAllow3ds(Boolean allow3ds) {
+        this.allow3ds = allow3ds;
+    }
+
     public Map<String, String> getUserReferenceMap() {
         return userReferenceMap;
     }
@@ -268,6 +277,7 @@ public class CardCreateRequest {
                 ", quoteId='" + quoteId + '\'' +
                 ", exchangeCurrencyCode='" + exchangeCurrencyCode + '\'' +
                 ", timeZone='" + timeZone + '\'' +
+                ", allow3ds=" + allow3ds +
                 ", userReferenceMap=" + userReferenceMap +
                 ", riskInfo=" + riskInfo +
                 '}';

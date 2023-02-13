@@ -70,6 +70,8 @@ public class CardDetailQueryResponse {
 
     private String timeZone;
 
+    private Boolean allow3ds;
+
     private Map<String, String> userReferenceMap = new HashMap<String, String>();
 
     public BigDecimal getRefundAmount() {
@@ -328,6 +330,14 @@ public class CardDetailQueryResponse {
         this.timeZone = timeZone;
     }
 
+    public Boolean getAllow3ds() {
+        return allow3ds;
+    }
+
+    public void setAllow3ds(Boolean allow3ds) {
+        this.allow3ds = allow3ds;
+    }
+
     public Map<String, String> getUserReferenceMap() {
         return userReferenceMap;
     }
@@ -371,6 +381,7 @@ public class CardDetailQueryResponse {
                 ", productCode='" + productCode + '\'' +
                 ", cardSid='" + cardSid + '\'' +
                 ", timeZone='" + timeZone + '\'' +
+                ", allow3ds=" + allow3ds +
                 ", userReferenceMap=" + userReferenceMap +
                 '}';
     }

@@ -22,6 +22,7 @@ public class CardUpdateRequest{
     private Boolean multipleCurrencyCard;
     private Boolean cvv2ForceCheck;
     private String timeZone;
+    private Boolean allow3ds;
     private Map<String, String> userReferenceMap = new LinkedHashMap<String, String>();
     private Map<String,String> riskInfo = new LinkedHashMap<String, String>();
 
@@ -153,6 +154,14 @@ public class CardUpdateRequest{
         this.timeZone = timeZone;
     }
 
+    public Boolean getAllow3ds() {
+        return allow3ds;
+    }
+
+    public void setAllow3ds(Boolean allow3ds) {
+        this.allow3ds = allow3ds;
+    }
+
     public Map<String, String> getUserReferenceMap() {
         return userReferenceMap;
     }
@@ -188,6 +197,7 @@ public class CardUpdateRequest{
                 ", multipleCurrencyCard=" + multipleCurrencyCard +
                 ", cvv2ForceCheck=" + cvv2ForceCheck +
                 ", timeZone='" + timeZone + '\'' +
+                ", allow3ds=" + allow3ds +
                 ", userReferenceMap=" + userReferenceMap +
                 ", riskInfo=" + riskInfo +
                 '}';

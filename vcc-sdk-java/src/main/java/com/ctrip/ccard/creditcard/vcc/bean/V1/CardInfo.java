@@ -198,6 +198,11 @@ public class CardInfo {
      */
     private String timeZone;
 
+    /**
+     * 是否接受3ds验证
+     */
+    private Boolean allow3ds;
+
     public String getCardProductCode() {
         return cardProductCode;
     }
@@ -484,5 +489,13 @@ public class CardInfo {
 
     public void setTimeZone(String timeZone) {
         this.timeZone = timeZone;
+    }
+
+    public Boolean getAllow3ds() {
+        return allow3ds;
+    }
+
+    public void setAllow3ds(Boolean allow3ds) {
+        this.allow3ds = allow3ds;
     }
 }
