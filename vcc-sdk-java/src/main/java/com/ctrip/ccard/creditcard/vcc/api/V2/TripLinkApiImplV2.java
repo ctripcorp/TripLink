@@ -79,4 +79,14 @@ public class TripLinkApiImplV2 implements TripLinkApiV2 {
     public CardUnsuspendResponse unsuspend(CardUnsuspendRequest request) {
         return vccBiz.unsuspend(request);
     }
+
+    @Override
+    public PayoutCreateResponse payoutCreate(PayoutCreateRequest request) {
+        return vccBiz.payoutCreate(request);
+    }
+
+    @Override
+    public PayoutQueryResponse payoutQuery(PayoutQueryRequest request) {
+        return vccBiz.payoutQuery(request);
+    }
 }

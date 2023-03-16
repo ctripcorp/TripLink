@@ -29,4 +29,8 @@ public interface TripLinkBizV2 {
     QuoteResponse quote(QuoteRequest request);
 
     QueryAuthTransactionByPageResponse authTransactionQueryByPage(QueryAuthTransactionByPageRequest request);
+
+    PayoutCreateResponse payoutCreate(PayoutCreateRequest request);
+
+    PayoutQueryResponse payoutQuery(PayoutQueryRequest request);
 }

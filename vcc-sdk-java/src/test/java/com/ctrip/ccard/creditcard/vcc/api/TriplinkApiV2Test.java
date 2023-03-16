@@ -1,30 +1,7 @@
 package com.ctrip.ccard.creditcard.vcc.api;
 
 import com.ctrip.ccard.creditcard.vcc.api.V2.TripLinkApiImplV2;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCancelRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCancelResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCreateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCreateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardDetailQueryRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardDetailQueryResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRechargeRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRechargeResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardSuspendRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardSuspendResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUnsuspendRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUnsuspendResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUpdateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUpdateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardWithdrawRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.CardWithdrawResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryCustomerCreditAmountRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryCustomerCreditAmountResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QuoteRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.QuoteResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.*;
 import com.ctrip.ccard.creditcard.vcc.biz.V2.TripLinkBizImplV2;
 import com.ctrip.ccard.creditcard.vcc.util.JacksonUtil;
 import com.ctrip.ccard.creditcard.vcc.util.TripLinkHttpClient;
@@ -466,6 +443,89 @@ public class TripLinkApiV2Test {
         request.setFxAmount(BigDecimal.valueOf(100L));
 
         QuoteResponse response = tripLinkApi.quote(request);
+        System.out.println(JacksonUtil.object2JsonString(response));
+        //Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void payoutCreate() throws Exception {
+        PayoutCreateRequest request = new PayoutCreateRequest();
+        /**
+         * 请求流水号
+         * 测试示例： request.setRequestId(UUID.randomUUID());
+         */
+        request.setRequestId(String.valueOf(UUID.randomUUID()));
+        /**
+         * 商户ID 携程提供
+         * 测试示例： request.setCustomerId("CSR1234567890");
+         */
+        request.setCustomerId("CSR2E54DC4B8A5D4");
+        /**
+         * 提现币种
+         * 测试示例：request.setPaymentCurrency("840");
+         */
+        request.setPaymentCurrency("840");
+        /**
+         * 提现金额
+         * 测试示例： request.setPaymentAmount(new BigDecimal("100"))
+         */
+        request.setPaymentAmount(new BigDecimal("100"));
+        /**
+         * 收款人账号
+         * 测试示例： request.setBeneficiaryAccountNo("12321424");
+         */
+        request.setBeneficiaryAccountNo("12321424");
+        /**
+         * 收款人账户名称
+         *   request.setBeneficiaryAccountName("trip company");
+         */
+        request.setBeneficiaryAccountName("trip company");
+        /**
+         * 收款银行名称
+         *  request.setBeneficiaryBankName("bank name");
+         */
+        request.setBeneficiaryBankName("bank name");
+        /**
+         * 收款人银行所在国家/地区代码
+         *  request.setBeneficiaryBankCountryCode("HK");
+         */
+        request.setBeneficiaryBankCountryCode("HK");
+        /**
+         * 附言
+         *  request.setReference("reference123");
+         */
+        request.setReference("reference123");
+        /**
+         * 订单号
+         *  request.setClientOrderId("1234");
+         */
+        request.setClientOrderId("1234");
+
+        PayoutCreateResponse response = tripLinkApi.payoutCreate(request);
+        System.out.println(JacksonUtil.object2JsonString(response));
+        //Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void payoutQuery() throws Exception {
+        PayoutQueryRequest request = new PayoutQueryRequest();
+        /**
+         * 请求流水号
+         * 测试示例： request.setRequestId(UUID.randomUUID());
+         */
+        request.setRequestId(String.valueOf(UUID.randomUUID()));
+        /**
+         * 商户ID 携程提供
+         * 测试示例： request.setCustomerId("CSR1234567890");
+         */
+        request.setCustomerId("CSR2E54DC4B8A5D4");
+        /**
+         * 提现币种
+         * 测试示例：request.setOriRequestId("1232124");
+         */
+        request.setOriRequestId("1232124");
+
+        PayoutQueryResponse response = tripLinkApi.payoutQuery(request);
         System.out.println(JacksonUtil.object2JsonString(response));
         //Assert.assertNotNull(response);
     }

@@ -117,4 +117,18 @@ public interface TripLinkApiV2 {
      * if response.resultCode is not equals "000000" check the response.message
      */
     QueryAuthTransactionByPageResponse authTransactionQueryByPage(QueryAuthTransactionByPageRequest request);
+
+    /**
+     * payout create
+     * @param request
+     * @return
+     */
+    PayoutCreateResponse payoutCreate(PayoutCreateRequest request);
+
+    /**
+     * query payout order
+     * @param request
+     * @return
+     */
+    PayoutQueryResponse payoutQuery(PayoutQueryRequest request);
 }
