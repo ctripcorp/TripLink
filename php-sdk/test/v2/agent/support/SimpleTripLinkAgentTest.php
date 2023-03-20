@@ -7,7 +7,9 @@ use v2\client\support\GuzzleHttpClient;
 use v2\config\Customer;
 use v2\model\core\CloseCardRequest;
 use v2\model\core\CreateCardRequest;
+use v2\model\core\FxQuoteRequest;
 use v2\model\core\QueryAccountRequest;
+use v2\model\core\QueryAuthorizationByPageRequest;
 use v2\model\core\QueryAuthorizationRequest;
 use v2\model\core\QueryCardRequest;
 use v2\model\core\QuerySettlementRequest;
@@ -160,6 +162,23 @@ class SimpleTripLinkAgentTest extends TestCase {
         $this->assertEquals('000000', $response->getReturnCode());
     }
 
+    public function testFxQuote(): void {
+        $httpClient = new GuzzleHttpClient();
+        $customer = new Customer(CUSTOMER_ID, AES_KEY, CUSTOMER_PRIVATE_KEY, TRIPLINK_PUBLIC_KEY);
+        $tripLinkAgent = new SimpleTripLinkAgent(BASE_URL, $customer, $httpClient);
+
+        $request = new FxQuoteRequest(uniqid(), CUSTOMER_ID);
+        $request->setSellCurrency('156');
+        $request->setBuyCurrency('840');
+        $request->setFxDirection(0);
+        $request->setFxAmount(100.12);
+
+        $response = $tripLinkAgent->fxQuote($request);
+        var_dump($response);
+
+        $this->assertEquals('000000', $response->getReturnCode());
+    }
+
     public function testQueryAccount(): void {
         $httpClient = new GuzzleHttpClient();
         $customer = new Customer(CUSTOMER_ID, AES_KEY, CUSTOMER_PRIVATE_KEY, TRIPLINK_PUBLIC_KEY);
@@ -184,6 +203,24 @@ class SimpleTripLinkAgentTest extends TestCase {
         $request->setEndTime('2022-03-02');
 
         $response = $tripLinkAgent->queryAuthorization($request);
+        var_dump($response);
+
+        $this->assertEquals('000000', $response->getReturnCode());
+    }
+
+    public function testQueryAuthorizationByPage(): void {
+        $httpClient = new GuzzleHttpClient();
+        $customer = new Customer(CUSTOMER_ID, AES_KEY, CUSTOMER_PRIVATE_KEY, TRIPLINK_PUBLIC_KEY);
+        $tripLinkAgent = new SimpleTripLinkAgent(BASE_URL, $customer, $httpClient);
+
+        $request = new QueryAuthorizationByPageRequest(uniqid(), CUSTOMER_ID);
+        $request->setCardLogId('c55d99dac26bb334c07879404a93d2c6a96b42f7372f9c04d14034d019103fe4');
+        $request->setTransactionStartTime('2022-02-01 03:00:00');
+        $request->setTransactionEndTime('2022-03-02 04:00:00');
+        $request->setPageNo(1);
+        $request->setPageSize(10);
+
+        $response = $tripLinkAgent->queryAuthorizationByPage($request);
         var_dump($response);
 
         $this->assertEquals('000000', $response->getReturnCode());

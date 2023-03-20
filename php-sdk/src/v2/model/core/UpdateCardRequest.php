@@ -72,6 +72,11 @@ class UpdateCardRequest extends BaseRequest implements JsonSerializable {
      */
     private $timeZone = null;
     /**
+     * 是否接受3DS验证
+     * @var bool|null whether allow 3DS
+     */
+    private $allow3ds = null;
+    /**
      * 用户自定义字段
      * @var UserReference|null user defined properties
      */
@@ -179,6 +184,14 @@ class UpdateCardRequest extends BaseRequest implements JsonSerializable {
 
     public function setTimeZone(?string $timeZone): void {
         $this->timeZone = $timeZone;
+    }
+
+    public function getAllow3ds(): ?bool {
+        return $this->allow3ds;
+    }
+
+    public function setAllow3ds(?bool $allow3ds): void {
+        $this->allow3ds = $allow3ds;
     }
 
     public function getUserReferenceMap(): ?UserReference {

@@ -142,6 +142,11 @@ class QueryCardResponse extends BaseResponse implements JsonSerializable {
      */
     private $timeZone = null;
     /**
+     * 是否接受3DS验证
+     * @var bool|null whether allow 3DS
+     */
+    private $allow3ds = null;
+    /**
      * 用户自定义字段
      * @var UserReference|null user defined properties
      */
@@ -176,6 +181,7 @@ class QueryCardResponse extends BaseResponse implements JsonSerializable {
         $instance->cardType = $array['cardType'] ?? null;
         $instance->cardLabel = $array['cardLabel'] ?? null;
         $instance->timeZone = $array['timeZone'] ?? null;
+        $instance->allow3ds = $array['allow3ds'] ?? null;
         $instance->userReferenceMap = isset($array['userReferenceMap']) ? UserReference::fromArray($array['userReferenceMap']) : null;
         return $instance;
     }
@@ -394,6 +400,14 @@ class QueryCardResponse extends BaseResponse implements JsonSerializable {
 
     public function setTimeZone(?string $timeZone): void {
         $this->timeZone = $timeZone;
+    }
+
+    public function getAllow3ds(): ?bool {
+        return $this->allow3ds;
+    }
+
+    public function setAllow3ds(?bool $allow3ds): void {
+        $this->allow3ds = $allow3ds;
     }
 
     public function getUserReferenceMap(): ?UserReference {
