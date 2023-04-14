@@ -11,6 +11,11 @@ class Settlement implements JsonSerializable {
      */
     private $txnId = null;
     /**
+     * 交易关联ID
+     * @var string|null transaction relation id
+     */
+    private $transactionId = null;
+    /**
      * 交易流水号
      * @var string|null settlement reference number
      */
@@ -114,6 +119,7 @@ class Settlement implements JsonSerializable {
     public static function fromArray(array $array): self {
         $instance = new self();
         $instance->txnId = $array['txnId'] ?? null;
+        $instance->transactionId = $array['transactionId'] ?? null;
         $instance->referenceNumber = $array['referenceNumber'] ?? null;
         $instance->occurDateTime = $array['occurDateTime'] ?? null;
         $instance->postingDateTime = $array['postingDateTime'] ?? null;
@@ -143,6 +149,14 @@ class Settlement implements JsonSerializable {
 
     public function setTxnId(?string $txnId): void {
         $this->txnId = $txnId;
+    }
+
+    public function getTransactionId(): ?string {
+        return $this->transactionId;
+    }
+
+    public function setTransactionId(?string $transactionId): void {
+        $this->transactionId = $transactionId;
     }
 
     public function getReferenceNumber(): ?string {
