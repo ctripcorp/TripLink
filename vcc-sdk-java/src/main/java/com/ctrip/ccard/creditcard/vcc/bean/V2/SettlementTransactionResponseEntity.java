@@ -3,25 +3,27 @@ package com.ctrip.ccard.creditcard.vcc.bean.V2;
 import java.math.BigDecimal;
 
 public class SettlementTransactionResponseEntity {
-    private String occurDateTime;	//			交易发生时间
-    private String postingDateTime;	//			入账时间
+
+    private String occurDateTime;    // 交易发生时间
+    private String postingDateTime;    // 入账时间
     private String postingSysTime;
-    private String originalTransactionCurrency;	//			发生POS交易币种
-    private BigDecimal originalTransactionAmount;	//			发生POS交易金额
-    private String accountCurrency;	//			结算币种
-    private BigDecimal billAccountAmount;	//			结算金额
-    private String cardTransactionCurrency;//开卡时入账币种
-    private BigDecimal cardTransactionAmount;//开卡时入账金额
-    private String transactionType;	//			交易类型
-    private String transactionCode;	//			交易类型码
-    private String approvalCode;	//			授权码
-    private String referenceNumber;	//			交易流水号
-    private String isCredit;	//			是否是收或付标识
-    private String posMerchantName;	//			商户名称
-    private String posMerchantClassCode;	//			商户MCC
-    private String posMerchantCountry;	//			商户所在国家
-    private String posMerchantCity;	//			商户所在国家城市
-    private String posMerchantState;	//			商户所在国家城市区域和国家置有一个
+    private String originalTransactionCurrency;    // 发生POS交易币种
+    private BigDecimal originalTransactionAmount;    // 发生POS交易金额
+    private String accountCurrency;    // 结算币种
+    private BigDecimal billAccountAmount;    // 结算金额
+    private String cardTransactionCurrency;    // 开卡时入账币种
+    private BigDecimal cardTransactionAmount;    // 开卡时入账金额
+    private String transactionType;    // 交易类型
+    private String transactionCode;    // 交易类型码
+    private String approvalCode;    // 授权码
+    private String referenceNumber;    // 交易流水号
+    private String isCredit;    // 是否是收或付标识
+    private String posMerchantName;    // 商户名称
+    private String posMerchantClassCode;    // 商户MCC
+    private String posMerchantCountry;    // 商户所在国家
+    private String isoMerchantCountryCode;        // 商户国家 ISO 3166-1 alpha-3
+    private String posMerchantCity;    // 商户所在国家城市
+    private String posMerchantState;    // 商户所在国家城市区域和国家置有一个
     private String posMerchantID;   // 商户ID
     private String posAcquirerID;   // 收单行ID
     private String txnId;// 入账的流水号
@@ -139,6 +141,14 @@ public class SettlementTransactionResponseEntity {
         this.posMerchantCountry = posMerchantCountry;
     }
 
+    public String getIsoMerchantCountryCode() {
+        return isoMerchantCountryCode;
+    }
+
+    public void setIsoMerchantCountryCode(String isoMerchantCountryCode) {
+        this.isoMerchantCountryCode = isoMerchantCountryCode;
+    }
+
     public String getPosMerchantCity() {
         return posMerchantCity;
     }
@@ -231,6 +241,7 @@ public class SettlementTransactionResponseEntity {
                 ", posMerchantName='" + posMerchantName + '\'' +
                 ", posMerchantClassCode='" + posMerchantClassCode + '\'' +
                 ", posMerchantCountry='" + posMerchantCountry + '\'' +
+                ", isoMerchantCountryCode='" + isoMerchantCountryCode + '\'' +
                 ", posMerchantCity='" + posMerchantCity + '\'' +
                 ", posMerchantState='" + posMerchantState + '\'' +
                 ", posMerchantID='" + posMerchantID + '\'' +

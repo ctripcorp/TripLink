@@ -40,6 +40,8 @@ public class AuthTransactionDataDTO implements Serializable {
     // mcc
     private String mcc;
     private String merchantCountry;
+    // 商户国家 ISO 3166-1 alpha-3
+    private String isoMerchantCountryCode;
     private String merchantCity;
     private String merchantId;
     private String acquiringBankId;
@@ -183,6 +185,14 @@ public class AuthTransactionDataDTO implements Serializable {
         this.merchantCountry = merchantCountry;
     }
 
+    public String getIsoMerchantCountryCode() {
+        return isoMerchantCountryCode;
+    }
+
+    public void setIsoMerchantCountryCode(String isoMerchantCountryCode) {
+        this.isoMerchantCountryCode = isoMerchantCountryCode;
+    }
+
     public String getMerchantCity() {
         return merchantCity;
     }
@@ -258,6 +268,7 @@ public class AuthTransactionDataDTO implements Serializable {
                 ", merchantName='" + merchantName + '\'' +
                 ", mcc='" + mcc + '\'' +
                 ", merchantCountry='" + merchantCountry + '\'' +
+                ", isoMerchantCountryCode='" + isoMerchantCountryCode + '\'' +
                 ", merchantCity='" + merchantCity + '\'' +
                 ", merchantId='" + merchantId + '\'' +
                 ", acquiringBankId='" + acquiringBankId + '\'' +
