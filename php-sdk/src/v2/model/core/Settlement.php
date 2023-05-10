@@ -106,6 +106,11 @@ class Settlement implements JsonSerializable {
      */
     private $posMerchantCountry = null;
     /**
+     * 商户所在国家 ISO 3166-1 alpha-3
+     * @var string|null merchant country ISO code
+     */
+    private $isoMerchantCountryCode = null;
+    /**
      * 商户所在城市
      * @var string|null merchant city
      */
@@ -138,6 +143,7 @@ class Settlement implements JsonSerializable {
         $instance->posMerchantName = $array['posMerchantName'] ?? null;
         $instance->posMerchantClassCode = $array['posMerchantClassCode'] ?? null;
         $instance->posMerchantCountry = $array['posMerchantCountry'] ?? null;
+        $instance->isoMerchantCountryCode = $array['isoMerchantCountryCode'] ?? null;
         $instance->posMerchantCity = $array['posMerchantCity'] ?? null;
         $instance->posAcquirerID = $array['posAcquirerID'] ?? null;
         return $instance;
@@ -301,6 +307,14 @@ class Settlement implements JsonSerializable {
 
     public function setPosMerchantCountry(?string $posMerchantCountry): void {
         $this->posMerchantCountry = $posMerchantCountry;
+    }
+
+    public function getIsoMerchantCountryCode(): ?string {
+        return $this->isoMerchantCountryCode;
+    }
+
+    public function setIsoMerchantCountryCode(?string $isoMerchantCountryCode): void {
+        $this->isoMerchantCountryCode = $isoMerchantCountryCode;
     }
 
     public function getPosMerchantCity(): ?string {

@@ -86,6 +86,11 @@ class AuthorizationByPage implements JsonSerializable {
      */
     private $merchantCountry = null;
     /**
+     * 商户所在国家 ISO 3166-1 alpha-3
+     * @var string|null merchant country ISO code
+     */
+    private $isoMerchantCountryCode = null;
+    /**
      * 商户所在城市
      * @var string|null merchant city
      */
@@ -139,6 +144,7 @@ class AuthorizationByPage implements JsonSerializable {
         $instance->merchantName = $array['merchantName'] ?? null;
         $instance->mcc = $array['mcc'] ?? null;
         $instance->merchantCountry = $array['merchantCountry'] ?? null;
+        $instance->isoMerchantCountryCode = $array['isoMerchantCountryCode'] ?? null;
         $instance->merchantCity = $array['merchantCity'] ?? null;
         $instance->merchantId = $array['merchantId'] ?? null;
         $instance->acquiringBankId = $array['acquiringBankId'] ?? null;
@@ -275,6 +281,14 @@ class AuthorizationByPage implements JsonSerializable {
 
     public function setMerchantCountry(?string $merchantCountry): void {
         $this->merchantCountry = $merchantCountry;
+    }
+
+    public function getIsoMerchantCountryCode(): ?string {
+        return $this->isoMerchantCountryCode;
+    }
+
+    public function setIsoMerchantCountryCode(?string $isoMerchantCountryCode): void {
+        $this->isoMerchantCountryCode = $isoMerchantCountryCode;
     }
 
     public function getMerchantCity(): ?string {
