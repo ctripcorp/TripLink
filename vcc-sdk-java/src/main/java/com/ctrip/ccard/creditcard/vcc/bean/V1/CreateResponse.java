@@ -71,6 +71,8 @@ public class CreateResponse {
      */
     private String cardLabel;
 
+    private String cardType;
+
     public String getResultStatus() {
         return resultStatus;
     }
@@ -191,6 +193,14 @@ public class CreateResponse {
         this.cardLabel = cardLabel;
     }
 
+    public String getCardType() {
+        return cardType;
+    }
+
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
+
     @Override
     public String toString() {
         return "CreateResponse{" +
@@ -209,6 +219,7 @@ public class CreateResponse {
                 ", cardVerifyNo='" + cardVerifyNo + '\'' +
                 ", cardExpiryDate='" + cardExpiryDate + '\'' +
                 ", cardLabel='" + cardLabel + '\'' +
+                ", cardType='" + cardType + '\'' +
                 '}';
     }
 }

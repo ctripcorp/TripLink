@@ -189,6 +189,8 @@ public class BeanConvertUtil {
             createResponse.setCardExpiryDate(cardInfo.getCardExpiryDate());
             //卡组
             createResponse.setCardLabel(cardInfo.getCardLabel());
+            //卡类型
+            createResponse.setCardType(cardInfo.getCardType());
         }
         return createResponse;
     }

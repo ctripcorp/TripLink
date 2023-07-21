@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +22,7 @@ import java.util.Set;
 /**
  * Description: https请求vcc接口
  */
-public class TripLinkHttpClient implements HttpClient<CallHttpResponse> {
+public class TripLinkHttpProxyClient implements HttpClient<CallHttpResponse> {
 
     private static final String HTTP_METHOD_GET = "GET";
 
@@ -32,13 +34,25 @@ public class TripLinkHttpClient implements HttpClient<CallHttpResponse> {
 
     private static final String CONTENT_TYPE_JSON_CONTENT = "application/json";
 
+    private String proxyHost;
+
+    private Integer proxyPort;
+
+    public TripLinkHttpProxyClient() {
+    }
+
+    public TripLinkHttpProxyClient(String proxyHost, Integer proxyPort) {
+        this.proxyHost = proxyHost;
+        this.proxyPort = proxyPort;
+    }
+
     public CallHttpResponse post(String requestJson, String url, Map<String,String> header) {
         try {
             if(null == header){
                 header = new HashMap<String, String>();
             }
             header.put(CONTENT_TYPE,CONTENT_TYPE_JSON_CONTENT);
-            return httpsRequest(url,HTTP_METHOD_POST,requestJson,header);
+            return httpsRequest(url,HTTP_METHOD_POST,requestJson,header,proxyHost,proxyPort);
         } catch (Exception e) {
             throw new HttpException("request vcc exception",e);
         }
@@ -46,7 +60,7 @@ public class TripLinkHttpClient implements HttpClient<CallHttpResponse> {
 
     public CallHttpResponse get(String url, Map<String, String> header) {
         try {
-            return httpsRequest(url,HTTP_METHOD_GET,null,header);
+            return httpsRequest(url,HTTP_METHOD_GET,null,header,proxyHost,proxyPort);
         } catch (Exception e) {
             throw new HttpException("request vcc exception",e);
         }
@@ -58,10 +72,13 @@ public class TripLinkHttpClient implements HttpClient<CallHttpResponse> {
      * @param httpMethod method
      * @param requestJsonInfo 请求体
      * @param header http header
+     * @param proxyHost 代理
+     * @param proxyPort 代理端口
      * @return
      * @throws Exception
      */
-    private static CallHttpResponse httpsRequest(String requestUrl,String httpMethod,String requestJsonInfo,Map<String,String> header) throws Exception{
+    private static CallHttpResponse httpsRequest(String requestUrl,String httpMethod,String requestJsonInfo,Map<String,String> header,
+                                                 String proxyHost,Integer proxyPort) throws Exception{
         CallHttpResponse response = new CallHttpResponse();
         //请求数据流
         OutputStream outputStream = null;
@@ -79,7 +96,15 @@ public class TripLinkHttpClient implements HttpClient<CallHttpResponse> {
             SSLSocketFactory ssf = sslContext.getSocketFactory();
             //Connect 创建初始化
             URL url = new URL(requestUrl);
-            HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
+            HttpsURLConnection conn = null;
+            //代理
+            if(proxyHost != null && proxyPort != null){
+                Proxy proxy = new Proxy(Proxy.Type.HTTP,new InetSocketAddress(proxyHost,proxyPort));
+                conn = (HttpsURLConnection)url.openConnection(proxy);
+            }else {
+                //无代理
+                conn = (HttpsURLConnection)url.openConnection();
+            }
             conn.setDoOutput(true);
             conn.setDoInput(true);
             conn.setUseCaches(false);
