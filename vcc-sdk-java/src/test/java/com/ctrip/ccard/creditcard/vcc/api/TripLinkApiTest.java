@@ -1,39 +1,9 @@
 package com.ctrip.ccard.creditcard.vcc.api;
 
 import com.ctrip.ccard.creditcard.vcc.api.V1.TripLinkApiImpl;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateCardInfo;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAccountInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAccountInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.SuspendRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.SuspendResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.UnSuspendRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.UnSuspendResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateCardInfo;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.*;
 import com.ctrip.ccard.creditcard.vcc.biz.V1.TripLinkBizImpl;
+import com.ctrip.ccard.creditcard.vcc.util.JacksonUtil;
 import com.ctrip.ccard.creditcard.vcc.util.TripLinkHttpClient;
 import org.junit.Assert;
 import org.junit.Before;
@@ -51,7 +21,7 @@ public class TripLinkApiTest {
 
     private static final String DES = "Wa8Nw*Ei";
 
-    private static final String URL = "https://openpci-fws.ctripqa.com/restful/soa2/18375/json";
+    private static final String URL = "https://m.fat3144.qa.nt.ctripcorp.com/api";
 
     private static final String PRIVATE_KEY = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAKpQrSAzyJV0MfBN7qKvE8d73phdredNhF3cKm3IWKFlCWg/3alVWI6GE462rPc5A4T+shYcvzqhV5wSOS0QMfj9VfLPqUT+xggFcCQ48mbeX4Jy/N5QZB3RZuQu+YbmQT6f54h2sJvhqLurvE7sgW4qL7r6AaJfDsvYPjKSezYXAgMBAAECgYA32EY8Jd6iarwpMFSMEV4p7craKPVpv3gkkply79tn6EpCXZaf/HUSHpJxHCLw2Uf3JtBcAccOQXMJoMwQo5vOoMVl5nk+EZN//MB8Re8r/7GQV8E+myHdlntMjxOf38PGn9z8Ze0Q020fZwGjA6egBFcU/ld1lCcI0TAj3cZDcQJBANS9UOC3J5njhnuzACjQ1qTTXuv6hr2lbglr2za4Ju9xFJUkKXy2LBAp2LlakXZXDhf7lsqmwZg5BvOBK6DPl18CQQDM8tqqOr4LRJRhq2bqBx398IqtyoZpMshpzBXLr7bdhp7FR2N4AEoAGaa5hS5k3z5SYNLEGKFhRM+sFJBQjnRJAkBnq647I+YffxotM8jTGxpOjlbGhnqc9n4OB0p3evw2WRPfrhStmpUUd2AOy4zxb3EFzOvp66OSC9BQX9Uj86XfAkEAouGbgVDgOupNFvZ2+yWe43Ppc0eS3UZ72wFUjSXgKlzUECu1VOi95yh7xdOf1JFL4YKL30dH8psShUtuimc86QJAeBXASabJBcHAIisPkODvsciiz1pzm1WSuXRUxnuis0TRTRs7+2KEnWE4UV3jxehxkc1RAgteYosWXg5TWQgiUg==";
 
@@ -295,5 +265,41 @@ public class TripLinkApiTest {
         request.setCardLogId("a7558f115f25893d3588d9fc3ecab8e8b887bc92e82f4c3e2ba3d4e239a6e9b9");
         UnSuspendResponse response = tripLinkApi.unSuspend(request);
         Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void queryAuthTransInfoByPageTest() {
+        QueryAuthTransInfoByPageRequest request = new QueryAuthTransInfoByPageRequest();
+        request.setRequestId("8908089");
+        request.setRequestTime("20210728230850");
+        request.setMerchantName("WANWEI");
+        request.setChannelType("WANWEI_CFNC_VCC");
+        request.setStartDate("2022-04-01 00:00:00");
+        request.setEndDate("2023-05-01 00:00:00");
+        request.setCardLogId("98d523cd2eaddeda76ca4e4d0f24660abda7e39b7e819c05ab92c8ff45e80167");
+        request.setOperator("max");
+        request.setPageNo(1);
+        request.setPageSize(100);
+        QueryAuthTransInfoByPageResponse response = tripLinkApi.queryAuthTransInfoByPage(request);
+        System.out.println(JacksonUtil.object2JsonString(response));
+       // Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void querySettlemetTransInfoByPageTest() {
+        QuerySettlemetTransInfoByPageRequest request = new QuerySettlemetTransInfoByPageRequest();
+        request.setRequestId("9808686");
+        request.setRequestTime("20210728230850");
+        request.setMerchantName("WANWEI");
+        request.setChannelType("WANWEI_CFNC_VCC");
+        request.setStartDate("2023-04-01 00:00:00");
+        request.setEndDate("2023-05-01 00:00:00");
+        request.setCardLogId("98d523cd2eaddeda76ca4e4d0f24660abda7e39b7e819c05ab92c8ff45e80167");
+        request.setOperator("max");
+        request.setPageNo(1);
+        request.setPageSize(100);
+        QuerySettlemetTransInfoByPageResponse response = tripLinkApi.querySettlemetTransInfoByPage(request);
+        System.out.println(JacksonUtil.object2JsonString(response));
+        //Assert.assertNotNull(response);
     }
 }

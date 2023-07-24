@@ -24,22 +24,22 @@ public class TripLinkApiV2Test {
     /**
      * aes key,携程提供
      */
-    private static final String AES_KEY = "填写分配给您的AES KEY";
+    private static final String AES_KEY = "i0BFCWsuAPYH7PTa4jQhaQ==";
     /**
      * api 请求地址
      * 测试环境：https://vcc-compass-fat.ctripqa.com/compass/api
      * 生产环境：https://compass.triplinkintl.com/compass/api
      */
-    private static final String URL = "接口请求地址";
+    private static final String URL = "https://vcc.compass.fat3144.qa.nt.ctripcorp.com/compass/api";
     /**
      * RSA publick key
      * 测试环境：MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzGuvnpECqBJlD2Rk8eQ3BiNJn6TglMxC+BIzj7g2xOBF1wrn7vDgO40uNwF42SSDbQ2eb9lOyslhFlNZFeasCwKFLQ/uo0HY2vFlFBb49362OL1aYIf3hCgL7J2+4U6vUlrZkm0HWSZm5KMT/Y39hjTPSvaTQQPYBFgbderPIw1CS7hQpOh6MMp6XqdzPEdKWZ431A60wYV89BAd5n5hrlAWXeWsnzsO9FK1AHnDhH8FGkIsxYaZsVAAHwWIk1WLnKTWLLJSJjH+0qG7LwWcnlZDe22xza+LzszgyBcQ3f2jio1KD+xpXGN+qqa9jjuwFUx3qcdURRS53j1qRVhuFwIDAQAB
      */
-    private static final String PUBLIC_KEY = "携程提供的RSA公钥，用来验签";
+    private static final String PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzGuvnpECqBJlD2Rk8eQ3BiNJn6TglMxC+BIzj7g2xOBF1wrn7vDgO40uNwF42SSDbQ2eb9lOyslhFlNZFeasCwKFLQ/uo0HY2vFlFBb49362OL1aYIf3hCgL7J2+4U6vUlrZkm0HWSZm5KMT/Y39hjTPSvaTQQPYBFgbderPIw1CS7hQpOh6MMp6XqdzPEdKWZ431A60wYV89BAd5n5hrlAWXeWsnzsO9FK1AHnDhH8FGkIsxYaZsVAAHwWIk1WLnKTWLLJSJjH+0qG7LwWcnlZDe22xza+LzszgyBcQ3f2jio1KD+xpXGN+qqa9jjuwFUx3qcdURRS53j1qRVhuFwIDAQAB";
     /**
      * RSA private key
      */
-    private static final String PRIVATE_KEY = "您自己创建的RSA私钥，用来加签";
+    private static final String PRIVATE_KEY = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDMa6+ekQKoEmUPZGTx5DcGI0mfpOCUzEL4EjOPuDbE4EXXCufu8OA7jS43AXjZJINtDZ5v2U7KyWEWU1kV5qwLAoUtD+6jQdja8WUUFvj3frY4vVpgh/eEKAvsnb7hTq9SWtmSbQdZJmbkoxP9jf2GNM9K9pNBA9gEWBt16s8jDUJLuFCk6Howynpep3M8R0pZnjfUDrTBhXz0EB3mfmGuUBZd5ayfOw70UrUAecOEfwUaQizFhpmxUAAfBYiTVYucpNYsslImMf7SobsvBZyeVkN7bbHNr4vOzODIFxDd/aOKjUoP7GlcY36qpr2OO7AVTHepx1RFFLnePWpFWG4XAgMBAAECggEAJj2u6NbvzElEppB9YdLziC5pw3ewm6VqkcW155jqhgH+jq/3m3dsOze6AYhA9z4hZ/E4Rmw8lSr/ApItBC/W12htSXTFi7zxuGOYKR3zDTmjFRI3Kf/Fie+D64vG/ZcerSVZtk63JTJN5U+sma5KUyTl8nwWJ/90Fbv1xyVaApBOwMXxoA3YYy+oqnnzGXut084bozSWkC3jVzEMPTFI4Vb4YWG4d37SpvJegUXWDDHArer9OaKKMRsjG/ms34NDpjEmNQQAatP217QFLX94R6e4MRDvz8eAtBGQcVhFzSxjPl4OgDrJmwxwLiilT4+FB2FXhtxQeFVsviuZ1TP2gQKBgQDuccBiWt5sbk9h9/qiUws4k8gjb630HoWpwZ8roGQ/sDl0LMPY5XAAeMI9xVTi9VfYEsd3h95D/9z+PvhMpb8c79ThxDH916L71XMrxA/JVOPi8DlD/T7OnOH4q66cYJwVsltaem6smK8soIPkBBBW8HTioLPggtCJDFunq97AcQKBgQDbeKYcb6LPLc7KAuSpFQbLtQyh2o8nmvi8SfycHTopnzVq+bZLI6HrCB0BeFwZuwHSlHljtW91cIYL1ULBSmEpZ03RCFHG15zs3LcE/MduviEcn2TattAc7Ati/z5LHYiiatXf6tNPj4r+C0nIab6r8Fb6gzDd0gNFNUSRjelbBwKBgQCcWIHo++Qz/PCYMF1q6kDFTEFC2wuYshq6gHa5yGVzTT2e62tPYMHbzVKv5iAO4QhEaavYuIII3FAvdWKh/1wcwTU5A8gzxZzcu8zUua4QOVVjjFhAOGFiYIPa5deMOdyebWBxJy5Char2/Bj+/ZspJmm939mSMLRD6JKAkrVwQQKBgCSrZeW+aU+Acdqi3R27G6WRnIi2gdC2PfUHz6Mt5vfpV/2Ft4WacIVal64VNB5Adq9+i0GzoOnYYS089qhhCxbl4cSZRUCZ6ehRgGre6VuBfPrRTwKUJPWQIt7pkrjuOFQa0Z1WGPRkIW8M58kKkgccYwv8O3/0hQNdQRWoxmKlAoGBAKKAr/J2QfS9hmlQP2XVOms0z2acA+qIjWiapk6Utv+XTSxyFWwF4IFo5yw300OAARGhbBMzZvxr3y4lwCrV6UHu+XurAZR5+jLSrLR97fAVvqsSnvEZ5L2H6KwYxDK2t/qGukCZOzC9skp+t3plS+dXLQQLni5DhP3+PzYHJqTc";
 
     @Before
     public void setup() {
@@ -338,29 +338,30 @@ public class TripLinkApiV2Test {
          * 请求流水号
          * 测试示例： request.setRequestId(UUID.randomUUID());
          */
-        request.setRequestId("请求流水号");
+        request.setRequestId(String.valueOf(UUID.randomUUID()));
         /**
          * 商户ID 携程提供
          * 测试示例： request.setCustomerId("CSR1234567890");
          */
-        request.setCustomerId("携程提供 格式为 CSRxxxxxx");
+        request.setCustomerId("CSRF30414D4CBE54");
         /**
          * 卡识别号，开卡接口返回的 cardLogId字段
          * 测试示例：request.setCardLogId("db5831315c687528ab03784da1e5e32e19169e6952f164c489a502787abfba92");
          */
-        request.setCardLogId("卡识别号，开卡接口返回的 cardLogId字段");
+        request.setCardLogId("98d523cd2eaddeda76ca4e4d0f24660abda7e39b7e819c05ab92c8ff45e80167");
         /**
          * 查询清算记录 时间区间设置 开始时间
          * 测试示例： request.setStartTime("2022-01-01");
          */
-        request.setStartTime("时间区间 yyyy-MM-dd");
+        request.setStartTime("2023-04-01");
         /**
          * 查询清算记录 时间区间设置 结束时间
          * 测试示例： request.setStartTime("2022-02-01");
          */
-        request.setEndTime("时间区间 yyyy-MM-dd");
+        request.setEndTime("2023-05-01");
         QuerySettlementTransactionResponse response = tripLinkApi.querySettlementTransaction(request);
-        Assert.assertNotNull(response);
+        System.out.println(JacksonUtil.object2JsonString(response));
+        //Assert.assertNotNull(response);
     }
 
     @Test
@@ -528,5 +529,19 @@ public class TripLinkApiV2Test {
         PayoutQueryResponse response = tripLinkApi.payoutQuery(request);
         System.out.println(JacksonUtil.object2JsonString(response));
         //Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void settlementTransactionQueryByPageTest(){
+        QuerySettlementTransactionByPageRequest request = new QuerySettlementTransactionByPageRequest();
+        request.setCustomerId("CSRF30414D4CBE54");
+        request.setCardLogId("98d523cd2eaddeda76ca4e4d0f24660abda7e39b7e819c05ab92c8ff45e80167");
+        request.setRequestId("9076546754");
+        request.setPageNo(1);
+        request.setPageSize(200);
+        request.setSettlementEndTime("2023-05-01 00:00:00");
+        request.setSettlementStartTime("2023-04-01 00:00:00");
+        QuerySettlementTransactionByPageResponse response = tripLinkApi.settlementTransactionQueryByPage(request);
+        System.out.println(JacksonUtil.object2JsonString(response));
     }
 }

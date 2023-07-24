@@ -231,4 +231,18 @@ public class TripLinkApiImpl implements TripLinkApi {
         OperateResponse bizResponse = vccBiz.operate(bizRequest);
         return BeanConvertUtil.convert2UnSuspendResponse(bizResponse);
     }
+
+    @Override
+    public QueryAuthTransInfoByPageResponse queryAuthTransInfoByPage(QueryAuthTransInfoByPageRequest request) {
+        QTransInfoRequest bizRequest = BeanConvertUtil.convert2QueryAuthTransInfoByPageRequest(request);
+        QTransInfoResponse bizResponse = vccBiz.qTransInfo(bizRequest);
+        return BeanConvertUtil.convert2QueryAuthTransInfoByPageResponse(bizResponse);
+    }
+
+    @Override
+    public QuerySettlemetTransInfoByPageResponse querySettlemetTransInfoByPage(QuerySettlemetTransInfoByPageRequest request) {
+        QTransInfoRequest bizRequest = BeanConvertUtil.convert2QuerySettlemetTransInfoByPageRequest(request);
+        QTransInfoResponse bizResponse = vccBiz.qTransInfo(bizRequest);
+        return BeanConvertUtil.convert2QuerySettlemetTransInfoByPageResponse(bizResponse);
+    }
 }

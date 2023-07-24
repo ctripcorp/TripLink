@@ -1,47 +1,6 @@
 package com.ctrip.ccard.creditcard.vcc.util;
 
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CardInfo;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateCardInfo;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.OperateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.OperateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QOperateResultRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QOperateResultResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QTransInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QTransInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAccountInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAccountInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfo;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.SuspendRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.SuspendResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.UnSuspendRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.UnSuspendResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateCardInfo;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawRequest;
-import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.*;
 
 public class BeanConvertUtil {
 
@@ -73,6 +32,10 @@ public class BeanConvertUtil {
     private static final String SUB_REQUEST_TYPE_AUTH = "AUTH";
     //qTransInfo接口 请求子类型值 清算交易
     private static final String SUB_REQUEST_TYPE_SETTLEMENT = "SETTLEMENT";
+    //qTransInfo接口 请求子类型值 预授权交易
+    private static final String SUB_REQUEST_TYPE_AUTH2 = "AUTH2";
+    //qTransInfo接口 请求子类型值 清算交易
+    private static final String SUB_REQUEST_TYPE_SETTLEMENT2 = "SETTLEMENT2";
 
     /**
      * operate接口请求数据 ：开卡操作
@@ -1154,5 +1117,133 @@ public class BeanConvertUtil {
             unSuspendResponse.setCardLogId(cardInfo.getCardLogId());
         }
         return unSuspendResponse;
+    }
+
+    /**
+     * qTransInfo接口请求数据 预授权交易查询 分页
+     */
+    public static QTransInfoRequest convert2QueryAuthTransInfoByPageRequest(QueryAuthTransInfoByPageRequest request){
+        QTransInfoRequest qTransInfoRequest = new QTransInfoRequest();
+        //请求流水号
+        qTransInfoRequest.setRequestId(request.getRequestId());
+        //请求时间 yyyyMMddHHmmss
+        qTransInfoRequest.setRequestTime(request.getRequestTime());
+        //请求类型
+        qTransInfoRequest.setRequestType(REQUEST_TYPE_QTRANS);
+        //请求子类型
+        qTransInfoRequest.setSubRequestType(SUB_REQUEST_TYPE_AUTH2);
+        //请求渠道
+        qTransInfoRequest.setChannelType(request.getChannelType());
+        //商户名
+        qTransInfoRequest.setMerchantName(request.getMerchantName());
+        //查询开始日期
+        qTransInfoRequest.setStartDate(request.getStartDate());
+        //查询结束日期
+        qTransInfoRequest.setEndDate(request.getEndDate());
+        //请求扩展字段
+        qTransInfoRequest.setReqExtra(request.getReqExtra());
+        //操作人
+        qTransInfoRequest.setOperator(request.getOperator());
+        //卡信息
+        CardInfo cardInfo = new CardInfo();
+        //VCC发行卡片处唯一参考号
+        cardInfo.setCardLogId(request.getCardLogId());
+        qTransInfoRequest.setCardInfo(cardInfo);
+        //订单号
+        qTransInfoRequest.setOrderNo(request.getOrderNo());
+        qTransInfoRequest.setTransactionStatus(request.getTransactionStatus());
+        qTransInfoRequest.setTransactionCode(request.getTransactionCode());
+        qTransInfoRequest.setPageNo(request.getPageNo());
+        qTransInfoRequest.setPageSize(request.getPageSize());
+        return qTransInfoRequest;
+    }
+
+    /**
+     * qTransInfo接口返回数据  预授权交易查询 分页
+     */
+    public static QueryAuthTransInfoByPageResponse convert2QueryAuthTransInfoByPageResponse(QTransInfoResponse qTransInfoResponse){
+        QueryAuthTransInfoByPageResponse queryAuthTransInfoResponse = new QueryAuthTransInfoByPageResponse();
+        //结果状态
+        queryAuthTransInfoResponse.setResultStatus(qTransInfoResponse.getResultstatus());
+        //结果码
+        queryAuthTransInfoResponse.setResultRespCode(qTransInfoResponse.getResultRespCode());
+        //结果码描述
+        queryAuthTransInfoResponse.setResultRespMsg(qTransInfoResponse.getResultRespMsg());
+        //结果码详细描述
+        queryAuthTransInfoResponse.setResultRespDetailMsg(qTransInfoResponse.getResultRespDetailMsg());
+        //请求流水号
+        queryAuthTransInfoResponse.setRequestId(qTransInfoResponse.getRequestId());
+        //请求时间
+        queryAuthTransInfoResponse.setRequestTime(qTransInfoResponse.getRequestTime());
+        //请求商户名
+        queryAuthTransInfoResponse.setMerchantName(qTransInfoResponse.getMerchantName());
+        //发卡通道类型
+        queryAuthTransInfoResponse.setChannelType(qTransInfoResponse.getChannelType());
+        if(null != qTransInfoResponse.getAuthInfoByPage()){
+            queryAuthTransInfoResponse.setAuthInfoByPage(qTransInfoResponse.getAuthInfoByPage());
+        }
+        return queryAuthTransInfoResponse;
+    }
+
+    /**
+     * qTransInfo接口请求数据 清算交易查询 分页
+     */
+    public static QTransInfoRequest convert2QuerySettlemetTransInfoByPageRequest(QuerySettlemetTransInfoByPageRequest request){
+        QTransInfoRequest qTransInfoRequest = new QTransInfoRequest();
+        //请求流水号
+        qTransInfoRequest.setRequestId(request.getRequestId());
+        //请求时间 yyyyMMddHHmmss
+        qTransInfoRequest.setRequestTime(request.getRequestTime());
+        //请求类型
+        qTransInfoRequest.setRequestType(REQUEST_TYPE_QTRANS);
+        //请求子类型
+        qTransInfoRequest.setSubRequestType(SUB_REQUEST_TYPE_SETTLEMENT2);
+        //请求渠道
+        qTransInfoRequest.setChannelType(request.getChannelType());
+        //商户名
+        qTransInfoRequest.setMerchantName(request.getMerchantName());
+        //查询开始日期
+        qTransInfoRequest.setStartDate(request.getStartDate());
+        //查询结束日期
+        qTransInfoRequest.setEndDate(request.getEndDate());
+        //请求扩展字段
+        qTransInfoRequest.setReqExtra(request.getReqExtra());
+        //操作人
+        qTransInfoRequest.setOperator(request.getOperator());
+        //卡信息
+        CardInfo cardInfo = new CardInfo();
+        //VCC发行卡片处唯一参考号
+        cardInfo.setCardLogId(request.getCardLogId());
+        qTransInfoRequest.setCardInfo(cardInfo);
+        qTransInfoRequest.setPageNo(request.getPageNo());
+        qTransInfoRequest.setPageSize(request.getPageSize());
+        return qTransInfoRequest;
+    }
+
+    /**
+     * qTransInfo接口返回数据  清算交易查询 fenye
+     */
+    public static QuerySettlemetTransInfoByPageResponse convert2QuerySettlemetTransInfoByPageResponse(QTransInfoResponse qTransInfoResponse){
+        QuerySettlemetTransInfoByPageResponse querySettlemetTransInfoResponse = new QuerySettlemetTransInfoByPageResponse();
+        //结果状态
+        querySettlemetTransInfoResponse.setResultStatus(qTransInfoResponse.getResultstatus());
+        //结果码
+        querySettlemetTransInfoResponse.setResultRespCode(qTransInfoResponse.getResultRespCode());
+        //结果码描述
+        querySettlemetTransInfoResponse.setResultRespMsg(qTransInfoResponse.getResultRespMsg());
+        //结果码详细描述
+        querySettlemetTransInfoResponse.setResultRespDetailMsg(qTransInfoResponse.getResultRespDetailMsg());
+        //请求流水号
+        querySettlemetTransInfoResponse.setRequestId(qTransInfoResponse.getRequestId());
+        //请求时间
+        querySettlemetTransInfoResponse.setRequestTime(qTransInfoResponse.getRequestTime());
+        //请求商户名
+        querySettlemetTransInfoResponse.setMerchantName(qTransInfoResponse.getMerchantName());
+        //发卡通道类型
+        querySettlemetTransInfoResponse.setChannelType(qTransInfoResponse.getChannelType());
+        if(null != qTransInfoResponse.getSettlementInfoByPage()){
+            querySettlemetTransInfoResponse.setSettlementInfoByPage(qTransInfoResponse.getSettlementInfoByPage());
+        }
+        return querySettlemetTransInfoResponse;
     }
 }

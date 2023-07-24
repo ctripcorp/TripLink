@@ -36,4 +36,8 @@ public interface TripLinkApi {
 
     UnSuspendResponse unSuspend(UnSuspendRequest request);
 
+    QueryAuthTransInfoByPageResponse queryAuthTransInfoByPage(QueryAuthTransInfoByPageRequest request);
+
+    QuerySettlemetTransInfoByPageResponse querySettlemetTransInfoByPage(QuerySettlemetTransInfoByPageRequest request);
+
 }

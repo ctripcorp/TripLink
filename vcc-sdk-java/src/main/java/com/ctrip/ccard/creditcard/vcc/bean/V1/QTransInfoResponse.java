@@ -62,6 +62,10 @@ public class QTransInfoResponse {
      */
     private String respExtra;
 
+    private AuthTransactionByPage authInfoByPage;
+
+    private SettlementTransactionByPage settlementInfoByPage;
+
     public String getResultstatus() {
         return resultstatus;
     }
@@ -182,6 +186,22 @@ public class QTransInfoResponse {
         this.respExtra = respExtra;
     }
 
+    public AuthTransactionByPage getAuthInfoByPage() {
+        return authInfoByPage;
+    }
+
+    public void setAuthInfoByPage(AuthTransactionByPage authInfoByPage) {
+        this.authInfoByPage = authInfoByPage;
+    }
+
+    public SettlementTransactionByPage getSettlementInfoByPage() {
+        return settlementInfoByPage;
+    }
+
+    public void setSettlementInfoByPage(SettlementTransactionByPage settlementInfoByPage) {
+        this.settlementInfoByPage = settlementInfoByPage;
+    }
+
     @Override
     public String toString() {
         return "QTransInfoResponse{" +
@@ -200,6 +220,8 @@ public class QTransInfoResponse {
                 ", authInfoResp=" + authInfoResp +
                 ", settlementInfoResp=" + settlementInfoResp +
                 ", respExtra='" + respExtra + '\'' +
+                ", authInfoByPage=" + authInfoByPage +
+                ", settlementInfoByPage=" + settlementInfoByPage +
                 '}';
     }
 }

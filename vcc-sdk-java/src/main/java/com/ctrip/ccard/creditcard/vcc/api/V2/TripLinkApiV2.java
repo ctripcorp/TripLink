@@ -131,4 +131,13 @@ public interface TripLinkApiV2 {
      * @return
      */
     PayoutQueryResponse payoutQuery(PayoutQueryRequest request);
+
+    /**
+     * settlementTransactionQueryByPage
+     * request.requestId can not null
+     * @return QueryAuthTransactionByPageResponse
+     * response.resultCode equals "000000" it succeeds otherwise it is failed
+     * if response.resultCode is not equals "000000" check the response.message
+     */
+    QuerySettlementTransactionByPageResponse settlementTransactionQueryByPage(QuerySettlementTransactionByPageRequest request);
 }

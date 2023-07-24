@@ -3,61 +3,45 @@ package com.ctrip.ccard.creditcard.vcc.bean.V1;
 /**
  * Description:
  */
-public class QTransInfoRequest {
+public class QuerySettlemetTransInfoByPageRequest {
     /**
-     * 请求流水号
+     * the request number of the original close request number
      */
     private String requestId;
     /**
-     * 请求时间
+     * request time
      */
     private String requestTime;
     /**
-     * 请求类型
-     */
-    private String requestType;
-    /**
-     * 请求子类型
-     */
-    private String subRequestType;
-    /**
-     * 请求商户名
+     * merchant name , TripLink distribution
      */
     private String merchantName;
     /**
-     * 发卡通道类型
+     * channel type, TripLink distribution
      */
     private String channelType;
     /**
-     * 开始日期
+     * settlement trans start time
      */
     private String startDate;
     /**
-     * 结束日期
+     * settlement trans end time
      */
     private String endDate;
     /**
-     * 卡信息请求
+     * TripLink unique reference number
      */
-    private CardInfo cardInfo;
+    private String cardLogId;
     /**
-     * 签名信息
-     */
-    private String sign;
-    /**
-     * 请求扩展字段
+     * request extra info
+     * json type
+     * eg: {"BinFlagDcre":"12345"}
      */
     private String reqExtra;
     /**
-     * 操作人
+     * operator
      */
     private String operator;
-
-    private String orderNo;
-
-    private String transactionStatus;
-
-    private String transactionCode;
 
     private int pageSize;
 
@@ -85,22 +69,6 @@ public class QTransInfoRequest {
 
     public void setRequestTime(String requestTime) {
         this.requestTime = requestTime;
-    }
-
-    public String getRequestType() {
-        return requestType;
-    }
-
-    public void setRequestType(String requestType) {
-        this.requestType = requestType;
-    }
-
-    public String getSubRequestType() {
-        return subRequestType;
-    }
-
-    public void setSubRequestType(String subRequestType) {
-        this.subRequestType = subRequestType;
     }
 
     public String getMerchantName() {
@@ -135,20 +103,12 @@ public class QTransInfoRequest {
         this.endDate = endDate;
     }
 
-    public CardInfo getCardInfo() {
-        return cardInfo;
+    public String getCardLogId() {
+        return cardLogId;
     }
 
-    public void setCardInfo(CardInfo cardInfo) {
-        this.cardInfo = cardInfo;
-    }
-
-    public String getSign() {
-        return sign;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
+    public void setCardLogId(String cardLogId) {
+        this.cardLogId = cardLogId;
     }
 
     public String getReqExtra() {
@@ -157,30 +117,6 @@ public class QTransInfoRequest {
 
     public void setReqExtra(String reqExtra) {
         this.reqExtra = reqExtra;
-    }
-
-    public String getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public String getTransactionStatus() {
-        return transactionStatus;
-    }
-
-    public void setTransactionStatus(String transactionStatus) {
-        this.transactionStatus = transactionStatus;
-    }
-
-    public String getTransactionCode() {
-        return transactionCode;
-    }
-
-    public void setTransactionCode(String transactionCode) {
-        this.transactionCode = transactionCode;
     }
 
     public int getPageSize() {

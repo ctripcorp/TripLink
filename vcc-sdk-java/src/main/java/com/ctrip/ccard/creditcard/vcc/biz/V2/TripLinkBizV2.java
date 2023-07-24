@@ -33,4 +33,6 @@ public interface TripLinkBizV2 {
     PayoutCreateResponse payoutCreate(PayoutCreateRequest request);
 
     PayoutQueryResponse payoutQuery(PayoutQueryRequest request);
+
+    QuerySettlementTransactionByPageResponse settlementTransactionQueryByPage(QuerySettlementTransactionByPageRequest request);
 }
