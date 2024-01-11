@@ -544,4 +544,71 @@ public class TripLinkApiV2Test {
         QuerySettlementTransactionByPageResponse response = tripLinkApi.settlementTransactionQueryByPage(request);
         System.out.println(JacksonUtil.object2JsonString(response));
     }
+    @Test
+    public void fxCreateTest(){
+        FxCreateRequest request = new FxCreateRequest();
+        /**
+         * 请求流水号
+         * 测试示例:request.setRequestId("202401040000001")
+         */
+        request.setRequestId(UUID.randomUUID().toString());
+        /**
+         * 商户ID 携程提供
+         * 测试示例：request.setCustomerId("CSRF30414D4CBE54")
+         */
+        request.setCustomerId("CSR5A0637BEDC494");
+        /**
+         * 卖出币种 ：ISO 4217货币编号，3位数字
+         * 测试示例: request.setSellCurrency("157")
+         */
+        request.setSellCurrency("157");
+        /**
+         * 买入币种 ：ISO 4217货币编号，3位数字
+         * 测试示例: request.setBuyCurrency("840")
+         */
+        request.setBuyCurrency("840");
+        /**
+         * 交易方向
+         * 0：指定卖出，此时fxAmount为卖出金额
+         * 1：指定买入，此时fxAmount为买入金额
+         */
+        request.setFxDirection(0);
+        /**
+         * 交易金额，与FxDirection相互联动
+         */
+        request.setFxAmount(BigDecimal.valueOf(200));
+        /**
+         * 查询汇率接口返回的汇率ID，若不传，则以TripLink实时汇率成交
+         */
+        request.setQuoteId("");
+
+        FxCreateResponse response = tripLinkApi.fxCreate(request);
+
+        System.out.println(JacksonUtil.object2JsonString(response));
+    }
+
+    @Test
+    public void fxQueryTest(){
+        FxQueryRequest request = new FxQueryRequest();
+        /**
+         * 请求流水号
+         * 测试示例:request.setRequestId("202401040000001")
+         */
+        request.setRequestId(UUID.randomUUID().toString());
+        /**
+         * 商户ID 携程提供
+         * 测试示例：request.setCustomerId("CSRF30414D4CBE54")
+         */
+        request.setCustomerId("CSR5A0637BEDC494");
+        /**
+         * 原始交易流水
+         * 测试示例：request.setOriRequestId("1232124");
+         */
+        request.setOriRequestId("1232124");
+
+
+        FxQueryResponse response = tripLinkApi.fxQuery(request);
+
+        System.out.println(JacksonUtil.object2JsonString(response));
+    }
 }

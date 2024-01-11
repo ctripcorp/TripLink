@@ -19,6 +19,8 @@ use v2\model\core\UnsuspendCardRequest;
 use v2\model\core\UpdateCardRequest;
 use v2\model\core\UserReference;
 use v2\model\core\WithdrawCardRequest;
+use v2\model\core\FxCreateRequest;
+use v2\model\core\FxQueryRequest;
 
 const BASE_URL = 'https://vcc-compass-fat.ctripqa.com/compass/api';
 
@@ -257,5 +259,36 @@ class SimpleTripLinkAgentTest extends TestCase {
         var_dump($response);
 
         $this->assertEquals('000000', $response['returnCode']);
+    }
+
+
+    public function testFxCreate(): void {
+        $httpClient = new GuzzleHttpClient();
+        $customer = new Customer(CUSTOMER_ID, AES_KEY, CUSTOMER_PRIVATE_KEY, TRIPLINK_PUBLIC_KEY);
+        $tripLinkAgent = new SimpleTripLinkAgent(BASE_URL, $customer, $httpClient);
+
+        $request = new FxCreateRequest(uniqid(), CUSTOMER_ID);
+        $request->setSellCurrency('157');
+        $request->setBuyCurrency('840');
+        $request->setFxDirection(0);
+        $request->setFxAmount(100.12);
+        $request->setQuoteId('');
+        $response = $tripLinkAgent->fxCreate($request);
+        var_dump($response);
+
+        $this->assertEquals('000000', $response->getReturnCode());
+    }
+
+    public function testFxQuery(): void {
+            $httpClient = new GuzzleHttpClient();
+            $customer = new Customer(CUSTOMER_ID, AES_KEY, CUSTOMER_PRIVATE_KEY, TRIPLINK_PUBLIC_KEY);
+            $tripLinkAgent = new SimpleTripLinkAgent(BASE_URL, $customer, $httpClient);
+
+            $request = new FxQueryRequest(uniqid(), CUSTOMER_ID);
+            $request->setOriRequestId('1232124');
+            $response = $tripLinkAgent->fxQuery($request);
+            var_dump($response);
+
+            $this->assertEquals('000000', $response->getReturnCode());
     }
 }

@@ -93,4 +93,14 @@ public class TripLinkApiImplV2 implements TripLinkApiV2 {
     public QuerySettlementTransactionByPageResponse settlementTransactionQueryByPage(QuerySettlementTransactionByPageRequest request) {
         return vccBiz.settlementTransactionQueryByPage(request);
     }
+
+    @Override
+    public FxCreateResponse fxCreate(FxCreateRequest request) {
+        return vccBiz.fxCreate(request);
+    }
+
+    @Override
+    public FxQueryResponse fxQuery(FxQueryRequest request) {
+        return vccBiz.fxQuery(request);
+    }
 }

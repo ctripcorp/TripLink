@@ -12,6 +12,10 @@ use v2\model\core\CreateCardRequest;
 use v2\model\core\CreateCardResponse;
 use v2\model\core\FxQuoteRequest;
 use v2\model\core\FxQuoteResponse;
+use v2\model\core\FxCreateRequest;
+use v2\model\core\FxCreateResponse;
+use v2\model\core\FxQueryRequest;
+use v2\model\core\FxQueryResponse;
 use v2\model\core\QueryAccountRequest;
 use v2\model\core\QueryAccountResponse;
 use v2\model\core\QueryAuthorizationByPageRequest;
@@ -91,6 +95,12 @@ class SimpleTripLinkAgent implements TripLinkAgent {
 
     public function fxQuote(FxQuoteRequest $request): FxQuoteResponse {
         return FxQuoteResponse::fromArray($this->general(get_object_vars($request->jsonSerialize()), 'fxQuote'));
+    }
+    public function fxCreate(FxCreateRequest $request): FxCreateResponse {
+        return FxCreateResponse::fromArray($this->general(get_object_vars($request->jsonSerialize()), 'fxCreate'));
+    }
+    public function fxQuery(FxQueryRequest $request): FxQueryResponse {
+        return FxQueryResponse::fromArray($this->general(get_object_vars($request->jsonSerialize()), 'fxQuery'));
     }
 
     public function queryAccount(QueryAccountRequest $request): QueryAccountResponse {

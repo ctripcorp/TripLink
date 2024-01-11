@@ -20,6 +20,11 @@ use v2\model\core\UpdateCardRequest;
 use v2\model\core\UpdateCardResponse;
 use v2\model\core\WithdrawCardRequest;
 use v2\model\core\WithdrawCardResponse;
+use v2\model\core\fxCreateRequest;
+use v2\model\core\fxCreateResponse;
+use v2\model\core\fxQueryRequest;
+use v2\model\core\fxQueryResponse;
+
 
 interface TripLinkAgent {
     /**
@@ -66,6 +71,18 @@ interface TripLinkAgent {
      * 查询清算交易
      */
     public function querySettlement(QuerySettlementRequest $request): QuerySettlementResponse;
+
+    /**
+     * 换汇订单申请
+     */
+    public function fxCreate(fxCreateRequest $request): fxCreateResponse;
+
+
+    /**
+     * 换汇订单查询
+     */
+    public function fxQuery(fxQueryRequest $request): fxQueryResponse;
+
 
     /**
      * 通用

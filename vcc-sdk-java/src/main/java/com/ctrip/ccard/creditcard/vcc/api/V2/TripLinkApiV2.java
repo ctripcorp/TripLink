@@ -140,4 +140,20 @@ public interface TripLinkApiV2 {
      * if response.resultCode is not equals "000000" check the response.message
      */
     QuerySettlementTransactionByPageResponse settlementTransactionQueryByPage(QuerySettlementTransactionByPageRequest request);
+
+
+    /**
+     * fx create
+     * @param request
+     * @return
+     */
+    FxCreateResponse fxCreate(FxCreateRequest request);
+
+    /**
+     * query fx order
+     * @param request
+     * @return
+     */
+    FxQueryResponse fxQuery(FxQueryRequest request);
+
 }
