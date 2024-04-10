@@ -156,4 +156,23 @@ public interface TripLinkApiV2 {
      */
     FxQueryResponse fxQuery(FxQueryRequest request);
 
+
+    /**
+     * chargeback
+     * request.requestId can not null
+     * @return ChargebackResponse
+     * response.resultCode equals "000000" it succeeds otherwise it is failed
+     * if response.resultCode is not equals "000000" check the response.Message
+     */
+    ChargebackResponse chargeback(ChargebackRequest request);
+
+    /**
+     * chargebackQuery
+     * request.requestId can not null
+     * @return ChargebackQueryResponse
+     * response.resultCode equals "000000" it succeeds otherwise it is failed
+     * if response.resultCode is not equals "000000" check the response.Message
+     */
+    ChargebackQueryResponse chargebackQuery(ChargebackQueryRequest request);
+
 }

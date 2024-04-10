@@ -72,7 +72,53 @@ public class CardDetailQueryResponse {
 
     private Boolean allow3ds;
 
+    private String areaCode;
+    private String mobilePhone;
+    private String userEmail;
+    private Boolean supportThreeDSChallenge;
+    private Boolean threeDSPassesSilently;
+
     private Map<String, String> userReferenceMap = new HashMap<String, String>();
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public Boolean getSupportThreeDSChallenge() {
+        return supportThreeDSChallenge;
+    }
+
+    public void setSupportThreeDSChallenge(Boolean supportThreeDSChallenge) {
+        this.supportThreeDSChallenge = supportThreeDSChallenge;
+    }
+
+    public Boolean getThreeDSPassesSilently() {
+        return threeDSPassesSilently;
+    }
+
+    public void setThreeDSPassesSilently(Boolean threeDSPassesSilently) {
+        this.threeDSPassesSilently = threeDSPassesSilently;
+    }
 
     public BigDecimal getRefundAmount() {
         return refundAmount;
@@ -382,6 +428,11 @@ public class CardDetailQueryResponse {
                 ", cardSid='" + cardSid + '\'' +
                 ", timeZone='" + timeZone + '\'' +
                 ", allow3ds=" + allow3ds +
+                ", areaCode='" + areaCode + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", supportThreeDSChallenge=" + supportThreeDSChallenge +
+                ", threeDSPassesSilently=" + threeDSPassesSilently +
                 ", userReferenceMap=" + userReferenceMap +
                 '}';
     }

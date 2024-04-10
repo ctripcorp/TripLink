@@ -40,4 +40,7 @@ public interface TripLinkBizV2 {
 
     FxQueryResponse fxQuery(FxQueryRequest request);
 
+    ChargebackResponse chargeback(ChargebackRequest request);
+
+    ChargebackQueryResponse chargebackQuery(ChargebackQueryRequest request);
 }

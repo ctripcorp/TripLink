@@ -3,6 +3,7 @@ package com.ctrip.ccard.creditcard.vcc.api;
 import com.ctrip.ccard.creditcard.vcc.api.V2.TripLinkApiImplV2;
 import com.ctrip.ccard.creditcard.vcc.bean.V2.*;
 import com.ctrip.ccard.creditcard.vcc.biz.V2.TripLinkBizImplV2;
+import com.ctrip.ccard.creditcard.vcc.util.DesUtil;
 import com.ctrip.ccard.creditcard.vcc.util.JacksonUtil;
 import com.ctrip.ccard.creditcard.vcc.util.TripLinkHttpClient;
 import org.junit.Assert;

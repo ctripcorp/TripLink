@@ -110,6 +110,11 @@ public class BeanConvertUtil {
             cardInfo.setTimeZone(createCardInfo.getTimeZone());
             //是否接受3ds验证
             cardInfo.setAllow3ds(createCardInfo.getAllow3ds());
+            cardInfo.setAreaCode(createCardInfo.getAreaCode());
+            cardInfo.setMobilePhone(createCardInfo.getMobilePhone());
+            cardInfo.setUserEmail(createCardInfo.getUserEmail());
+            cardInfo.setSupportThreeDSChallenge(createCardInfo.getSupportThreeDSChallenge());
+            cardInfo.setThreeDSPassesSilently(createCardInfo.getThreeDSPassesSilently());
             operateRequest.setCardInfo(cardInfo);
         }
         return operateRequest;
@@ -219,6 +224,11 @@ public class BeanConvertUtil {
             cardInfo.setTimeZone(updateCardInfo.getTimeZone());
             //是否接受3ds验证
             cardInfo.setAllow3ds(updateCardInfo.getAllow3ds());
+            cardInfo.setAreaCode(updateCardInfo.getAreaCode());
+            cardInfo.setMobilePhone(updateCardInfo.getMobilePhone());
+            cardInfo.setUserEmail(updateCardInfo.getUserEmail());
+            cardInfo.setSupportThreeDSChallenge(updateCardInfo.getSupportThreeDSChallenge());
+            cardInfo.setThreeDSPassesSilently(updateCardInfo.getThreeDSPassesSilently());
             operateRequest.setCardInfo(cardInfo);
         }
         return operateRequest;
@@ -638,6 +648,11 @@ public class BeanConvertUtil {
             queryCardInfo.setTimeZone(cardInfo.getTimeZone());
             //是否接受3ds验证
             queryCardInfo.setAllow3ds(cardInfo.getAllow3ds());
+            queryCardInfo.setAreaCode(cardInfo.getAreaCode());
+            queryCardInfo.setMobilePhone(cardInfo.getMobilePhone());
+            queryCardInfo.setUserEmail(cardInfo.getUserEmail());
+            queryCardInfo.setSupportThreeDSChallenge(cardInfo.getSupportThreeDSChallenge());
+            queryCardInfo.setThreeDSPassesSilently(cardInfo.getThreeDSPassesSilently());
             queryCardInfoResponse.setCardInfo(queryCardInfo);
         }
         return queryCardInfoResponse;

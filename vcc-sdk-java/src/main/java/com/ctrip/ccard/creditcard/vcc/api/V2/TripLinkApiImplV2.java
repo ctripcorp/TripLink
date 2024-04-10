@@ -103,4 +103,14 @@ public class TripLinkApiImplV2 implements TripLinkApiV2 {
     public FxQueryResponse fxQuery(FxQueryRequest request) {
         return vccBiz.fxQuery(request);
     }
+
+    @Override
+    public ChargebackResponse chargeback(ChargebackRequest request) {
+        return vccBiz.chargeback(request);
+    }
+
+    @Override
+    public ChargebackQueryResponse chargebackQuery(ChargebackQueryRequest request) {
+        return vccBiz.chargebackQuery(request);
+    }
 }
