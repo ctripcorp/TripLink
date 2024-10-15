@@ -1,9 +1,45 @@
 package com.ctrip.ccard.creditcard.vcc.api;
 
 import com.ctrip.ccard.creditcard.vcc.api.V2.TripLinkApiImplV2;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.*;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCancelRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCancelResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCreateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCreateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardDetailQueryRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardDetailQueryResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardInfoNotifyRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardInfoNotifyResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRechargeRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRechargeResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRestoreRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRestoreResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardSuspendRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardSuspendResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUnsuspendRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUnsuspendResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUpdateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUpdateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardWithdrawRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardWithdrawResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.FxCreateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.FxCreateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.FxQueryRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.FxQueryResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.PayoutCreateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.PayoutCreateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.PayoutQueryRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.PayoutQueryResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryCustomerCreditAmountRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryCustomerCreditAmountResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionByPageRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionByPageResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuoteRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuoteResponse;
 import com.ctrip.ccard.creditcard.vcc.biz.V2.TripLinkBizImplV2;
-import com.ctrip.ccard.creditcard.vcc.util.DesUtil;
 import com.ctrip.ccard.creditcard.vcc.util.JacksonUtil;
 import com.ctrip.ccard.creditcard.vcc.util.TripLinkHttpClient;
 import org.junit.Assert;
@@ -11,7 +47,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -31,7 +69,7 @@ public class TripLinkApiV2Test {
      * 测试环境：https://vcc-compass-fat.ctripqa.com/compass/api
      * 生产环境：https://compass.triplinkintl.com/compass/api
      */
-    private static final String URL = "https://vcc.compass.fat3144.qa.nt.ctripcorp.com/compass/api";
+    private static final String URL = "https://vcc.compass.fat3143.qa.nt.ctripcorp.com/compass/api";
     /**
      * RSA publick key
      * 测试环境：MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzGuvnpECqBJlD2Rk8eQ3BiNJn6TglMxC+BIzj7g2xOBF1wrn7vDgO40uNwF42SSDbQ2eb9lOyslhFlNZFeasCwKFLQ/uo0HY2vFlFBb49362OL1aYIf3hCgL7J2+4U6vUlrZkm0HWSZm5KMT/Y39hjTPSvaTQQPYBFgbderPIw1CS7hQpOh6MMp6XqdzPEdKWZ431A60wYV89BAd5n5hrlAWXeWsnzsO9FK1AHnDhH8FGkIsxYaZsVAAHwWIk1WLnKTWLLJSJjH+0qG7LwWcnlZDe22xza+LzszgyBcQ3f2jio1KD+xpXGN+qqa9jjuwFUx3qcdURRS53j1qRVhuFwIDAQAB
@@ -235,6 +273,21 @@ public class TripLinkApiV2Test {
          */
         request.setWithdrawAmount(new BigDecimal("提现金额,保留的小数位对应卡币种"));
         CardWithdrawResponse response = tripLinkApi.withdraw(request);
+        Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void restore() {
+        CardRestoreRequest request = new CardRestoreRequest();
+        request.setRequestId(UUID.randomUUID().toString());
+        request.setCustomerId("CSR2E54DC4B8A5D4");
+        request.setCardLogId("db5831315c687528ab03784da1e5e32e19169e6952f164c489a502787abfba92");
+        request.setSettlementId("ffc5d82d-35ec-4cd9-b9f5-7b65e1cd4fad");
+        request.setCardCurrencyCode("840");
+        request.setCardTransactionAmount(BigDecimal.valueOf(12.34));
+
+        CardRestoreResponse response = tripLinkApi.restore(request);
+
         Assert.assertNotNull(response);
     }
 
@@ -609,6 +662,41 @@ public class TripLinkApiV2Test {
 
 
         FxQueryResponse response = tripLinkApi.fxQuery(request);
+
+        System.out.println(JacksonUtil.object2JsonString(response));
+    }
+
+    @Test
+    public void notifyCardInfoTest() {
+        CardInfoNotifyRequest request = new CardInfoNotifyRequest();
+        /**
+         * 请求流水号
+         * 测试示例:request.setRequestId("202401040000001")
+         */
+        request.setRequestId(UUID.randomUUID().toString());
+        /**
+         * 商户ID 携程提供
+         * 测试示例：request.setCustomerId("CSRF30414D4CBE54")
+         */
+        request.setCustomerId("CSRF30414D4CBE54");
+        /**
+         * 卡识别号，开卡接口返回的 cardLogId字段
+         * 测试示例：request.setCardLogId("db5831315c687528ab03784da1e5e32e19169e6952f164c489a502787abfba92");
+         */
+        request.setCardLogId("9055ca4790f78b9af6ec8105d120332988c7b9ed32f06c7c37668e2705f92384");
+        /**
+         * 收件人邮箱列表
+         * 测试示例: zhangsan@com
+         */
+        List<String> recipient = new ArrayList<>();
+        recipient.add("wanyuwu@trip.com");
+        request.setRecipient(recipient);
+        /**
+         * 收件人姓名
+         */
+        request.setRecipientName("zhangsan");
+
+        CardInfoNotifyResponse response = tripLinkApi.notifyCardInfo(request);
 
         System.out.println(JacksonUtil.object2JsonString(response));
     }

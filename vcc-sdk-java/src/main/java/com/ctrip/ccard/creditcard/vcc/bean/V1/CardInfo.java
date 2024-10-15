@@ -56,6 +56,11 @@ public class CardInfo {
     private String localCurrency;
 
     /**
+     * 卡本币种对应的金额
+     */
+    private BigDecimal localCurrencyAmt;
+
+    /**
      * 卡入账币种 结算币种
      */
     private String billCurrency;
@@ -87,6 +92,7 @@ public class CardInfo {
      * 提现卡 额度必须大于0
      */
     private BigDecimal willChangeAmt;
+
     /**
      * 卡最低可扣款金额
      * 不允许为0
@@ -204,50 +210,19 @@ public class CardInfo {
     private Boolean allow3ds;
 
     private String areaCode;
+
     private String mobilePhone;
+
     private String userEmail;
+
     private Boolean supportThreeDSChallenge;
+
     private Boolean threeDSPassesSilently;
 
-    public String getAreaCode() {
-        return areaCode;
-    }
-
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode;
-    }
-
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
-
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public Boolean getSupportThreeDSChallenge() {
-        return supportThreeDSChallenge;
-    }
-
-    public void setSupportThreeDSChallenge(Boolean supportThreeDSChallenge) {
-        this.supportThreeDSChallenge = supportThreeDSChallenge;
-    }
-
-    public Boolean getThreeDSPassesSilently() {
-        return threeDSPassesSilently;
-    }
-
-    public void setThreeDSPassesSilently(Boolean threeDSPassesSilently) {
-        this.threeDSPassesSilently = threeDSPassesSilently;
-    }
+    /**
+     * 清算ID(报销卡)
+     */
+    private String settlementId;
 
     public String getCardProductCode() {
         return cardProductCode;
@@ -327,6 +302,14 @@ public class CardInfo {
 
     public void setLocalCurrency(String localCurrency) {
         this.localCurrency = localCurrency;
+    }
+
+    public BigDecimal getLocalCurrencyAmt() {
+        return localCurrencyAmt;
+    }
+
+    public void setLocalCurrencyAmt(BigDecimal localCurrencyAmt) {
+        this.localCurrencyAmt = localCurrencyAmt;
     }
 
     public String getBillCurrency() {
@@ -543,5 +526,53 @@ public class CardInfo {
 
     public void setAllow3ds(Boolean allow3ds) {
         this.allow3ds = allow3ds;
+    }
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public Boolean getSupportThreeDSChallenge() {
+        return supportThreeDSChallenge;
+    }
+
+    public void setSupportThreeDSChallenge(Boolean supportThreeDSChallenge) {
+        this.supportThreeDSChallenge = supportThreeDSChallenge;
+    }
+
+    public Boolean getThreeDSPassesSilently() {
+        return threeDSPassesSilently;
+    }
+
+    public void setThreeDSPassesSilently(Boolean threeDSPassesSilently) {
+        this.threeDSPassesSilently = threeDSPassesSilently;
+    }
+
+    public String getSettlementId() {
+        return settlementId;
+    }
+
+    public void setSettlementId(String settlementId) {
+        this.settlementId = settlementId;
     }
 }

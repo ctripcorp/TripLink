@@ -57,6 +57,11 @@ public class AuthTransactionDataDTO implements Serializable {
     // 是否是授权释放 0-授权释放交易 1-非授权释放交易
     private String reversalType;
 
+    /**
+     * 交易发生本地时间 格式yyyy-MM-dd HH:mm:ss
+     */
+    private String localTime;
+
     public String getCardLogId() {
         return cardLogId;
     }
@@ -249,6 +254,14 @@ public class AuthTransactionDataDTO implements Serializable {
         this.reversalType = reversalType;
     }
 
+    public String getLocalTime() {
+        return localTime;
+    }
+
+    public void setLocalTime(String localTime) {
+        this.localTime = localTime;
+    }
+
     @Override
     public String toString() {
         return "AuthTransactionDataDTO{" +
@@ -276,6 +289,7 @@ public class AuthTransactionDataDTO implements Serializable {
                 ", cardEndingBalance=" + cardEndingBalance +
                 ", creditTransactionSign='" + creditTransactionSign + '\'' +
                 ", reversalType='" + reversalType + '\'' +
+                ", localTime='" + localTime + '\'' +
                 '}';
     }
 }

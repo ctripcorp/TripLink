@@ -28,6 +28,11 @@ public class AuthTransactionDetailByPage {
     private String creditTransactionSign;
     private String reversalType;
 
+    /**
+     * 交易发生本地时间
+     */
+    private String localTime;
+
     public String getCardLogId() {
         return cardLogId;
     }
@@ -220,6 +225,14 @@ public class AuthTransactionDetailByPage {
         this.reversalType = reversalType;
     }
 
+    public String getLocalTime() {
+        return localTime;
+    }
+
+    public void setLocalTime(String localTime) {
+        this.localTime = localTime;
+    }
+
     @Override
     public String toString() {
         return "AuthTransactionDetailByPage{" +
@@ -247,6 +260,7 @@ public class AuthTransactionDetailByPage {
                 ", cardEndingBalance=" + cardEndingBalance +
                 ", creditTransactionSign='" + creditTransactionSign + '\'' +
                 ", reversalType='" + reversalType + '\'' +
+                ", localTime='" + localTime + '\'' +
                 '}';
     }
 }

@@ -12,7 +12,7 @@
 
     <groupId>com.ctrip.ccard.creditcard</groupId>
     <artifactId>triplink-api</artifactId>
-    <version>2.4.0</version>
+    <version>2.5.1</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -24,7 +24,7 @@
         <junit.version>4.12</junit.version>
         <org.bouncycastle.version>1.69</org.bouncycastle.version>
         <org.slf4j.version>1.7.9</org.slf4j.version>
-        <framework-bom.version>7.7.0</framework-bom.version>
+        <framework-bom.version>7.43.1</framework-bom.version>
         <commons-codec.version>1.11</commons-codec.version>
         <!-- Maven Release Repository URL -->
         <releases.repo>http://maven.release.ctripcorp.com/nexus/content/repositories/fsrelease</releases.repo>

@@ -1,7 +1,51 @@
 package com.ctrip.ccard.creditcard.vcc.biz.V2;
 
 import com.ctrip.ccard.creditcard.vcc.bean.CallHttpResponse;
-import com.ctrip.ccard.creditcard.vcc.bean.V2.*;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCancelRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCancelResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCreateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardCreateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardDetailQueryRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardDetailQueryResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardInfoNotifyRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardInfoNotifyResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRechargeRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRechargeResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRestoreRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardRestoreResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardSuspendRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardSuspendResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUnsuspendRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUnsuspendResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUpdateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardUpdateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardWithdrawRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.CardWithdrawResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.ChargebackQueryRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.ChargebackQueryResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.ChargebackRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.ChargebackResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.FxCreateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.FxCreateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.FxQueryRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.FxQueryResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.PayoutCreateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.PayoutCreateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.PayoutQueryRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.PayoutQueryResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionByPageRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionByPageResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryAuthTransactionResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryCustomerCreditAmountRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QueryCustomerCreditAmountResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionByPageRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionByPageResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuerySettlementTransactionResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuoteRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.QuoteResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V2.TripLinkApiRequest;
 import com.ctrip.ccard.creditcard.vcc.exception.BusinessException;
 import com.ctrip.ccard.creditcard.vcc.util.CipherUtils;
 import com.ctrip.ccard.creditcard.vcc.util.HttpClient;
@@ -25,6 +69,8 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
     private static final String RECHARGE_CARD = "rechargeCard";
 
     private static final String WITHDRAW_CARD = "withdrawCard";
+
+    private static final String RESTORE_CARD = "restoreCard";
 
     private static final String SUSPEND_CARD = "suspendCard";
 
@@ -57,6 +103,8 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
     private static final String CHARGEBACK = "chargeback";
 
     private static final String CHARGEBACK_QUERY = "chargebackQuery";
+
+    private static final String NOTIFY_CARD_INFO = "notifyCardInfo";
 
     private static final String API_SUCCESS_CODE = "200";
 
@@ -108,9 +156,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 createCard requestJson is：" + requestJson);
+        LOGGER.info("call tripLinkV2 create requestJson is:" + requestJson);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 createCard responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 create responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -125,7 +173,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("create card verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -150,9 +198,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 updateCard requestJson is：" + requestJson);
+        LOGGER.info("call tripLinkV2 update requestJson is:" + requestJson);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 updateCard responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 update responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -167,7 +215,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("update card verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -193,9 +241,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 rechargeCard requestJson is：" + requestJson);
+        LOGGER.info("call tripLinkV2 recharge requestJson is:" + requestJson);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 rechargeCard responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 recharge responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -210,7 +258,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("recharge card verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -236,9 +284,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 withdrawCard requestJson is：" + requestJson);
+        LOGGER.info("call tripLinkV2 withdraw requestJson is:" + requestJson);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 withdrawCard responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 withdraw responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -253,11 +301,54 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("withdraw card verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
         return JacksonUtil.str2Object(payload, CardWithdrawResponse.class);
+    }
+
+    @Override
+    public CardRestoreResponse restore(CardRestoreRequest request) {
+        //添加默认版本2.0
+        request.setServiceVersion(StringUtils.isEmpty(request.getServiceVersion()) ? DEFAULT_VERSION : request.getServiceVersion());
+        //加密数据
+        String encryptData = CipherUtils.aesEncrypt(this.aesKey, JacksonUtil.object2JsonString(request));
+        //当前时间戳
+        long timestamp = new Date().getTime();
+        //签名数据
+        String signContent = buildRequestSignContent(request.getCustomerId(), RESTORE_CARD, request.getServiceVersion(), request.getRequestId(), timestamp, encryptData);
+        //生成签名
+        String sign = CipherUtils.rsaSign(this.customerRsaPrivateKey, signContent);
+        //接口请求头
+        Map<String, String> header = buildHeader(request.getCustomerId(), RESTORE_CARD, request.getServiceVersion(), timestamp, request.getRequestId(), sign);
+        //API请求入参
+        TripLinkApiRequest apiRequest = new TripLinkApiRequest();
+        apiRequest.setPayload(encryptData);
+        //接口请求
+        String requestJson = JacksonUtil.object2JsonString(apiRequest);
+        LOGGER.info("call tripLinkV2 restore requestJson is:" + requestJson);
+        CallHttpResponse response = httpClient.post(requestJson, url, header);
+        LOGGER.info("call tripLinkV2 restore responseStr is:" + response);
+        //http请求返回报文 header
+        Map<String, String> responseHeaders = response.getHeader();
+        //code判断
+        if (!API_SUCCESS_CODE.equals(responseHeaders.get("code"))) {
+            throw new BusinessException(responseHeaders.get("message"));
+        }
+        //http请求返回报文 业务数据
+        String result = response.getResult();
+        TripLinkApiRequest apiResponse = JacksonUtil.str2Object(result, TripLinkApiRequest.class);
+        //生成需要验签的签名数据
+        String responseSignContent = buildResponseSignContent(responseHeaders, apiResponse.getPayload());
+        //验签
+        boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
+        if (!signResult) {
+            throw new BusinessException("verify response sign failed");
+        }
+        //解密数据
+        String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
+        return JacksonUtil.str2Object(payload, CardRestoreResponse.class);
     }
 
     public CardCancelResponse close(CardCancelRequest request) {
@@ -278,9 +369,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 closeCard requestJson is：" + requestJson);
+        LOGGER.info("call tripLinkV2 close requestJson is:" + requestJson);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 closeCard responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 close responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -295,7 +386,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("close card verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -320,9 +411,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 queryCard requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 queryCard requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 queryCard responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 queryCard responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -337,7 +428,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("query card verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -363,9 +454,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 queryCustomerCreditAmount requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 queryCustomerCreditAmount requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 queryCustomerCreditAmount responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 queryCustomerCreditAmount responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -380,7 +471,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("query customer credit amount verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -406,9 +497,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 queryAuthTransaction requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 queryAuthTransaction requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 queryAuthTransaction responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 queryAuthTransaction responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -423,7 +514,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("query auth transaction verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -449,9 +540,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 querySettlementTransaction requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 querySettlementTransaction requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 querySettlementTransaction responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 querySettlementTransaction responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -466,7 +557,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("query settlement transaction verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -492,9 +583,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 suspend requestJson is：" + requestJson);
+        LOGGER.info("call tripLinkV2 suspend requestJson is:" + requestJson);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 suspend responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 suspend responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -509,7 +600,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("suspend card verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -535,9 +626,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 unsuspend requestJson is：" + requestJson);
+        LOGGER.info("call tripLinkV2 unsuspend requestJson is:" + requestJson);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 unsuspend responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 unsuspend responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -552,7 +643,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("unsuspend card verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -591,7 +682,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
     private String buildResponseSignContent(Map<String, String> header, String result) {
         StringBuilder builder = new StringBuilder();
         String customerId = header.get("customerId");
-        if(StringUtils.isBlank(customerId)){
+        if (StringUtils.isBlank(customerId)) {
             customerId = header.get("customerid");
         }
         if (StringUtils.isNotBlank(customerId)) {
@@ -660,9 +751,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 quote requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 quote requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 quote responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 quote responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -677,7 +768,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("query settlement transaction verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -703,9 +794,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 quote requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 authTransactionQueryByPage requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 quote responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 authTransactionQueryByPage responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -720,7 +811,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("query settlement transaction verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -746,9 +837,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 payout create requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 payoutCreate requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 payout create responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 payoutCreate responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -763,7 +854,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("query settlement transaction verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -789,9 +880,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 payout query requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 payoutQuery requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 payout query responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 payoutQuery responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -806,7 +897,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("query settlement transaction verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -832,9 +923,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 settlementTransactionQueryByPage requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 settlementTransactionQueryByPage requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 settlementTransactionQueryByPage responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 settlementTransactionQueryByPage responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -849,7 +940,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("query settlementTransactionQueryByPage verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -875,9 +966,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 fx create requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 fxCreate requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 fx create responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 fxCreate responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -892,7 +983,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("query settlement transaction verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -919,9 +1010,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 payout query requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 fxQuery requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 payout query responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 fxQuery responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -936,7 +1027,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("query settlement transaction verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -962,9 +1053,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 chargeback requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 chargeback requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 chargeback responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 chargeback responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -979,7 +1070,7 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("chargeback verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
@@ -1005,9 +1096,9 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         apiRequest.setPayload(encryptData);
         //接口请求
         String requestJson = JacksonUtil.object2JsonString(apiRequest);
-        LOGGER.info("call tripLinkV2 chargeback requestJson is：" + encryptData);
+        LOGGER.info("call tripLinkV2 chargebackQuery requestJson is:" + encryptData);
         CallHttpResponse response = httpClient.post(requestJson, url, header);
-        LOGGER.info("call tripLinkV2 chargeback responseStr is：" + response);
+        LOGGER.info("call tripLinkV2 chargebackQuery responseStr is:" + response);
         //http请求返回报文 header
         Map<String, String> responseHeaders = response.getHeader();
         //code判断
@@ -1022,11 +1113,54 @@ public class TripLinkBizImplV2 implements TripLinkBizV2 {
         //验签
         boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
         if (!signResult) {
-            throw new BusinessException("chargeback query verify response sign failed");
+            throw new BusinessException("verify response sign failed");
         }
         //解密数据
         String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
         return JacksonUtil.str2Object(payload, ChargebackQueryResponse.class);
     }
 
+    @Override
+    public CardInfoNotifyResponse notifyCardInfo(CardInfoNotifyRequest request) {
+        // 添加默认版本2.0
+        request.setServiceVersion(StringUtils.isEmpty(request.getServiceVersion()) ? DEFAULT_VERSION : request.getServiceVersion());
+        // 加密数据
+        String encryptData = CipherUtils.aesEncrypt(this.aesKey, JacksonUtil.object2JsonString(request));
+        // 当前时间戳
+        long timestamp = new Date().getTime();
+        // 签名数据
+        String signContent = buildRequestSignContent(request.getCustomerId(), NOTIFY_CARD_INFO, request.getServiceVersion(), request.getRequestId(), timestamp, encryptData);
+        // 生成签名
+        String sign = CipherUtils.rsaSign(this.customerRsaPrivateKey, signContent);
+        // 接口请求头
+        Map<String, String> header = buildHeader(request.getCustomerId(), NOTIFY_CARD_INFO, request.getServiceVersion(), timestamp, request.getRequestId(), sign);
+        // API请求入参
+        TripLinkApiRequest apiRequest = new TripLinkApiRequest();
+        apiRequest.setPayload(encryptData);
+        // 接口请求
+        String requestJson = JacksonUtil.object2JsonString(apiRequest);
+        LOGGER.info("call tripLinkV2 notifyCardInfo requestJson is:" + encryptData);
+        CallHttpResponse response = httpClient.post(requestJson, url, header);
+        LOGGER.info("call tripLinkV2 notifyCardInfo responseStr is:" + response);
+        System.out.println(response);
+        // http请求返回报文 header
+        Map<String, String> responseHeaders = response.getHeader();
+        // code判断
+        if (!API_SUCCESS_CODE.equals(responseHeaders.get("code"))) {
+            throw new BusinessException(responseHeaders.get("message"));
+        }
+        // http请求返回报文 业务数据
+        String result = response.getResult();
+        TripLinkApiRequest apiResponse = JacksonUtil.str2Object(result, TripLinkApiRequest.class);
+        // 生成需要验签的签名数据
+        String responseSignContent = buildResponseSignContent(responseHeaders, apiResponse.getPayload());
+        // 验签
+        boolean signResult = CipherUtils.rsaVerify(this.triplinkRsaPublicKey, responseSignContent, responseHeaders.get("sign"));
+        if (!signResult) {
+            throw new BusinessException("verify response sign failed");
+        }
+        // 解密数据
+        String payload = CipherUtils.aesDecrypt(this.aesKey, apiResponse.getPayload());
+        return JacksonUtil.str2Object(payload, CardInfoNotifyResponse.class);
+    }
 }

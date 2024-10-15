@@ -10,6 +10,12 @@ public class AuthInfo {
     private String occurTime;
 
     /**
+     * 交易发生本地时间
+     */
+    private String localTime;
+
+
+    /**
      * 交易唯一号
      */
     private String transId;
@@ -223,5 +229,13 @@ public class AuthInfo {
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
+    }
+
+    public String getLocalTime() {
+        return localTime;
+    }
+
+    public void setLocalTime(String localTime) {
+        this.localTime = localTime;
     }
 }

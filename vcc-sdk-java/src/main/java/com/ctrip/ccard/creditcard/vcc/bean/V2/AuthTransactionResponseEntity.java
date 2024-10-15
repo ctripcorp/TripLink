@@ -26,6 +26,11 @@ public class AuthTransactionResponseEntity {
     private String txnId; // 交易唯一ID
     private String transactionID; //交易关联ID 消费授权和冲正为个ID
 
+    /**
+     * 交易发生本地时间 格式yyyy-MM-dd HH:mm:ss
+     */
+    private String transactionLocalTime;
+
     public String getTransactionID() {
         return transactionID;
     }
@@ -194,6 +199,14 @@ public class AuthTransactionResponseEntity {
         this.originalTransactionCurrency = originalTransactionCurrency;
     }
 
+    public String getTransactionLocalTime() {
+        return transactionLocalTime;
+    }
+
+    public void setTransactionLocalTime(String transactionLocalTime) {
+        this.transactionLocalTime = transactionLocalTime;
+    }
+
     @Override
     public String toString() {
         return "AuthTransactionResponseEntity{" +
@@ -218,6 +231,7 @@ public class AuthTransactionResponseEntity {
                 ", posAcquirerID='" + posAcquirerID + '\'' +
                 ", txnId='" + txnId + '\'' +
                 ", transactionID='" + transactionID + '\'' +
+                ", transactionLocalTime='" + transactionLocalTime + '\'' +
                 '}';
     }
 }

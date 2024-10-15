@@ -1,6 +1,39 @@
 package com.ctrip.ccard.creditcard.vcc.api.V1;
 
-import com.ctrip.ccard.creditcard.vcc.bean.V1.*;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CloseResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.CreateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoByPageRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoByPageResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryAuthTransInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCardInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCloseResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryCreateResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryMerchantInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoByPageRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoByPageResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QuerySettlemetTransInfoResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.QueryUpdateResultResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.RechargeResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.RestoreRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.RestoreResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.SuspendRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.SuspendResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UnSuspendRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UnSuspendResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.UpdateResponse;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawRequest;
+import com.ctrip.ccard.creditcard.vcc.bean.V1.WithdrawResponse;
 
 /**
  * Description: TripLink Api
@@ -15,6 +48,8 @@ public interface TripLinkApi {
     RechargeResponse recharge(RechargeRequest request);
 
     WithdrawResponse withdraw(WithdrawRequest request);
+
+    RestoreResponse restore(RestoreRequest request);
 
     CloseResponse close(CloseRequest request);
 
