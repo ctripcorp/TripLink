@@ -32,6 +32,22 @@ public class TripLinkHttpClient implements HttpClient<CallHttpResponse> {
 
     private static final String CONTENT_TYPE_JSON_CONTENT = "application/json";
 
+    private static Integer CONNECT_TIMEOUT = null;
+    private static Integer READ_TIMEOUT = null;
+
+    public TripLinkHttpClientPref(Integer connectTimeout,Integer readTimeout) {
+        if(connectTimeout != null){
+            CONNECT_TIMEOUT = connectTimeout;
+        }
+        if(readTimeout != null){
+            READ_TIMEOUT = readTimeout;
+        }
+
+    }
+    public TripLinkHttpClientPref() {
+
+    }
+
     public CallHttpResponse post(String requestJson, String url, Map<String,String> header) {
         try {
             if(null == header){
@@ -85,6 +101,11 @@ public class TripLinkHttpClient implements HttpClient<CallHttpResponse> {
             conn.setUseCaches(false);
             conn.setRequestMethod(httpMethod);
             conn.setSSLSocketFactory(ssf);
+            if (null != CONNECT_TIMEOUT)
+                conn.setConnectTimeout(CONNECT_TIMEOUT);
+            if(null != READ_TIMEOUT)
+                conn.setReadTimeout(READ_TIMEOUT);
+
             //设置 header
             if(null != header){
                 for(Map.Entry<String,String> entry : header.entrySet()){
