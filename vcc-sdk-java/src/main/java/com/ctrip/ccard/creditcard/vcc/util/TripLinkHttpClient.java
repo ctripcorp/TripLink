@@ -35,7 +35,13 @@ public class TripLinkHttpClient implements HttpClient<CallHttpResponse> {
     private static Integer CONNECT_TIMEOUT = null;
     private static Integer READ_TIMEOUT = null;
 
-    public TripLinkHttpClientPref(Integer connectTimeout,Integer readTimeout) {
+    /**
+     * des:
+     * @param connectTimeout 毫秒
+     * @param readTimeout 毫秒
+     * date 2025/1/3 13:54
+    */
+    public TripLinkHttpClient(Integer connectTimeout,Integer readTimeout) {
         if(connectTimeout != null){
             CONNECT_TIMEOUT = connectTimeout;
         }
@@ -44,7 +50,7 @@ public class TripLinkHttpClient implements HttpClient<CallHttpResponse> {
         }
 
     }
-    public TripLinkHttpClientPref() {
+    public TripLinkHttpClient() {
 
     }
 
