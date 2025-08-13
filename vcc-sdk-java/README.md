@@ -8,7 +8,7 @@ TripLink SDK For Java 让您不用更轻松方便对接TripLink开发接口，�
 ## 环境要求
 1. TripLink SDK For Java 建议配合`JKD 1.8`版本。
 
-2. 使用 TripLink SDK For Java 之前 ，您需要先前往[TripLink文档中心-准备工作](http://vcc.docs.fws.qa.nt.ctripcorp.com/quickstart.html)完成开发者接入的一些准备工作，包括RSA公钥、DES密钥、商户账号等。
+2. 使用 TripLink SDK For Java 之前 ，您需要先前往[TripLink文档中心-准备工作](https://api.triplinkintl.com/quickstart.html)完成开发者接入的一些准备工作，包括RSA公钥、DES密钥、商户账号等。
 
 3. 准备工作完成后，注意保存如下信息，后续将作为使用SDK的输入。
 
@@ -132,7 +132,7 @@ public class TestApi {
 ```
 
 ## 文档
-[SDK文档首页](http://vcc.docs.fws.qa.nt.ctripcorp.com/)
+[SDK文档首页](https://api.triplinkintl.com/)
 
 ## 问题
 [提交 Issue](https://https://github.com/ctripcorp/TripLink)，我们会定期查看Issue记录并尽快做出反馈。
